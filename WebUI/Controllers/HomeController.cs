@@ -1,7 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Net;
 using BusinessLogicLayer.Geral;
+using BusinessLogicLayer.Seguranca;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebUI.Models;
@@ -12,19 +17,31 @@ namespace WebUI.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        KitandaConfig _kitandaConfig;
+        private readonly KitandaConfig _kitandaConfig;
         public HomeController(ILogger<HomeController> logger, KitandaConfig kitandaConfig)
         {
             _logger = logger;
             _kitandaConfig = kitandaConfig;
         }
 
-        public IActionResult Index()
-        {  
-
-            return Login();
+        public IActionResult Login()
+        {   
+            return View();
         } 
+        
+        public IActionResult Home()
+        {
+            return View();
+        }
+
+        public IActionResult BranchSelection()
+        {
+            var myBranchList =EmpresaRN.GetInstance().ObterMinhasFiliais(Request.Query["pUs"]);
+            return View(myBranchList);
+        }
+
          
+
         public IActionResult Privacy()
         {
             return View();
@@ -36,10 +53,31 @@ namespace WebUI.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        public IActionResult Login()
+        public ActionResult Entrar(AcessoDTO userCredentials)
         {
-            return View();
+            userCredentials.Maquina = Environment.MachineName;
+            userCredentials.IP = ObterEnderecoIP();
+            userCredentials.ServerName = Environment.MachineName;
+            userCredentials.CurrentPassword = _kitandaConfig.Encrypt(userCredentials.CurrentPassword);
+            userCredentials.Url = _kitandaConfig.FilePath;
+            userCredentials = AcessoRN.GetInstance().Entrar(userCredentials);
+
+            if (userCredentials.Sucesso)
+            {
+                //TempData["myModel"] = userCredentials; 
+            }
+            
+            return Json(userCredentials);
         }
-         
+
+        protected string ObterEnderecoIP()
+        {
+            string strHostName = Dns.GetHostName();
+            IPHostEntry ipHostInfo = Dns.GetHostEntry(strHostName);
+            return ipHostInfo.AddressList.Where(t => t.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).FirstOrDefault().ToString();
+        }
+
+
+
     }
 }

@@ -1,4 +1,8 @@
-﻿<html class="loading" lang="en" data-textdirection="ltr">
+﻿@{ 
+    Layout = "";
+}
+
+<html class="loading" lang="en" data-textdirection="ltr">
 <!-- BEGIN: Head-->
 
 <head>
@@ -8,93 +12,103 @@
     <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
     <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
     <meta name="author" content="ThemeSelect">
-    <title>User Login | Materialize - Material Design Admin Template</title>
-    <link rel="apple-touch-icon" href="~/app-assets/images/favicon/apple-touch-icon-152x152.png">
-    <link rel="shortcut icon" type="image/x-icon" href="~/app-assets/images/favicon/favicon-32x32.png">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- BEGIN: VENDOR CSS-->
-    <link rel="stylesheet" type="text/css" href="~/app-assets/vendors/vendors.min.css">
-    <!-- END: VENDOR CSS-->
-    <!-- BEGIN: Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="~/app-assets/css/themes/vertical-menu-nav-dark-template/materialize.css">
-    <link rel="stylesheet" type="text/css" href="~/app-assets/css/themes/vertical-menu-nav-dark-template/style.css">
-    <link rel="stylesheet" type="text/css" href="~/app-assets/css/pages/login.css">
-    <!-- END: Page Level CSS-->
-    <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="~/app-assets/css/custom/custom.css">
+    <title>KitandaERP Login</title>
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/xcsslogin/style.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/xcsslogin/alertify.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/materialize.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
     <!-- END: Custom CSS-->
+    <script>
+        function EntrarOld()
+        {
+            var username = $("#txtUsername").val();
+            var password = $("#txtPassword").val();
+
+            if (username === "") {
+                alert("Digite o Utilizador");
+            } else if (password == "") {
+                alert("Digite a Senha");
+            } else {
+
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: '@Url.Action("Entrar", "Home")',
+                        data: {
+                            Utilizador: username,
+                            CurrentPassword: password
+                        },
+                        error: function (result)
+                        {
+                            alert("There is a Problem, Try Again!");
+                        },
+                        success: function (result)
+                        {
+                            if (result.Sucesso == false && result.MensagemErro != "") {
+                                alert(result.MensagemErro);
+                            } else {
+                                var url = '@Url.Action("ActionName", "Home")';
+
+                                window.location.href = url.replace("ActionName", result.Url);
+                            }
+                        }
+                    });
+            }
+        }
+    </script>
 </head>
 <!-- END: Head-->
 
-<body class="vertical-layout page-header-light vertical-menu-collapsible vertical-menu-nav-dark preload-transitions 1-column login-bg   blank-page blank-page" data-open="click" data-menu="vertical-menu-nav-dark" data-col="1-column">
-    <div class="row">
-        <div class="col s12">
-            <div class="container">
-                <div id="login-page" class="row">
-                    <div class="col s12 m6 l4 z-depth-4 card-panel border-radius-6 login-card bg-opacity-8">
-                        <form class="login-form">
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <h5 class="ml-4">Sign in</h5>
-                                </div>
-                            </div>
-                            <div class="row margin">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix pt-2">person_outline</i>
-                                    <input id="username" type="text">
-                                    <label for="username" class="center-align">Username</label>
-                                </div>
-                            </div>
-                            <div class="row margin">
-                                <div class="input-field col s12">
-                                    <i class="material-icons prefix pt-2">lock_outline</i>
-                                    <input id="password" type="password">
-                                    <label for="password">Password</label>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col s12 m12 l12 ml-2 mt-1">
-                                    <p>
-                                        <label>
-                                            <input type="checkbox" />
-                                            <span>Remember Me</span>
-                                        </label>
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s12">
-                                    <a href="index.html" class="btn waves-effect waves-light border-round gradient-45deg-purple-deep-orange col s12">Login</a>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="input-field col s6 m6 l6">
-                                    <p class="margin medium-small"><a href="user-register.html">Register Now!</a></p>
-                                </div>
-                                <div class="input-field col s6 m6 l6">
-                                    <p class="margin right-align medium-small"><a href="user-forgot-password.html">Forgot password ?</a></p>
-                                </div>
-                            </div>
-                        </form>
+<body>
+    <div class="background-container"></div>
+    <div class="login-outer-container">
+        <div class="login-inner-container">
+            <div class="login">
+                <div class="platform-logo">
+                    <a pcfg-href="siteUrl" tabindex="-1"><img pcfg-title="brandName" src="../template/app-assets/static/logo_login.png"></a>
+                </div>
+                <form class="loginContainer" action="" autocomplete="off">
+                    <div class="row margin">
+                        <div class="input-field">
+                            <i class="material-icons prefix pt-2" id="icon1">person_outline</i>
+                            <input type="text" name="txtUsername" id="txtUsername">
+                            <label for="username" class="center-align">Utilizador</label>
+                        </div>
+                        <span class="errorText" id="emailError"></span>
                     </div>
+                    <div class="row margin">
+                        <div class="input-field">
+                            <i class="material-icons prefix pt-2" id="icon2">lock_outline</i>
+                            <input type="password" name="password" id="txtPassword">
+                            <label for="txtPassword">Palavra-Passe</label>
+                        </div>
+                        <span class="errorText" id="passwordError"></span>
+                    </div>
+                    <!--validLogin()-->
+                    <input type="button" class="button ipbP" id="btnEntrar" value="ENTRAR" onclick="Entrar()"/>
+                    <span id="result" class="errorText"></span>
+                    <br>
+                </form>
+            </div>
+            <div class="social-info">
+                <div class="inner-social-info">
+                    <a class="social-info-icon" pcfg-href="brandFacebook" tabindex="-1" target="_blank">
+                         Copyright © 2016 - 2020 &nbsp;<b>GC LUCAN</b>&nbsp; Todos direito reservado. 
+                        </a>
                 </div>
             </div>
-            <div class="content-overlay"></div>
+
         </div>
     </div>
 
-    <!-- BEGIN VENDOR JS-->
-    <script src="~/app-assets/js/vendors.min.js"></script>
-    <!-- BEGIN VENDOR JS-->
-    <!-- BEGIN PAGE VENDOR JS-->
-    <!-- END PAGE VENDOR JS-->
-    <!-- BEGIN THEME  JS-->
-    <script src="~/app-assets/js/plugins.js"></script>
-    <script src="~/app-assets/js/search.js"></script>
-    <script src="~/app-assets/js/custom/custom-script.js"></script>
-    <!-- END THEME  JS-->
-    <!-- BEGIN PAGE LEVEL JS-->
-    <!-- END PAGE LEVEL JS-->
-</body>
+    <script src="~/template/app-assets/js/vendors.min.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/vendor/animsition/js/animsition.min.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/plugins.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/login.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/alertify.js" asp-append-version="true"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
+</body>
 </html>

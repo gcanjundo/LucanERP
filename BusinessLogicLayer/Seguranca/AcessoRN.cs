@@ -14,7 +14,7 @@ namespace BusinessLogicLayer.Seguranca
     {
         private static AcessoRN _instancia;
         private AcessoDAO daoAcesso;
-        private readonly string LocalHost = "127.0.0.0"; 
+        private readonly string KITANDAGC = "COM", KITANDAPOS= "POS", KITANDAREST="REST", LOCKSCREEN="LockScreen", SIKOLA="SIKOLA";
 
         public AcessoRN() 
         {
@@ -50,8 +50,12 @@ namespace BusinessLogicLayer.Seguranca
         { 
             try
             {
+                //Obter a Empresa Princial do Sistema
                 EmpresaDTO entidade = EmpresaRN.GetInstance().ObterEmpresaSistema();
-                acesso.FuncionarioID = acesso.Codigo.ToString();
+
+                acesso.FuncionarioID = acesso.Codigo.ToString(); 
+
+                // Obter a Série de Facturação
                 int SerieFaturacao = GetPeriodoFaturacao(entidade.Codigo);
                  
                 if (string.IsNullOrEmpty(entidade.MensagemErro))
@@ -60,7 +64,7 @@ namespace BusinessLogicLayer.Seguranca
                     {
                         if (isMasterAdmin(acesso.Utilizador))
                         {
-                            acesso.Url = "CreateNewCompany();";
+                            acesso.Url = "CreateBranch";
                         }
                         else
                         {
@@ -69,33 +73,29 @@ namespace BusinessLogicLayer.Seguranca
                     }
                     else if (SerieFaturacao <= 0)
                     {
-                        if ((isMasterAdmin(acesso.Utilizador)))
-                        {
-                            acesso.MensagemErro = "CreateNewSerialDocumentation()";
-                        }
-                        else
-                        {
-                            acesso.MensagemErro = "O Sistema não tem uma Série de Facturação configurada. Deve Contactar a Equipa da LucanSoft para configuração do mesmo"; 
-                        }
+                        acesso.MensagemErro = "O Sistema não tem uma Série de Facturação configurada. Deve Contactar a Equipa da LucanSoft para configuração do mesmo";
                     }
                     else
                     {
-                        bool UserAllowed = false;
+                        bool userTemAcessoAoSistema = false;
+
                         if (!acesso.IsRestUser)
                         {
-                            if (string.IsNullOrEmpty(acesso.Filial))
+                            if (string.IsNullOrEmpty(acesso.Filial)) // A partir da Página de Login
                             {
-                                UserAllowed = UtilizadorRN.GetInstance().isAccessAllowed(acesso.Utilizador, acesso.CurrentPassword);
+                                userTemAcessoAoSistema = UtilizadorRN.GetInstance().isAccessAllowed(acesso.Utilizador, acesso.CurrentPassword);
                             }
                             else
                             {
-                                UserAllowed = true;
+                                userTemAcessoAoSistema = true;
+                                /*
                                 var userDetails = UtilizadorRN.GetInstance().ObterPorPK(new UtilizadorDTO { Utilizador = acesso.Utilizador });
-                                acesso.CurrentPassword = userDetails.CurrentPassword;
+                                acesso.CurrentPassword = userDetails.CurrentPassword;*/
                             }
                         }
                         else
                         {
+                            // Em caso de Utilizador Vindo Módulo de Restauração(KitandaRest)
                             var PostOfSales = PosRN.GetInstance().GetPostOfSalesDetails(new PosDTO
                             {
                                 Codigo = acesso.Codigo,
@@ -108,7 +108,7 @@ namespace BusinessLogicLayer.Seguranca
                                   acesso.MensagemErro = "ShowModal('"+acesso.Utilizador+"', '"+acesso.Codigo+"');";
                                 else if(PostOfSales.PinCode == acesso.CurrentPassword)
                                 {
-                                    UserAllowed = true;
+                                    userTemAcessoAoSistema = true;
                                     acesso.CurrentPassword =  PostOfSales.CurrentPassword;
                                 }
                                 else
@@ -123,7 +123,7 @@ namespace BusinessLogicLayer.Seguranca
                             }
                         }
 
-                        if (UserAllowed)
+                        if (userTemAcessoAoSistema)
                         {
                             acesso.Codigo = entidade.Codigo;
                             GenericRN clsGeneric = new GenericRN();
@@ -176,16 +176,21 @@ namespace BusinessLogicLayer.Seguranca
                                 acesso.MensagemErro = "Ops!! O nome de Utilizador ou a senha estão incorrectos. Volte a Tentar";
                         }
 
+
+                        if (userTemAcessoAoSistema && acesso.MensagemErro == string.Empty)
+                        {
+                            string pFrom = acesso.IsRestUser ? LOCKSCREEN : string.Empty; 
+                            IniciarSessao(acesso, SerieFaturacao, acesso.CurrentSystem, pFrom, acesso.Filial);
+                        }
+
                     }
                 }
                 else
                 {
-                    acesso.MensagemErro = "Ocorreu um erro ao carregar as Configurações do Sistema: " + entidade.MensagemErro;
+                    acesso.MensagemErro = "Ocorreu um erro ao durante a obtenção dos dados da empresa licenciada: " + entidade.MensagemErro;
                 }
 
-                string pFrom = acesso.IsRestUser ? "LockScreen" : string.Empty;
-                if (acesso.MensagemErro == string.Empty)
-                    IniciarSessao(acesso, SerieFaturacao, acesso.CurrentSystem, pFrom, acesso.Filial);
+                
                  
 
             }catch(Exception ex)
@@ -255,7 +260,7 @@ namespace BusinessLogicLayer.Seguranca
                 acesso.WareHouseName = acesso.UserDefaultWarehouse.Descricao;
                 acesso.UserPOS = PosRN.GetInstance().ObtePostosVendas(new PosDTO(acesso.Utilizador, acesso.Filial)).Where(t => t.Descricao == acesso.Utilizador).SingleOrDefault();
 
-                if (SystemLogged == "REST")
+                if (SystemLogged == KITANDAREST)
                 { 
                     acesso.UserAccess = PermissaoFormularioRN.GetInstance().ObterPermissoesFormularioREST(new UtilizadorDTO(acesso.Utilizador)); 
                 }
@@ -264,15 +269,17 @@ namespace BusinessLogicLayer.Seguranca
                     SerieDTO PosSerieDefault = acesso.UserPOS != null ? SerieRN.GetInstance().ObterPorPK(new SerieDTO { Codigo = acesso.UserPOS.DocumentSerieID })
                         : null;
                     SystemConfigurations.DesignationDefaultSeriePOS = PosSerieDefault != null ? PosSerieDefault.Descricao : string.Empty;
-                    if (SystemLogged == "POS")
+                    if (SystemLogged == KITANDAPOS)
                     {
                         acesso.UserAccess = PermissaoFormularioRN.GetInstance().ObterPermissoesFormularioPOS(new UtilizadorDTO(acesso.Utilizador));
                     }
-                    else
-                    if (SystemLogged == "COM")
+                    else if (SystemLogged == KITANDAGC)
                     {
                         acesso.UserAccess = PermissaoFormularioRN.GetInstance().GetUserAccess(acesso.Utilizador);
 
+                    }else if(SystemLogged == SIKOLA) 
+                    { 
+                    
                     }
 
                     if (acesso.UserProfile == AcessoDTO.CashRegisterProfile)
@@ -302,63 +309,60 @@ namespace BusinessLogicLayer.Seguranca
             return pProfile == AcessoDTO.isGerente || isMasterAdmin(pUtilizador) ? true: false;
         }
 
-        private AcessoDTO IniciarSessao(AcessoDTO acesso, int pSerieFaturacao, string pSys, string pFrom, string BranchID)
+        private AcessoDTO IniciarSessao(AcessoDTO pAcesso, int pSerieFaturacao, string pSys, string pFrom, string pEmpresaSeleccionada)
         {
             try
             {
 
-                UtilizadorDTO dto = UtilizadorRN.GetInstance().ObterPorPK(new UtilizadorDTO(acesso.Utilizador));
+                UtilizadorDTO user = UtilizadorRN.GetInstance().ObterPorPK(new UtilizadorDTO(pAcesso.Utilizador));
 
-                acesso.UseID = dto.Codigo;
-                acesso.Utilizador = dto.Utilizador;
-                acesso.SocialName = dto.SocialName;
-                acesso.UserProfile = dto.Perfil.Codigo;
-                acesso.Supervisor = dto.Supervisor;
-               
-                EmpresaDTO objFilial;
+                pAcesso.UseID = user.Codigo;
+                pAcesso.Utilizador = user.Utilizador;
+                pAcesso.SocialName = user.SocialName;
+                pAcesso.UserProfile = user.Perfil.Codigo;
+                pAcesso.Supervisor = user.Supervisor;
+                pAcesso.CurrentPassword = user.CurrentPassword;
+
+                EmpresaDTO empresa; 
                 List<EmpresaDTO> filiais;
-                if (isMasterAdmin(dto.Utilizador))
+
+                if (isMasterAdmin(user.Utilizador))
                 {
                     filiais = EmpresaRN.GetInstance().ObterTodas();
                     ParametrizarAdmin();
                     foreach (var unidade in filiais)
                     {
-                        EmpresaRN.GetInstance().IncluirUtilizador(new UtilizadorDTO(dto.Utilizador, unidade.Codigo));
-                    }
-                    objFilial = !string.IsNullOrEmpty(BranchID) ? filiais.Where(t => t.Codigo == int.Parse(BranchID)).ToList().FirstOrDefault() : filiais[0];
-
+                        EmpresaRN.GetInstance().IncluirUtilizador(new UtilizadorDTO(user.Utilizador, unidade.Codigo));
+                    } 
                 }
                 else
                 {
-                    filiais = EmpresaRN.GetInstance().ObterMinhasFiliais(dto.Utilizador);
-                    if (filiais.Count > 1)
-                        objFilial = !string.IsNullOrEmpty(BranchID) ? filiais.Where(t => t.Codigo == int.Parse(BranchID)).ToList().FirstOrDefault() : filiais.Where(f => f.IsDefault).ToList().FirstOrDefault();
-                    else
-                        objFilial = filiais[0];
-                     
+                    filiais = EmpresaRN.GetInstance().ObterMinhasFiliais(user.Utilizador);  
                 }
 
-                if (objFilial == null)
+                empresa = !string.IsNullOrEmpty(pEmpresaSeleccionada) ? filiais.Where(t => t.Codigo == int.Parse(pEmpresaSeleccionada)).ToList().FirstOrDefault() : filiais.FirstOrDefault();
+
+                if (empresa == null)
                 {
-                    if (isMasterAdmin(dto.Utilizador))
+                    if (isMasterAdmin(user.Utilizador))
                     {
-                        acesso.Url = "RegistarSucursal();";
+                        pAcesso.Url = "RegistarSucursal";
                     }
                     else
                     {
-                        acesso.MensagemErro = "alert('Lamentamos, mas a sua conta de Utilizador não tem permissão para aceder as Unidades Filiais do Sistema. Por favor contacte o Administrador do Sistema.');";
+                        pAcesso.MensagemErro = "Lamentamos, mas a sua conta de Utilizador não tem permissão para aceder as Unidades Filiais do Sistema. Por favor contacte o Administrador do Sistema.";
                     }
 
                 }
                 else
                 {
-                    if (filiais.Count > 1 && string.IsNullOrEmpty(BranchID))
+                    if (filiais.Count > 1 && string.IsNullOrEmpty(pEmpresaSeleccionada))
                     {
-                        acesso.Url = "window.location.href='../BranchSelectionSection';";
-                        acesso.Sucesso = true;
+                        pAcesso.Url = "BranchSelection";
+                        pAcesso.Sucesso = true;
                     }else
                     {
-                        acesso = LoadSelectedBranchSettings(acesso, pSerieFaturacao, pSys, pFrom, objFilial);
+                        pAcesso = LoadSelectedBranchSettings(pAcesso, pSerieFaturacao, pSys, pFrom, empresa);
                          
                     }
                         
@@ -367,130 +371,133 @@ namespace BusinessLogicLayer.Seguranca
             }
             catch (Exception ex)
             {
-                acesso.MensagemErro = "alert('Ocorreu um Erro durante no inicio de Sessão: " + ex.Message.Replace("'", "")+ "');";
+                pAcesso.MensagemErro = "alert('Ocorreu um Erro durante no inicio de Sessão: " + ex.Message.Replace("'", "")+ "');";
             }
 
 
-            return acesso;
+            return pAcesso;
         }
 
-        public AcessoDTO LoadSelectedBranchSettings(AcessoDTO acesso, int pSerieFaturacao, string pSys, string pFrom, EmpresaDTO objFilial)
+        public AcessoDTO LoadSelectedBranchSettings(AcessoDTO pAcesso, int pSerieFaturacao, string pSys, string pFrom, EmpresaDTO pEmpresa)
         {
 
             try
             {
-                ConfiguracaoDTO SystemConfigurations = ConfiguracaoRN.GetInstance().GetSystemConfiguration(objFilial);
+                ConfiguracaoDTO SystemConfigurations = ConfiguracaoRN.GetInstance().GetSystemConfiguration(pEmpresa);
+
                 if (SystemConfigurations.Sucesso)
                 {
                     SystemConfigurations.SerieFaturacao = pSerieFaturacao;
-                    acesso.Filial = SystemConfigurations.Filial;
+                    pAcesso.Filial = SystemConfigurations.Filial;
                 }
                 else
                 {
                     //SystemConfigurations = new ConfiguracaoDTO();
-                    SystemConfigurations.BranchDetails = objFilial;
-                    SystemConfigurations.Filial = objFilial.Codigo.ToString();
+                    SystemConfigurations.BranchDetails = pEmpresa;
+                    SystemConfigurations.Filial = pEmpresa.Codigo.ToString();
 
                 }
 
                 if (SystemConfigurations.MensagemErro == string.Empty && SystemConfigurations.Sucesso)
                 {
 
-                    if (AcessoRN.GetInstance().SessaoIniciada(acesso) && !string.IsNullOrEmpty(acesso.Maquina))
+                    if (AcessoRN.GetInstance().SessaoIniciada(pAcesso) && !string.IsNullOrEmpty(pAcesso.Maquina))
                     {
 
-                        TerminarSessao(acesso.Utilizador);
+                        TerminarSessao(pAcesso.Utilizador);
                     }
 
                      
-                    acesso.Filial = objFilial.Codigo.ToString(); 
-                    acesso.DefaultLanguage = "pt-PT";
-                    acesso.Language = string.Empty;
-                    acesso.UserDefaultWarehouse = ArmazemRN.GetInstance().ObterPorFiltro(new ArmazemDTO { Filial = acesso.Filial, Descricao = string.Empty })
-                    .Where(t => t.Codigo == SystemConfigurations.PosDefaultWarehouse).FirstOrDefault();
-                    acesso.WareHouseName = acesso.UserDefaultWarehouse.Descricao;
-                    acesso.UserPOS = PosRN.GetInstance().ObtePostosVendas(new PosDTO(acesso.Utilizador, acesso.Filial)).Where(t => t.Descricao == acesso.Utilizador).SingleOrDefault();
-                    //acesso.DataLogin = DateTime.Today;.ToLocalTime(); DateTime.Parse(String.Format("{0:dd/MM/yyyy}", DateTime.Now));
-                    acesso.StatusSessao = "A";
-                    acesso.CurrentSystem = pSys;
-                    acesso.Filial = objFilial.Codigo.ToString();
+                    pAcesso.Filial = pEmpresa.Codigo.ToString(); 
+                    pAcesso.DefaultLanguage = "pt-PT";
+                    pAcesso.Language = string.Empty;
+                    pAcesso.UserDefaultWarehouse = ArmazemRN.GetInstance().ObterPorFiltro(new ArmazemDTO { Filial = pAcesso.Filial, Descricao = string.Empty })
+                    .Where(t => t.Codigo == SystemConfigurations.PosDefaultWarehouse).FirstOrDefault(); 
+                    pAcesso.WareHouseName = pAcesso.UserDefaultWarehouse.Descricao;
 
-                   var saveLogin = InserirAcesso(acesso);
+                    pAcesso.UserPOS = PosRN.GetInstance().ObtePostosVendas(new PosDTO(pAcesso.Utilizador, pAcesso.Filial)).Where(t => t.Descricao == pAcesso.Utilizador).SingleOrDefault();
+                    pAcesso.StatusSessao = "A";
+                    pAcesso.CurrentSystem = pSys;
+                    pAcesso.Filial = pEmpresa.Codigo.ToString();
 
-                    acesso.Sucesso = !acesso.Sucesso ? saveLogin.Sucesso : acesso.Sucesso;
+                   var saveLogin = InserirAcesso(pAcesso);
 
-                    if (acesso.Sucesso)
+                    pAcesso.Sucesso = !pAcesso.Sucesso ? saveLogin.Sucesso : pAcesso.Sucesso;
+
+                    if (pAcesso.Sucesso)
                     {
-                        acesso.Url = "window.location.href='../Default';";
+                        pAcesso.Url = "Home";
 
 
                         if (pSys == "REST")
-                        {
-                            //acesso.Url = "window.location.href='../Menu';";
-                            acesso.UserAccess = PermissaoFormularioRN.GetInstance().ObterPermissoesFormularioREST(new UtilizadorDTO(acesso.Utilizador));
-                            if (acesso.UserProfile == AcessoDTO.CashRegisterProfile)
+                        { 
+                            pAcesso.UserAccess = PermissaoFormularioRN.GetInstance().ObterPermissoesFormularioREST(new UtilizadorDTO(pAcesso.Utilizador));
+
+                            if (pAcesso.UserProfile == AcessoDTO.CashRegisterProfile)
                             {
-                                acesso.Url = "window.location.href='/RestPOS'";
+                                pAcesso.Url = "window.location.href='/RestPOS'";
                                 SystemConfigurations.IsCashRegister = true;
 
                             }
-                            else if (acesso.FuncionarioID != "" && acesso.FuncionarioID != "-1" && acesso.FuncionarioID != "0" || pFrom == "LockScreen")
+                            else if (pAcesso.FuncionarioID != "" && pAcesso.FuncionarioID != "-1" && pAcesso.FuncionarioID != "0" || pFrom == LOCKSCREEN)
                             {
-                                acesso.Url = "window.location.href='/AtendimentoSala?pE=" + acesso.FuncionarioID + "'";
+                                pAcesso.Url = "window.location.href='/AtendimentoSala?pE=" + pAcesso.FuncionarioID + "'";
                             }
 
                         }
                         else
                         {
-                            SerieDTO PosSerieDefault = acesso.UserPOS != null ?
-                                SerieRN.GetInstance().ObterPorPK(new SerieDTO { Codigo = acesso.UserPOS.DocumentSerieID })
+                            SerieDTO PosSerieDefault = pAcesso.UserPOS != null ?
+                                SerieRN.GetInstance().ObterPorPK(new SerieDTO { Codigo = pAcesso.UserPOS.DocumentSerieID })
                                 : null;
                             SystemConfigurations.DesignationDefaultSeriePOS = PosSerieDefault != null ? PosSerieDefault.Descricao : string.Empty;
                             if (pSys == "POS")
                             {
-                                acesso.UserAccess = PermissaoFormularioRN.GetInstance().ObterPermissoesFormularioPOS(new UtilizadorDTO(acesso.Utilizador));
+                                pAcesso.UserAccess = PermissaoFormularioRN.GetInstance().ObterPermissoesFormularioPOS(new UtilizadorDTO(pAcesso.Utilizador));
                             }
-                            else
-                            if (pSys == "COM")
+                            else if (pSys == "COM")
                             {
-                                acesso.UserAccess = PermissaoFormularioRN.GetInstance().GetUserAccess(acesso.Utilizador);
+                                pAcesso.UserAccess = PermissaoFormularioRN.GetInstance().GetUserAccess(pAcesso.Utilizador);
+
+                            }else if(pSys == "SIKOLA")
+                            {
 
                             }
 
-                            if (acesso.UserProfile == AcessoDTO.CashRegisterProfile)
+                            if (pAcesso.UserProfile == AcessoDTO.CashRegisterProfile)
                             {
                                 if(SystemConfigurations.BranchDetails.Categoria=="2")
-                                  acesso.Url = "window.location.href='../Lavandaria/Home';";
+                                  pAcesso.Url = "window.location.href='../Lavandaria/Home';";
                                 else
-                                    acesso.Url = "window.location.href='../Comercial/POS';";
+                                    pAcesso.Url = "window.location.href='../Comercial/POS';";
                                 SystemConfigurations.IsCashRegister = true;
                             }
 
                         }
-                        acesso.CurrentSystem = pSys;
+                        pAcesso.CurrentSystem = pSys;
 
-                        acesso.Settings = SystemConfigurations;
+                        pAcesso.Settings = SystemConfigurations;
                     }
                     else
                     {
 
-                        acesso.MensagemErro = "alert('Ocorreu um erro ao Gravar a Sessão: " + saveLogin.MensagemErro + "');";
+                        pAcesso.MensagemErro = "alert('Ocorreu um erro ao Gravar a Sessão: " + saveLogin.MensagemErro + "');";
                     }
                 }
                 else
                 {
                     if (SystemConfigurations.MensagemErro != "")
-                        acesso.MensagemErro = "alert('Ocorreu um erro ao carregar as configurações: " + SystemConfigurations.MensagemErro + "');";
+                        pAcesso.MensagemErro = "alert('Ocorreu um erro ao carregar as configurações: " + SystemConfigurations.MensagemErro + "');";
                     else
-                        acesso.MensagemErro = "alert('A Empresa não tem está configurada'); window.location.href = '../Seguranca/Login';";
+                        pAcesso.MensagemErro = "alert('A Empresa não tem está configurada'); window.location.href = '../Seguranca/Login';";
                 }
             }
             catch(Exception ex)
             {
-                acesso.MensagemErro = "alert('Ocorreu um Erro durante o inicio de Sessão: "+ex.Message.Replace("'", "")+" Acesso: "+ acesso.StatusSessao +acesso.Url+"');";
+                pAcesso.MensagemErro = "alert('Ocorreu um Erro durante o inicio de Sessão: "+ex.Message.Replace("'", "")+" Acesso: "+ pAcesso.StatusSessao +pAcesso.Url+"');";
             }
 
-            return acesso;
+            return pAcesso;
         }
 
         public void TerminarSessao(string pUtilizador)

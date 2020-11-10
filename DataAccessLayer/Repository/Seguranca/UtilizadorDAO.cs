@@ -6,8 +6,7 @@ using System.Data.SqlClient;
 using System.Data;
 using Dominio.Seguranca;
 using MySql.Data.MySqlClient;
-
-
+using System.IO;
 
 namespace DataAccessLayer.Seguranca
 {
@@ -123,7 +122,7 @@ namespace DataAccessLayer.Seguranca
                 if (dr.Read())
                 {
 
-                    dto.Codigo = int.Parse(dr["UTI_CODIGO"].ToString());
+                    dto.Codigo = int.Parse(dr["UTI_ENTITY_ID"].ToString());
                     dto.SocialName = dr["UTI_NOME"].ToString();
                     dto.Utilizador = dr["UTI_UTILIZADOR"].ToString();
                     dto.CurrentPassword = dr["UTI_SENHA"].ToString();
@@ -135,6 +134,7 @@ namespace DataAccessLayer.Seguranca
                     };
                     dto.Supervisor = int.Parse(dr["UTI_SUPERVISOR"].ToString() == string.Empty ? "0" : dr["UTI_SUPERVISOR"].ToString());
                     dto.IdiomaID = int.Parse(dr["UTI_IDIOMA"].ToString() == string.Empty ? "1" : dr["UTI_IDIOMA"].ToString());
+                    dto.PathFoto = File.Exists(dr["ENT_FOTOGRAFIA_PATH"].ToString()) ? dr["ENT_FOTOGRAFIA_PATH"].ToString() : "~/images/SemFoto";
 
                 }
                 dto.Sucesso = true;

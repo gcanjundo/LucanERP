@@ -1,0 +1,24 @@
+/*================================================================================
+	Item Name: Materialize - Material Design Admin Template
+	Version: 5.0
+	Author: PIXINVENT
+	Author URL: https://themeforest.net/user/pixinvent/portfolio
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.kitandaGC-v-1 {
+    color: #333 !important;
+    border-bottom: none !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}

@@ -1,0 +1,902 @@
+body {
+    color: #111111!important;
+}
+
+.gradient-45deg-blue-grey-blue-grey {
+    background: #cfd8dc;
+    background: -webkit-linear-gradient(45deg, #cfd8dc, #546e7a) !important;
+    background: linear-gradient(45deg, #cfd8dc, #546e7a) !important;
+}
+
+.gradient-45deg-grey-grey-blue-blue {
+    background: #626566;
+    background: -webkit-linear-gradient(45deg, #546e7a, #cfd8dc) !important;
+    background: linear-gradient(45deg, #546e7a, #cfd8dc) !important;
+}
+
+.cardFundo {
+    background-color: #f8f8f8;
+    border: solid 1px;
+    border-color: #f8f8f8;
+}
+
+#geral {
+    margin-left: 30px;
+}
+
+.bordas {
+    border: solid 1px;
+    border-color: rgb(160, 185, 185);
+}
+
+.tabs1 {
+    height: auto!important;
+    margin-top: 8px;
+}
+
+.tabs1 .tab1 {
+    display: inline!important;
+    line-height: 48px!important;
+    font-style: inherit!important;
+    color: blue !important;
+    text-align: right!important;
+    text-transform: uppercase!important;
+}
+
+.btn-light-blue {
+    color: #00bcd4 !important;
+    background-color: #e8eaf6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, .08);
+}
+
+.btn-light-red {
+    color: #f44336 !important;
+    background-color: #e8eaf6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, .08);
+}
+
+.btn-light-indigo {
+    color: #3f51b5 !important;
+    background-color: #e8eaf6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, .08);
+}
+
+.btn-light-green {
+    color: #199e4c !important;
+    background-color: #e8eaf6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, .08);
+}
+
+.btn-light-orange {
+    color: #f39c12 !important;
+    background-color: #e8eaf6;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .1), 0 3px 1px -2px rgba(0, 0, 0, 0), 0 1px 5px 0 rgba(0, 0, 0, .08);
+}
+
+.mycon_blue {
+    font-size: 20px;
+    color: #00bcd4;
+}
+
+.mycon_branco {
+    font-size: 20px;
+    color: white;
+}
+
+.mycon_orange {
+    font-size: 20px;
+    color: #f39c12;
+}
+
+.mycon_green {
+    font-size: 20px;
+    color: #26fc78;
+}
+
+.mycon_red {
+    font-size: 20px;
+    color: #dd4b39;
+}
+
+.striped {
+    width: none;
+}
+
+.validate {
+    height: 2.5rem!important;
+}
+
+.datepicker {
+    height: 2.5rem!important;
+}
+
+.card-title {
+    background-color: #68666e !important;
+    color: white;
+    font-size: larger!important;
+    align-items: center;
+    border-radius: 4px;
+}
+
+.btnPequeno {
+    padding: 1px 4px !important;
+    height: 2rem !important;
+    color: white;
+    background-color: #2196f3 !important;
+}
+
+.btnPequeno2 {
+    padding: 1px 4px !important;
+    height: 2rem !important;
+    color: white;
+    background-color: #0fe5ec !important;
+}
+
+.btnPequeno3 {
+    padding: 1px 4px !important;
+    height: 2rem !important;
+    color: white;
+    background-color: #21f380 !important;
+}
+
+.ajustar {
+    display: flex !important;
+    justify-content: space-around!important;
+    border-radius: 3px !important;
+}
+
+.btnEliminar {
+    padding: 1px 4px !important;
+    height: 2rem !important;
+    box-shadow: none!important;
+    color: white;
+    background-color: #fa7962ee !important;
+}
+
+.btnPesquisa {
+    padding: 1px 4px !important;
+    height: 2rem !important;
+    box-shadow: none!important;
+    color: white;
+    background-color: #e4e728f5 !important;
+}
+
+.btnOperacao {
+    text-align: center;
+    background-color: #2196f3 !important;
+}
+
+.btn {
+    letter-spacing: 1.5px;
+}
+
+.Centralizar {
+    display: flex;
+    align-items: center;
+}
+
+.defineLabel {
+    height: 1rem!important;
+}
+
+td,
+th {
+    font-size: 12px;
+}
+
+.paragrafo {
+    font-size: 13px;
+}
+
+
+/* .txt
+any desk
+} */
+
+
+/*================================================================================
+        Item Name: Materialize - Material Design Admin Template
+        Version: 5.0
+        Author: PIXINVENT
+        Author URL: https://themeforest.net/user/pixinvent/portfolio
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN CSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+a {
+    color: #dedede;
+}
+
+.paddings {
+    padding: 15px;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 0.5fr));
+    gap: calc(var(--space) * 2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+footer.page-footer {
+    padding-top: 2px;
+}
+
+.cards>li {
+    display: grid;
+}
+
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--gray);
+    border-radius: calc(var(--space) * 0.25);
+    overflow: hidden;
+    transition: box-shadow 200ms linear;
+}
+
+.card>.thumbnail {
+    height: 12rem;
+    background-color: var(--gray);
+}
+
+.card>.thumbnail>img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card>.text {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    order: 1;
+    padding-left: var(--space);
+    padding-right: var(--space);
+}
+
+.card .stack:not(:last-child)>* {
+    margin-top: var(--space);
+    margin-bottom: 0;
+}
+
+.card .stack:last-child {
+    margin: 10px;
+}
+
+.titulo {
+    font-weight: 900;
+    color: black;
+    font-size: 14px;
+}
+
+.card .meta>.term {
+    display: flex;
+    justify-content: start;
+}
+
+.card .meta>.term>dd {
+    margin-left: 0;
+    margin-right: calc(var(--space) * 0.5);
+    font-weight: 700;
+}
+
+.card .meta>.term>dd::after {
+    content: ":";
+}
+
+
+/* reset button styles */
+
+.card h2>button {
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+
+/* states */
+
+a:hover,
+a:focus {
+    text-decoration: none;
+}
+
+.cardi:hover,
+.cardi:focus-within {
+    border: 1px solid #2196f3;
+}
+
+.kt_app {
+    margin: 0 !important;
+}
+
+.rights {
+    float: right;
+    margin-right: 14px;
+}
+
+.rights-1 {
+    float: right !important;
+}
+
+.navab {
+    background-color: #0033cc !important;
+    width: 95%;
+    float: right;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.img-empresa {
+    display: flex;
+}
+
+button:focus {
+    outline: none;
+    background-color: inherit !important;
+}
+
+.field_error {
+    color: red;
+}
+
+.app_color {
+    background: #2196f3 !important;
+}
+
+.fc-button-primary {
+    color: #000 !important;
+}
+
+.fc-button-primary:not(:disabled).fc-button-active,
+.fc-button-primary:not(:disabled):active {
+    color: #fff;
+    background-color: #2196f3 !important;
+    border-color: #2196f3 !important;
+}
+
+.nav-expanded .sidenav .menu-title {
+    font-size: 12px;
+}
+
+hr {
+    overflow: visible;
+    box-sizing: content-box;
+    height: 0px;
+    width: 100% !important;
+    /* color: red; */
+}
+
+span {
+    font-size: 12px !important;
+}
+
+.chip {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 40px;
+    display: inline-block;
+    height: 40px !important;
+    margin-right: 5px;
+    margin-bottom: 6px;
+    padding: 0 14px !important;
+    color: rgba(0, 0, 0, .6);
+    cursor: pointer;
+    border-radius: 16px;
+    background-color: #e4e4e4;
+}
+
+.txt {
+    text-align: right !important;
+}
+
+.tcolr {
+    color: #3F51B5 !important;
+}
+
+.tab-color-black {
+    background-color: black;
+    color: white;
+}
+
+.tab-color-greem {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btttt {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 10px !important;
+}
+
+.card {
+    border-radius: 5px !important;
+}
+
+.tab-color-blue {
+    background-color: #2196f3;
+    color: white;
+}
+
+.card-title {
+    border-radius: 0;
+}
+
+.tabs {
+    background-color: #f8f8f8 !important;
+}
+
+.tabs .tab a {
+    text-align: left !important;
+}
+
+.tabs .tab a.active {
+    color: #000000 !important;
+    background-color: rgb(33 150 243 / 37%) !important;
+    border-radius: 30px;
+}
+
+.mrgin {
+    margin: 2px;
+}
+
+.tab-color-red {
+    background-color: #F44336;
+    color: white;
+}
+
+.sactive {
+    border-radius: 0 5px 5px 0;
+    background-color: red;
+}
+
+td,
+th {
+    display: table-cell;
+    padding: 8px 15px;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 0 !important;
+}
+
+.card_sem_padd {
+    padding: 0 !important;
+}
+
+.card_sem_padd-4 {
+    padding: 10px !important;
+}
+
+.stylebutton {
+    bottom: 3px;
+    right: 19px;
+}
+
+.gradient-45deg-light-blue-cyan {
+    background: #0288d1;
+    background: -webkit-linear-gradient(45deg, #0288d1, #26c6da) !important;
+    background: linear-gradient(45deg, #0033cc, #0033cc) !important;
+}
+
+.mrrgg {
+    margin-left: 20px;
+}
+
+.input-fields {
+    position: relative;
+    margin-top: 2rem !important;
+    margin-bottom: 1rem;
+}
+
+.iicon {
+    top: 5px;
+    position: relative;
+    right: 5px;
+}
+
+.app_color_1 {
+    background: #0033cc !important;
+}
+
+small {
+    font-size: .8rem;
+    color: #757474 !important;
+}
+
+.ups {
+    font-size: 13px !important;
+}
+
+#breadcrumbs-wrapper .breadcrumbs .active {
+    font-weight: normal;
+    color: #fff !important;
+}
+
+.imgs-empresa {
+    height: 40px;
+    display: flex;
+    margin-top: 12px;
+    width: 40px;
+    border-radius: 50px;
+    /* border-bottom-right-radius: 24px; */
+    align-items: center;
+}
+
+.htc1 {
+    font-size: 24px !important;
+}
+
+.sidenav li a.active {
+    background: #2196f3 !important;
+}
+
+.brand-sidebar .logo-wrapper a.brand-logo img {
+    height: 30px !important;
+}
+
+.wav {
+    font-size: 18px !important;
+}
+
+.kt_center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+nav ul a {
+    font-size: 11px !important;
+}
+
+.left-b {
+    border-left: 1px solid #9E9E9E;
+}
+
+.bk {
+    background: #f9f9f9;
+    color: #000 !important;
+}
+
+.mrgg {
+    /* margin: 0px auto 0 260px !important;*/
+    margin: 0px auto 0 246px !important;
+    border-left: 2px solid #fff;
+    height: 100% !important;
+}
+
+.font-20s {
+    font-size: 18px;
+    color: #fff;
+    /* text-transform: uppercase; */
+    margin-left: 15px;
+    position: relative;
+    top: 2px;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: #000000 !important;
+    background-color: transparent;
+}
+
+.tabs .tab a {
+    font-size: 14px;
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 0 24px;
+    -webkit-transition: color .28s ease, background-color .28s ease;
+    transition: color .28s ease, background-color .28s ease;
+    text-overflow: ellipsis;
+    color: rgb(0 0 0) !important;
+}
+
+.tabs .tab {
+    text-transform: none !important;
+}
+
+.mtfoot-2 {
+    margin-top: 8% !important;
+}
+
+.nav-tr-color {
+    background: #2196F3;
+    color: #fff !important;
+}
+
+.font-20p {
+    font-size: 18px;
+    color: #fff;
+}
+
+.mycon {
+    font-size: 30px;
+    color: black !important;
+}
+
+.small-ico-bg {
+    padding: 16px !important;
+}
+
+.logo-text {
+    font-size: 20px !important;
+    text-transform: uppercase;
+}
+
+#cor {
+    background: #ffffff !important;
+    color: black;
+}
+
+.ptxt {
+    font-size: 24px;
+    text-transform: uppercase;
+}
+
+nav ul li {
+    /* border-bottom: 1px solid #9E9E9E !important;*/
+}
+
+.navbar .navbar-dark .header-search-wrapper i {
+    color: #000 !important;
+}
+
+#ul-horizontal-nav {
+    overflow: hidden;
+}
+
+input::placeholder {
+    color: black !important;
+}
+
+.kitandaGC-v-1 {
+    color: #333 !important;
+    border-bottom: none !important;
+    background: #fff !important;
+    box-shadow: none !important;
+}
+
+footer {
+    overflow: hidden;
+    bottom: 0;
+    width: 100%;
+    background-color: #2196f3 !important;
+}
+
+.dropdown-title {
+    text-transform: uppercase;
+}
+
+#main {
+    background-color: #86868630;
+}
+
+.segund {
+    background-color: #ffffff!important;
+}
+
+.first {
+    background: #3493de !important
+}
+
+header .brand-logo img {
+    height: 35px !important;
+}
+
+.logop {
+    position: relative;
+    top: -7px;
+    text-transform: none;
+    /* font-size: 26px !important;*/
+}
+
+.brand-sidebar .logo-wrapper a.navbar-toggler {
+    top: 11px !important;
+}
+
+.sidenav li>a>i,
+.sidenav li>a>[class^='mdi-'],
+.sidenav li>a li>a>[class*='mdi-'],
+.sidenav li>a>i.material-icons {
+    color: rgb(0 0 0);
+}
+
+header .brand-logo {
+    padding: 13px 12px !important;
+    color: #ffffff !important;
+}
+
+@media (max-width: 900px) {
+    .logo-somi {
+        display: none;
+    }
+    .texto-somi {
+        display: none;
+    }
+}
+
+.shadow-1,
+.language-dropdown ul.lang-list,
+.language-dropdown label {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.shadow-2,
+.language-dropdown.open label {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+.shadow-3 {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.shadow-4 {
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.shadow-5 {
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.3), 0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.language-dropdown {
+    display: table-caption;
+    margin: 25px 0px 0px;
+}
+
+.language-dropdown .lang-en {
+    border-left: 4px solid #E2162C;
+}
+
+.language-dropdown .lang-en .flag {
+    background-image: url("http://findicons.com/files/icons/282/flags/48/united_states_of_america_usa.png");
+}
+
+.language-dropdown .lang-pt {
+    border-left: 4px solid #E2162C;
+}
+
+.language-dropdown .lang-pt .flag {
+    background-image: url("https://findicons.com/files/icons/282/flags/48/angola.png");
+}
+
+.language-dropdown .lang-es {
+    border-left: 4px solid #DA4D13;
+}
+
+.language-dropdown .lang-es .flag {
+    background-image: url("http://www.imaginarium.pt/responsive/2015/images/iconsFicha/banderaES.png");
+}
+
+.language-dropdown label,
+.language-dropdown ul li {
+    display: block;
+    width: 50px;
+    height: 38px;
+    background: #fff;
+    padding: 0px 6px;
+    cursor: pointer;
+}
+
+.language-dropdown ul.lang-list {
+    position: relative;
+    visibility: hidden;
+    opacity: 0;
+    z-index: 1;
+}
+
+.selec {
+    margin-top: -12px;
+    margin-right: 10px;
+}
+
+.language-dropdown ul.lang-list li {
+    border-bottom: 1px solid #ECECEC;
+}
+
+.language-dropdown ul.lang-list li:last-child {
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
+.language-dropdown ul.lang-list li.selected {
+    display: none;
+}
+
+.language-dropdown label {
+    position: relative;
+    border-bottom: 1px solid #ECECEC;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+.language-dropdown .lang-flag .flag,
+.language-dropdown .lang-list .lang .flag {
+    float: left;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    background-size: 35px 35px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.language-dropdown.open ul.lang-list {
+    visibility: visible;
+    opacity: 1;
+}
+
+.language-dropdown.open label {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+
+.animate,
+.lang-flag,
+.lang-list {
+    cursor: pointer;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    -ms-transition: all .5s;
+    -ms-transition: all .5s;
+    transition: all .5s;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.section {
+    padding: 0rem 0;
+    margin-right: 50px;
+}
+
+.card-title {
+    border-radius: 0;
+}
+
+.tabs {
+    background-color: #f8f8f8;
+}
+
+.tabs .tab a {
+    text-align: left;
+}
+
+.tabs .tab a.active {
+    color: #000000 !important;
+    background-color: rgb(33 150 243 / 37%);
+    border-radius: 30px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #d7d7d7;
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius: 0px;
+    background-color: #F5F5F5;
+}

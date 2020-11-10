@@ -1,0 +1,60 @@
+﻿@model List<Dominio.Seguranca.EmpresaDTO>
+@{
+
+    ViewData["Title"] = "Seleccione a Empresa";
+}
+<div>
+    <div class="row">
+        <div class="content-wrapper-before app_color_1"></div>
+        <div class="col s12 m12 l12">
+            <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+                <!-- Search for small screen-->
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 m6 l6">
+                            <h5 class="breadcrumbs-title"><span></span></h5>
+                        </div>
+                        <div class="col s12 m6 l6 right-align-md">
+                            <ol class="breadcrumbs mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Home</a>
+                                </li> 
+                                <li class="breadcrumb-item active">
+                                    Empresas
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <ul class="cards">
+                    @foreach (var branch in Model)
+                    {
+                        <li class="paddings">
+                            <a href="localhost:5001/Home/Painel">
+                                <article class="cardi card">
+                                    <div class="text">
+                                        <div class="stack content">
+                                            <p> <label class="titulo">@branch.NomeComercial</label></p>
+
+                                            <p><small>@branch.Morada</small></p>
+
+                                            <label><small>Contribuinte:</small></label> <small>@branch.CompanyVAT</small>
+                                        </div>
+
+                                    </div>
+                                    <div class="thumbnail">
+                                        <img src="@branch.PathFoto" alt="">
+                                    </div>
+                                </article>
+                            </a>
+                        </li> 
+                    } 
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+
