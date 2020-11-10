@@ -14,6 +14,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\GestaoEscolar\Controllers\" />
+    <Folder Include="Areas\GestaoEscolar\Data\" />
+    <Folder Include="Areas\GestaoEscolar\Models\" />
+    <Folder Include="Areas\GestaoEscolar\Views\" />
+    <Folder Include="Areas\RecusosHumanos\Controllers\" />
+    <Folder Include="Areas\RecusosHumanos\Data\" />
+    <Folder Include="Areas\RecusosHumanos\Models\" />
+    <Folder Include="Areas\RecusosHumanos\Views\" />
     <Folder Include="Areas\Seguranca\Data\" />
     <Folder Include="Areas\Seguranca\Models\" />
   </ItemGroup>
