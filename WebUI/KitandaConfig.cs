@@ -46,10 +46,10 @@ namespace WebUI
 
                 //webConfig.SetCookies(Encrypt(pAcesso.Utilizador), tokeLogginID);
 
-                if (sessionDetails.ContainsKey(pAcesso.UseID.ToString()))
-                    sessionDetails.Remove(pAcesso.UseID.ToString());
+                if (sessionDetails.ContainsKey(pAcesso.UserID.ToString()))
+                    sessionDetails.Remove(pAcesso.UserID.ToString());
 
-                sessionDetails.Add(pAcesso.UseID.ToString(), pAcesso);
+                sessionDetails.Add(pAcesso.UserID.ToString(), pAcesso);
             } 
         }
 

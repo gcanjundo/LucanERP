@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    var sessionDetails = ViewData["SessionDetails"] as Dominio.Seguranca.AcessoDTO;
+}
+<!DOCTYPE html>
 <html class="loading" lang="pt" data-textdirection="ltr">
 
 <head>
@@ -6,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-    <title> Kitanda - @ViewData["Title"]</title>
+    <title> KitandaSoft ERP - @ViewData["Title"]</title>
 
     <link rel="apple-touch-icon" href="~/template/app-assets/images/favicon/apple-touch-icon-152x152.png">
     <link rel="shortcut icon" type="image/x-icon" href="">
@@ -33,7 +36,7 @@
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <div class="img-empresa logo-somi">
                             <img src="../template/app-assets/upload/favicon.png" class="imgs-empresa" alt="avatar">
-                            <h3 class="font-20s"> Empresa filhos de sangue</h3>
+                            <h3 class="font-20s"> @sessionDetails.CompanyName</h3>
                         </div>
                     </div>
                     <ul class="navbar-list right">
@@ -48,8 +51,8 @@
                     </ul>
                     <!-- translation-button-->
                     <ul class="dropdown-content" id="translation-dropdown">
-                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> English</a></li>
-                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Portuguese</a></li>
+                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> Inglês</a></li>
+                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Português</a></li>
                     </ul>
 
                     <!-- profile-dropdown-->
@@ -85,7 +88,7 @@
                 <a class="brand-logo darken-1 " href=" ">
                     <img class="hide-on-med-and-down " src="../template/app-assets/images/logo/loggo.png " alt="materialize logo " />
                     <img class="show-on-medium-and-down hide-on-med-and-up " src="../template/app-assets/images/logo/loggo.png " alt="materialize logo " />
-                    <span class="logop logo-text hide-on-med-and-down ">KitUI</span>
+                    <span class="logop logo-text hide-on-med-and-down ">KitandaSoft ERP</span>
                 </a>
                 <a class="navbar-toggler " href="# ">
                     <i class="material-icons ">radio_button_checked</i>
@@ -108,7 +111,10 @@
 
     <footer class="page-footer footer footer-static footer-dark radient-shadow navbar-border navbar-shadow ">
         <div class="footer-copyright ">
-            <div class="container "><span>&copy; 2016 - @DateTime.Today.Year <a href="www.lucansolucoes.co.ao" target="_blank ">GC LUCAN SOFTWARE E SERVIÇOS</a> All rights reserved.</span></div>
+            <div class="container ">
+                <span>&copy; 2016 - @DateTime.Today.Year <a href="www.lucansolucoes.co.ao" target="_blank ">GC LUCAN SOFTWARE E SERVIÇOS</a> Todos os direitos reservados. </span>
+                <span class="right hide-on-small-only">Licenciado para @sessionDetails.CompanyName</span>
+            </div>
         </div>
     </footer>
 
@@ -116,7 +122,8 @@
     <script src="~/template/app-assets/js/plugins.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/geral.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/scripts/advance-ui-modals.js" asp-append-version="true"></script>
-
+    <script src="~/template/app-assets/js/login.js" asp-append-version="true"></script> 
+    <script src="~/template/app-assets/js/alertify.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

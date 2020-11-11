@@ -90,9 +90,10 @@ namespace DataAccessLayer.Geral
                 ComandText = "stp_GER_TASK_OBTERPORFILTRO";
 
                 AddParameter("CODIGO", dto.Codigo); 
-                AddParameter("@SCHEDULE_FROM", dto.ScheduleDate);
-                AddParameter("@SCHEDULE_UNTIL", dto.ScheduleEndDate);
+                AddParameter("@SCHEDULE_FROM", dto.ScheduleDate == DateTime.MinValue ?(object)DBNull.Value : dto.ScheduleDate);
+                AddParameter("@SCHEDULE_UNTIL", dto.ScheduleEndDate == DateTime.MinValue ? (object)DBNull.Value : dto.ScheduleEndDate);
                 AddParameter("@COMPANY_ID", dto.Filial);
+                AddParameter("@UTILIZADOR", dto.UserID);
 
                 MySqlDataReader dr = ExecuteReader();
 

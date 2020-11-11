@@ -139,6 +139,7 @@ namespace DataAccessLayer.Seguranca
                         Provincia = dr["PROV_DESCRICAO"].ToString(),
                         ProvinciaMorada = int.Parse(dr["PROV_CODIGO"].ToString()),
                         CustomerFiscalCodeID = dr["FIL_SUJEITO_PASSIVO"].ToString(),
+                        CompanyLogo = dr["ENT_FOTOGRAFIA_PATH"].ToString(),
                     };
                     dto.CurrencySimbol = dr["PAI_MOEDA"].ToString(); 
                     dto.TituloDocumento = dr["DOC_DESCRICAO"].ToString();

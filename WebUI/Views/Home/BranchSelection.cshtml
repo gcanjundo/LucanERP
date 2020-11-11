@@ -18,7 +18,7 @@
                             <ol class="breadcrumbs mb-0">
                                 <li class="breadcrumb-item">
                                     <a href="#">Home</a>
-                                </li> 
+                                </li>
                                 <li class="breadcrumb-item active">
                                     Empresas
                                 </li>
@@ -32,7 +32,7 @@
                     @foreach (var branch in Model)
                     {
                         <li class="paddings">
-                            <a href="localhost:5001/Home/Painel">
+                            <a href="#" onclick="SelecteCompany('@branch.Codigo', '@branch.Utilizador')">
                                 <article class="cardi card">
                                     <div class="text">
                                         <div class="stack content">
@@ -50,9 +50,26 @@
                                 </article>
                             </a>
                         </li> 
-                    } 
-                </ul>
-
+                    }
+                </ul> 
+            </div>
+            <div id="modalPassword" class="modal modal-sm modal-fixed-footer">
+                <div class="modal-content">
+                    <h4>Confirmar Palavra Passe</h4>
+                     <div class="=row">
+                         <div class="col s12">
+                             <div class="input-field col s12">
+                                 <input id="txtPassword" type="password" class="validate">
+                                 <input type="hidden" id="hdSelectedCompany">
+                                 <input type="hidden" id="txtUsername">
+                                 <label for="password">Password</label>
+                                </div>
+                         </div>
+                     </div>
+                </div>
+                <div class="modal-footer"> 
+                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Entrar()">Confirmar</a>
+                </div>
             </div>
         </div>
     </div>

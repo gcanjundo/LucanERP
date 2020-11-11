@@ -87,8 +87,7 @@ namespace Dominio.Seguranca
         public object InvoiceData { get; set; }
         public string Language { get; set; }
         public string DefaultLanguage { get; set; }
-        public string CurrentSystem { get; set; } 
-        public int UseID { get; set; }
+        public string CurrentSystem { get; set; }  
         public PosDTO UserPOS { get; set; }
         public List<PagamentoDTO> PaymentReceivedList { get; set; }
         public bool IsRestUser { get; set; }

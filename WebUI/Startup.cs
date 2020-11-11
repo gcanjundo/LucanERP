@@ -27,6 +27,7 @@ namespace WebUI
                 options.JsonSerializerOptions.PropertyNamingPolicy = null;
             }); ; 
             services.AddRazorPages();
+            services.AddDistributedMemoryCache();
             services.AddSession(options => 
             {
                 options.IdleTimeout = System.TimeSpan.FromSeconds(14400);
@@ -44,7 +45,7 @@ namespace WebUI
 
             services.AddSingleton<KitandaConfig>();
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
-             
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

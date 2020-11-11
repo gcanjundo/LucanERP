@@ -33,9 +33,8 @@ namespace Dominio
         public string Situacao { get; set; } 
         public string FuncionarioID { get; set; } 
         public string SocialName { get; set; }
-
-        public int Supervisor { get; set; }
-
+        public int UserID { get; set; }
+        public int Supervisor { get; set; } 
         public bool IsCashRegister { get; set; }
 
         public string Email { get; set; }

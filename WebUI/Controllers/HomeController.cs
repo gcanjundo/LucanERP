@@ -7,8 +7,10 @@ using BusinessLogicLayer.Geral;
 using BusinessLogicLayer.Seguranca;
 using Dominio.Geral;
 using Dominio.Seguranca;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using WebUI.Extensions;
 using WebUI.Models;
 using WebUI.Models.Geral;
 
@@ -36,11 +38,32 @@ namespace WebUI.Controllers
 
         public IActionResult BranchSelection()
         {
-            var myBranchList =EmpresaRN.GetInstance().ObterMinhasFiliais(Request.Query["pUs"]);
+            var acesso = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            GetSessionDetails();
+            var myBranchList =EmpresaRN.GetInstance().ObterMinhasFiliais(acesso.Utilizador);
             return View(myBranchList);
         }
 
-         
+        public IActionResult Default()
+        { 
+            GetSessionDetails();
+            var acesso = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            var agenda = TaskRN.GetInstance().ObterPorFiltro(new TaskDTO { Utilizador = acesso.Utilizador, Filial = acesso.Filial });
+            return View();
+        }
+
+        public IActionResult DashBoard()
+        {
+            var userName = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            GetSessionDetails();
+            var myBranchList = EmpresaRN.GetInstance().ObterMinhasFiliais(userName.Utilizador);
+            return View(myBranchList);
+        }
+        void GetSessionDetails()
+        {
+            ViewData["SessionDetails"] = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+        }
+
 
         public IActionResult Privacy()
         {
@@ -64,7 +87,7 @@ namespace WebUI.Controllers
 
             if (userCredentials.Sucesso)
             {
-                //TempData["myModel"] = userCredentials; 
+                HttpContext.Session.Set<AcessoDTO>("userCredencials", userCredentials);
             }
             
             return Json(userCredentials);

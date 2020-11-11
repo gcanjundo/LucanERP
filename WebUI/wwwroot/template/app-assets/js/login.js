@@ -6,27 +6,18 @@ function Entrar() {
 
     var is_error = '';
 
-
+    
     if (username === '' || password === '') {
 
-        alertify.alert('Atenção', '!Oops Notamos que os campos estão vazios ...').set({
-            onshow: null,
-            onclose: function() {}
-        });
-        is_error = 'yes';
-    }
-    if (password === '') {
-        $('#passwordError').html('Senha Invalido');
-
+        if (username === '') {
+            $('#emailError').html('Digite o Utilizador');
+        } else if (password === '') {
+            $('#passwordError').html('Digite a Palavra-Passe');
+        } 
         is_error = 'yes';
     }
 
-    if (username === '') {
-        $('#emailError').html('Utilizador Invalido');
-
-        is_error = 'yes';
-
-    }
+      
 
     if (is_error == '') {
 
@@ -54,12 +45,15 @@ function Entrar() {
                             }
                         });
                     } else
-                    { 
+                    {
+                        if(result.Url == "BranchSelection")
+                            window.location.href = "/Home/" + result.Url;
+                        else 
                         alertify.alert('Sucesso', 'Bem-vindo ao Sistema').set({
                             onshow: null,
                             onclose: function ()
                             {
-                                window.location.href = "/Home/" + url;
+                                window.location.href = "/Home/" + result.Url;
                             }
                         });
                     }
@@ -68,6 +62,7 @@ function Entrar() {
 
     }
 
+    
      
     /**
      * if (is_error === '') {
@@ -112,4 +107,10 @@ function Entrar() {
     }
      */
 
+}
+
+function SelecteCompany(id, username) {
+    $("#hdSelectedCompany").val(id);
+    $("#txtUsername").val(username);
+    $('#modalPassword').modal('open');
 }

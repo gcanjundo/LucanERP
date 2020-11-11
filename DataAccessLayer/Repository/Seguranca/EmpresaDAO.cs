@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Dominio.Seguranca;
@@ -347,7 +348,7 @@ namespace DataAccessLayer.Seguranca
                 {
                     filial = new EmpresaDTO();
 
-
+                    filial.Utilizador = dto.Utilizador;
                     filial.Codigo = int.Parse(dr[0].ToString());
                     filial.NomeComercial = dr[1].ToString();
                     filial.Morada = dr[2].ToString().ToUpper() + " " + dr[3].ToString().ToUpper();
@@ -363,8 +364,8 @@ namespace DataAccessLayer.Seguranca
                         filial.IsDefault = false;
                     }
 
-                    filial.CompanyVAT = dr[8].ToString();
-                    filial.PathFoto = dr[9].ToString();
+                    filial.CompanyVAT = dr[8].ToString(); 
+                    filial.PathFoto = !string.IsNullOrEmpty(dr[9].ToString()) ? dr[9].ToString() : "../images/KitandaLogo.png";
                     if (dr[10].ToString() == "T")
                         filial.CustomerFiscalCodeID = "Regime Transitório";
                     else if (dr[10].ToString() == "I")

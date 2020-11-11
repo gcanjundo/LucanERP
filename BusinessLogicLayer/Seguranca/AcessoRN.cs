@@ -316,7 +316,7 @@ namespace BusinessLogicLayer.Seguranca
 
                 UtilizadorDTO user = UtilizadorRN.GetInstance().ObterPorPK(new UtilizadorDTO(pAcesso.Utilizador));
 
-                pAcesso.UseID = user.Codigo;
+                pAcesso.UserID = user.Codigo;
                 pAcesso.Utilizador = user.Utilizador;
                 pAcesso.SocialName = user.SocialName;
                 pAcesso.UserProfile = user.Perfil.Codigo;
@@ -360,7 +360,10 @@ namespace BusinessLogicLayer.Seguranca
                     {
                         pAcesso.Url = "BranchSelection";
                         pAcesso.Sucesso = true;
-                    }else
+                        pAcesso.CompanyName = "Seleccione a Empresa";
+                        pAcesso.CompanyLogo = "../template/app-assets/upload/favicon.png";
+                    }
+                    else
                     {
                         pAcesso = LoadSelectedBranchSettings(pAcesso, pSerieFaturacao, pSys, pFrom, empresa);
                          
@@ -389,6 +392,8 @@ namespace BusinessLogicLayer.Seguranca
                 {
                     SystemConfigurations.SerieFaturacao = pSerieFaturacao;
                     pAcesso.Filial = SystemConfigurations.Filial;
+                    pAcesso.CompanyName = SystemConfigurations.BranchDetails.NomeComercial;
+                    pAcesso.CompanyLogo = SystemConfigurations.BranchDetails.CompanyLogo;
                 }
                 else
                 {
@@ -537,6 +542,7 @@ namespace BusinessLogicLayer.Seguranca
         public List<AcessoDTO> ObterAcessosPorStatus(AcessoDTO dto)
         {
             return daoAcesso.ObterPorStatus(dto);
-        } 
+        }  
+         
     }
 }
