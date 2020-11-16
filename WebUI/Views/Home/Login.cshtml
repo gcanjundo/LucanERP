@@ -22,12 +22,19 @@
 
 <body>
 
-    <!-- Preloader -->
+    <!-- Preloader normal-->
     <div id="preloader">
         <div id="status">
-            <div> <img src="~/template/app-assets/static/logo_login.png" class="img_logo" id="teste_position" /> 
-              <img src="../images/status.gif" id="gif"/> 
-            </div>           
+            <div>
+                <img src="~/template/app-assets/static/logo_login.png" class="img_logo" id="teste_position" />
+                <img src="../images/status.gif" id="gif" />
+            </div>
+        </div>
+    </div>
+    <!-- Preloader ajax-->
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
         </div>
     </div>
 
@@ -42,7 +49,7 @@
                     <div class="row margin">
                         <div class="input-field">
                             <i class="material-icons prefix pt-2" id="icon1">person_outline</i>
-                            <input type="text" name="txtUsername" id="txtUsername" required >
+                            <input type="text" name="txtUsername" id="txtUsername" required>
                             <label for="username" class="center-align">Utilizador</label>
                         </div>
                         <span class="errorText" id="emailError"></span>
@@ -54,7 +61,7 @@
                             <input type="password" name="password" id="txtPassword" required>
                             <label for="txtPassword">Palavra-Passe</label>
                         </div>
-                    
+
                         <span class="errorText" id="passwordError"></span>
                     </div>
                     <!--validLogin()-->

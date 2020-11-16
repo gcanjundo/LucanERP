@@ -1,4 +1,11 @@
+
 function Entrar() {
+
+
+    $(document).ajaxSend(function () {
+        $("#overlay").fadeIn(300);
+    });
+
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
     var companyId = $("#hdSelectedCompany").val();
@@ -62,55 +69,12 @@ function Entrar() {
                         });
                     }
                 }
+            }).done(function () {
+                setTimeout(function () {
+                    $("#overlay").fadeOut(300);
+                }, 500);
             });
-
     }
-
-    
-     
-    /**
-     * if (is_error === '') {
-
-        jQuery.ajax({
-            type: 'post',
-            url: 'login/check_seguranca',
-            data: 'username=' + username + '&password=' + password,
-            success: function(data) {
-
-                var response = jQuery.parseJSON(data);
-                if (response.result === 'empresa') {
-
-                    alertify.alert('Bem Vindo ', 'Esolha uma empressa que pretende trabalhar').set({
-                        onshow: null,
-                        onclose: function() {
-                            window.location.href = 'Empresa';
-                        }
-                    });
-
-                }
-                if ((response.result === 'home')) {
-
-                    alertify.alert('Bem Vindo. ', 'Ha pagina principal').set({
-                        onshow: null,
-                        onclose: function() {
-
-                            //por ser outro controller colocamos a url com http://localhost/kitanda
-                            window.location.href = 'http://localhost/kitanda/Home/Painel';
-                        }
-                    });
-
-                } else {
-
-                    jQuery('#result').html(response.msg);
-                    // location.reload();
-
-                }
-
-            }
-        });
-    }
-     */
-
 }
 
 function SelecteCompany(id, username) {
