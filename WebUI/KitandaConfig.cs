@@ -16,20 +16,22 @@ using Microsoft.AspNetCore.Hosting;
 namespace WebUI
 {
     public class KitandaConfig
-    {
+    { 
 
-        private AcessoDTO pSessionInfo;
-        public string FilePath, tokeLogginID= "KitandaSoft_Logged";
-        GenericRN _genericClass = new GenericRN();
+        public AcessoDTO pSessionInfo;
+        public string FilePath, tokeLogginID = "KitandaSoft_Logged";
+        public GenericRN _genericClass;
         public static Dictionary<string, AcessoDTO> sessionDetails;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public KitandaConfig()
-        {   
+        {
+            _genericClass = new GenericRN();
         }
 
         public KitandaConfig(IWebHostEnvironment webHostEnvironment)
         {
+            _genericClass = new GenericRN();
             _webHostEnvironment = webHostEnvironment; 
 
             FilePath = Path.Combine(Directory.GetCurrentDirectory(), _genericClass.Decrypt(_genericClass.LicFilePath));
@@ -39,6 +41,7 @@ namespace WebUI
 
         public void SetAppSettings(AcessoDTO pAcesso)
         {
+
             if (!string.IsNullOrEmpty(pAcesso.Utilizador))
             {
                 ConfiguracaoRN.GetInstance().ExecuteBackup(pAcesso.Settings);

@@ -1,0 +1,351 @@
+﻿@{ 
+    var sessionDetails = ViewData["SessionDetails"] as Dominio.Seguranca.AcessoDTO;
+}
+<!DOCTYPE html>
+<html class="loading" lang="pt" data-textdirection="ltr">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+
+    <title> KitandaSoft GC - @ViewData["Title"]</title>
+
+    <link rel="apple-touch-icon" href="~/template/app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="app-assets/images/favicon/favicon-32x32.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/vendors/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/vendors/fullcalendar/css/fullcalendar.min.css">
+    <!-- END: VENDOR CSS-->
+    <!-- BEGIN: Page Level CSS-->
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/materialize.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/style.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/pages/dashboard.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/vendors/dropify/css/dropify.min.css">
+    <!-- END: Page Level CSS-->
+    <!-- BEGIN: Custom CSS-->
+
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/custom/custom.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/xcsslogin/alertify.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/pages/page-users.css">
+
+    <!-- BEGIN: VENDOR CSS-->
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/vendors/vendors.min.css">
+
+
+</head>
+<body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns   " data-open="click" data-menu="vertical-modern-menu" data-col="2-columns" onload="time()">
+    <header class="page-topbar" id="header">
+        <div class="navbar navbar-fixed">
+            <nav class="navbar-main navbar-color nav-collapsible first sideNav-lock navbar-dark no-shadow">
+                <div class="nav-wrapper">
+                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <div class="img-empresa logo-somi">
+                            <img src="@sessionDetails.CompanyLogo" class="imgs-empresa" alt="avatar">
+                            <h3 class="font-20s"> @sessionDetails.CompanyName</h3>
+                        </div>
+                    </div>
+                    <ul class="navbar-list right">
+                        <li id="saudacoes" style="display: none"> </li>
+                        <li>
+                            <a class="htc1" id="txt"></a>
+                        </li>
+                        <li class="dropdown-language "><a class="wav waves-effect waves-block waves-light translation-button" href="#" data-target="translation-dropdown"><span class="flag-icon flag-icon-pt"></span></a></li>
+                        <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
+                        <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="~/template/app-assets/upload/mingui.jpg" alt="avatar"><i></i></span></a></li>
+
+                    </ul>
+                    <!-- translation-button-->
+                    <ul class="dropdown-content" id="translation-dropdown">
+                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> Inglês</a></li>
+                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Português</a></li>
+                    </ul>
+
+                    <!-- profile-dropdown-->
+                    <ul class="dropdown-content" id="profile-dropdown">
+                        <li><a class="grey-text text-darken-1" href="user-profile-page.html"><i class="material-icons">person_outline</i> Perfil</a></li>
+                        <li><a class="grey-text text-darken-1" href="page-faq.html"><i class="material-icons">help_outline</i> Ajuda</a></li>
+                        <li class="divider"></li>
+                        <li><a class="grey-text text-darken-1 modal-trigger" href="#modalLogout"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+                    </ul>
+                </div>
+                <nav class="display-none search-sm">
+                    <div class="nav-wrapp11er">
+                        <form id="navbarForm">
+                            <div class="input-field search-input-sm">
+                                <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="" data-search="template-list">
+                                <label class="label-icon" for="search"><i class="material-icons search-sm-icon">search</i></label><i class="material-icons search-sm-close">close</i>
+                                <ul class="search-list collection search-list-sm display-none"></ul>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main">
+        <div class="row">
+            <nav class="dropdownmenu navab">
+                <div>
+                    <ul class="rights">
+                        <li><a href="#">Gestão Escolar</a></li>
+                        <li><a href="#">Gestão Oficina</a></li>
+                        <li><a href="#">Gestão Clínica</a></li>
+                        <li><a href="#">Stock & Inventario</a></li>
+                        <li><a href="#">Tesouraria</a></li>
+                        <li><a href="#">Recursos Humanos</a></li>
+                        <li><a href="#">Contabilidade</a></li>
+                        <li><a href="#">Imobilizado</a></li>
+                        <li><a class="modal-trigger" href="#modal2">Configurações</a></li>
+
+                    </ul>
+                </div>
+            </nav>
+            <div class="content-wrapper-before app_color"></div>
+            @RenderBody()
+        </div>
+    </div>
+
+    <aside class="sidenav-main nav-expanded nav-lock nav-collapsible sidenav-light sidenav-active-square ">
+        <div class="brand-sidebar ">
+            <h1 class="logo-wrapper ">
+                <a class="brand-logo darken-1 " href=" ">
+                    <img class="hide-on-med-and-down " src="~/template/app-assets/images/logo/loggo.png " alt="materialize logo " />
+                    <img class="show-on-medium-and-down hide-on-med-and-up " src="~/template/app-assets/images/logo/loggo.png " alt="materialize logo " />
+                    <span class="logop logo-text hide-on-med-and-down ">KitandaSoft ERP</span>
+                </a>
+                <a class="navbar-toggler " href="# ">
+                    <i class="material-icons ">radio_button_checked</i>
+                </a>
+            </h1>
+        </div>
+        @if (!string.IsNullOrEmpty(sessionDetails.Filial))
+        {
+            <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow" id="slide-out" data-menu="menu-navigation" data-collapsible="menu-accordion">
+
+
+                <li class="bold">
+                    <a class="waves-effect waves-cyan" href='@Url.Action("Index", "Home")'><i class="material-icons">home</i><span class="menu-title" data-i18n="Home">Home</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan active" href='@Url.Action("Index", "GestaoComercial", new { area = "GestaoComercial" })'><i class="material-icons">pie_chart</i><span class="menu-title" data-i18n="Contacts">Gestão Comercial</span></a>
+                </li>
+
+                <li class="bold">
+                    <a class="waves-effect waves-cyan " href='@Url.Action("ShowPOS", "GestaoComercial", new { area = "GestaoComercial" })'><i class="material-icons">computer</i><span class="menu-title" data-i18n="ToDo">POS</span></a>
+                </li>
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                        <i class="material-icons">local_offer</i>
+                        <span class="menu-title" data-i18n="Advanced UI">Gestão de Artigos</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a href='@Url.Action("CreateProduct", "ProductManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Novo Artigo</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("ProductList", "ProductManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Catálogo de Artigos</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                        <i class="material-icons">dvr</i>
+                        <span class="menu-title" data-i18n="Advanced UI">Clientes&Aacute; Facturação  </span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a href='@Url.Action("CustomerList", "CustomerManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Gestão de Clientes</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("SalesInvoiceList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Factura</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("BudgetInvoiceList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Próformas e Orçamento</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("CustomerOrderList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Encomendas</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("CreditNotesList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Notas de Créditos</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("DeliveryNotesList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Guias de Remessa</span></a>
+                            </li>
+                            <li class="bold">
+                                <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                                    <i class="material-icons">donut_small</i>
+                                    <span class="menu-title" data-i18n="Advanced UI">Gestão Contrato e Avenças</span>
+                                </a>
+                                <div class="collapsible-body">
+                                    <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                                        <li>
+                                            <a href='@Url.Action("ContractList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Contratos</span></a>
+                                        </li>
+                                        <li>
+                                            <a href='@Url.Action("FeeManagementList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Listagem de avenças</span></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("ReportsList", "SalesManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Relatórios e Estatísticas</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                        <i class="material-icons">person_add</i>
+                        <span class="menu-title" data-i18n="Advanced UI">Compras & Fornecedores</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a href='@Url.Action("SupplierList", "SupplierManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Gestão de Fornecedores</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("PurchageInvoiceList", "PurchageManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Facturas de Fornecedores</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("SuppierOrderList", "PurchageManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Encomendas de Fornecedores</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("SupplierCotationList", "PurchageManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Orçamentos e Cotações</span></a>
+                            </li>
+                            <li>
+                                <a href='@Url.Action("SupplierCreditNotesList", "PurchageManagement", new { area = "GestaoComercial" })'><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Orçamentos e Cotações</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                        <i class="material-icons">attach_money</i>
+                        <span class="menu-title" data-i18n="Advanced UI">Conta Corrente</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a href="advance-ui-carousel.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Recebimentos</span></a>
+                            </li>
+                            <li>
+                                <a href="advance-ui-collapsibles.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Pagamentos</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                        <i class="material-icons">insert_chart</i>
+                        <span class="menu-title" data-i18n="Advanced UI">Stock & Inventario</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a href="advance-ui-carousel.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Carousel</span></a>
+                            </li>
+                            <li>
+                                <a href="advance-ui-collapsibles.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Collapsibles</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan " href="JavaScript:void(0)">
+                        <i class="material-icons">power</i>
+                        <span class="menu-title" data-i18n="Advanced UI">Utilitario</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a href="advance-ui-carousel.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Carousel</span></a>
+                            </li>
+                            <li>
+                                <a href="advance-ui-collapsibles.html"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Collapsibles">Collapsibles</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+            </ul>
+        }
+        <div class="navigation-background"></div><a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only" href="#" data-target="slide-out"><i class="material-icons">menu</i></a>
+
+    </aside>
+
+    <div id="modalLogout" class="modal" style="width:30%;">
+        <div class=" modal-content ">
+            <h6>Você deseja terminar sessão agora ?</h6>
+        </div>
+        <div class=" modal-footer ">
+            <a href="#" class=" modal-close waves-effect waves-green btn-flat ">Não</a>
+            <a href="Home/LogOut " class=" modal-close waves-effect waves-green btn-flat ">Sim</a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal2" class="modal" style=" width: 30%;">
+        <div class=" modal-content ">
+            <div class=" col s12 ">
+                <h4>Configurações</h4>
+                <p>
+                    Você também pode estilizá-lo facilmente com materializar classes de conjunto de cores predefinidas de tema de administração.
+                </p>
+                <div class=" section ">
+                    <a class=" chip cyan white-text " href=" Seguranca/Utilizadores ">
+                        <i class=" material-icons iicon ">person_add</i> Contas de utlizadores
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Seguranca/perfis ">
+                        <i class=" material-icons iicon ">panorama_horizontal</i> Perfis de Acesso
+                    </a>
+                </div>
+                <div class=" section ">
+                    <a class=" chip cyan white-text " href=" Seguranca/surcusais ">
+                        <i class=" material-icons iicon ">note_add</i> Gestão de Sucursais
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Home/Dashboard/utilizadores ">
+                        <i class=" material-icons iicon ">build</i> Configuração
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Home/Dashboard/utilizadores ">
+                        <i class=" material-icons iicon ">contact_mail</i> Email Monitor
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Geral/TabelaConsulta ">
+                        <i class=" material-icons iicon ">grid_on</i> Tabelas
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class=" modal-footer ">
+            <a href="#" class=" modal-close waves-effect waves-green btn-flat ">Sair</a>
+
+        </div>
+    </div>
+
+    <footer class="page-footer footer footer-static footer-dark radient-shadow navbar-border navbar-shadow ">
+        <div class="footer-copyright ">
+            <div class="container ">
+                <span>&copy; 2016 - @DateTime.Today.Year <a href="www.lucansolucoes.co.ao" target="_blank ">GC LUCAN SOFTWARE E SERVIÇOS</a> Todos os direitos reservados. </span>
+                <span class="right hide-on-small-only">Licenciado para @sessionDetails.CompanyName</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/template/app-assets/js/vendors.min.js"></script>  
+    <script src="~/template/app-assets/js/plugins.js"></script>
+    <script src="~/template/app-assets/js/alertify.js"></script>
+    <script src="~/template/app-assets/js/geral.js"></script>
+    <script src="~/template/app-assets/js/scripts/advance-ui-modals.js"></script>
+    <script src="~/template/app-assets/js/custom/custom-script.js"></script> 
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

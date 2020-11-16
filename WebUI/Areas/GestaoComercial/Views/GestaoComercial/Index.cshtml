@@ -1,0 +1,221 @@
+﻿@{
+    ViewData["Title"] = "Dashboard Gestão Comercial";
+    Layout = "~/Areas/GestaoComercial/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+    <!-- Search for small screen-->
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m6 l6">
+                <h5 class="breadcrumbs-title"><span class="ups"></span></h5>
+            </div>
+            <div class="col s12 m6 l6 right-align-md">
+                <ol class="breadcrumbs mb-0 ups">
+                    <li class="breadcrumb-item">
+                        <a href="index.html">Gestão Comercial</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        <a href="#">Resumo</a>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        Comercial
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col s12">
+    <div class="container">
+        <div class="section">
+            <!--Basic Tabs-->
+            <div class="row">
+                <div class="col s12 m12 l12">
+                    <div id="basic-tabs" class="scrollspy">
+                        <div class="card-content">
+                            <div id="cards-extended">
+                                <div class="row">
+                                    <div class="col s12 m3">
+                                        <div class="card border-radius-3" style="background-color: #00c0ef !important;">
+                                            <div class="card-content center">
+                                                <i class="material-icons amber-text small-ico-bg mb-5 mycon">local_grocery_store</i>
+                                                <p class="font-20p">
+                                                    Vendas <br> & Faturação
+                                                </p>
+                                                <p class="green-text  mt-3">
+                                                    <a class="waves-effect waves-light btn" id="cor">Criar Nova</a>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m3">
+                                        <div class="card border-radius-3" style=" background-color: #00a65a !important">
+                                            <div class="card-content center">
+                                                <i class="material-icons amber-text small-ico-bg mb-5 mycon">attach_money</i>
+                                                <p class="font-20p">
+                                                    Recebimentos <br> & Pagamentos
+                                                </p>
+                                                <p class="green-text  mt-3">
+                                                    <a class="waves-effect waves-light btn" id="cor">Emitir Novo</a>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m3">
+                                        <div class="card border-radius-3" style="background-color: #f39c12 !important;">
+                                            <div class="card-content center">
+                                                <i class="material-icons amber-text small-ico-bg mb-5 mycon">donut_small</i>
+                                                <p class="font-20p">
+                                                    Catálogo de<br> Produtos e Serviços
+
+                                                </p>
+                                                <p class="green-text  mt-3">
+                                                    <a class="waves-effect waves-light btn" id="cor">Criar Novo Artigo</a>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col s12 m3">
+                                        <div class="card border-radius-3" style="background-color: #dd4b39 !important;">
+                                            <div class="card-content center">
+                                                <i class="material-icons amber-text small-ico-bg mb-5 mycon">person</i>
+                                                <p class="font-20p">
+                                                    Ficheiro<br>Geral de Clientes
+                                                </p>
+                                                <p class="green-text  mt-3">
+                                                    <a class="waves-effect waves-light btn" id="cor">Criar Novo Cliente </a>
+                                                </p>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="mt-2"></div>
+                        <div class="row">
+                            <div class="col s12">
+                                <ul class="tabs tab-demo z-depth-1">
+                                    <li class="tab"><a class="active" href="#test1">Visão Global</a></li>
+                                    <li class="tab"><a href="#test2">Vendas Mensais</a></li>
+                                    <li class="tab"><a href="#test3">Montante em Divida-A receber</a></li>
+                                    <li class="tab"><a href="#test4">Encomedas de clientes</a></li>
+                                    <li class="tab"><a href="#test4">Vendas de Produto e Serviços</a></li>
+                                    <li class="tab"><a href="#test4">Vendas por Cliente</a></li>
+                                </ul>
+                            </div>
+                            <div id="test1" class="col s12">
+                                <div class="row">
+                                    <div class="col s12">
+                                        <div id="borderless-table" class="card card-tabs">
+                                            <div class="card-content">
+                                                <div class="card-title">
+                                                    <div class="row">
+                                                        <div class="col s12 m6 l10">
+                                                            <h4 class="card-title">Analise de Vendas Vs Recbimento</h4>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                                <div id="view-borderless-table" class="active">
+                                                    <div class="row">
+                                                        <div class="col s12" style="padding: 0;">
+                                                            <div class="col s6">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr class="nav-tr-color">
+                                                                            <th data-field="id">Name</th>
+                                                                            <th data-field="name">Item</th>
+                                                                            <th data-field="price">Item </th>
+                                                                            <th data-field="price">Item </th>
+                                                                            <th data-field="price">Item </th>
+                                                                            <th data-field="price">Item </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Alvin</td>
+                                                                            <td>Eclair</td>
+                                                                            <td>$0.87</td>
+                                                                            <td>$0.87</td>
+                                                                            <td>$3.76</td>
+                                                                            <td>$0.87</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Alan</td>
+                                                                            <td>Jellybean</td>
+                                                                            <td>$3.76</td>
+                                                                            <td>$0.87</td>
+                                                                            <td>$3.76</td>
+                                                                            <td>$0.87</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Jonathan</td>
+                                                                            <td>Lollipop</td>
+                                                                            <td>$7.00</td>
+                                                                            <td>$0.87</td>
+                                                                            <td>$7.00</td>
+                                                                            <td>$0.87</td>
+                                                                        </tr>
+
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="col s6">
+                                                                <table>
+                                                                    <thead>
+                                                                        <tr class="nav-tr-color">
+                                                                            <th data-field="id">Name</th>
+                                                                            <th data-field="name">Item Name</th>
+                                                                            <th data-field="price">Item Price</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td>Alvin</td>
+                                                                            <td>Eclair</td>
+                                                                            <td>$0.87</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Alan</td>
+                                                                            <td>Jellybean</td>
+                                                                            <td>$3.76</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Jonathan</td>
+                                                                            <td>Lollipop</td>
+                                                                            <td>$7.00</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div id="test2" class="col s12">Test 2</div>
+                            <div id="test3" class="col s12">Test 3</div>
+                            <div id="test4" class="col s12">Test 4</div>
+                        </div>
+                        <div class="mtfoot-2"></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="content-overlay"></div>
+    </div>
+</div>

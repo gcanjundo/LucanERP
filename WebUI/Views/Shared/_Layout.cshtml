@@ -1,5 +1,7 @@
-﻿@{ 
-    var sessionDetails = ViewData["SessionDetails"] as Dominio.Seguranca.AcessoDTO;
+﻿@{   
+    var _config = ViewData["_kitandaConfig"] as KitandaConfig;
+    var sessionDetails = _config.pSessionInfo;
+
 }
 <!DOCTYPE html>
 <html class="loading" lang="pt" data-textdirection="ltr">
@@ -35,7 +37,7 @@
                 <div class="nav-wrapper">
                     <div class="header-search-wrapper hide-on-med-and-down">
                         <div class="img-empresa logo-somi">
-                            <img src="../template/app-assets/upload/favicon.png" class="imgs-empresa" alt="avatar">
+                            <img src="@sessionDetails.CompanyLogo" class="imgs-empresa" alt="avatar">
                             <h3 class="font-20s"> @sessionDetails.CompanyName</h3>
                         </div>
                     </div>
@@ -67,7 +69,7 @@
                     <div class="nav-wrapp11er">
                         <form id="navbarForm">
                             <div class="input-field search-input-sm">
-                                <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="Explore Materialize" data-search="template-list">
+                                <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="" data-search="template-list">
                                 <label class="label-icon" for="search"><i class="material-icons search-sm-icon">search</i></label><i class="material-icons search-sm-close">close</i>
                                 <ul class="search-list collection search-list-sm display-none"></ul>
                             </div>
@@ -95,19 +97,105 @@
                 </a>
             </h1>
         </div>
-        <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow " id="slide-out " data-menu="menu-navigation " data-collapsible="menu-accordion ">
-            <li class="bold ">
-                <a class="waves-effect waves-cyan active " href="app-todo.html ">
-                    <i class="material-icons ">home</i>
-                    <span class="menu-title " data-i18n="ToDo ">@ViewData["Title"]</span>
-                </a>
-        </ul>
+        @if (!string.IsNullOrEmpty(sessionDetails.Filial))
+        {
+    <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow " id="slide-out " data-menu="menu-navigation " data-collapsible="menu-accordion ">
+        <li class="bold ">
+            <a class="waves-effect waves-cyan active " href="app-todo.html ">
+                <i class="material-icons "></i>
+                <span class="menu-title " data-i18n="ToDo ">@ViewData["Title"]</span>
+            </a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(4, false)" asp-area="GestaoEscolar" asp-controller="HomeSikola" asp-action="DashboardSikola"><i class="material-icons">school</i><span class="menu-title" data-i18n="Kanban">Gestão Escolar</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(6, false)" asp-area="GestaoOficina" asp-controller="HomeOficina" asp-action="DashboardOficina"><i class="material-icons">build</i><span class="menu-title" data-i18n="Kanban">Gestão Oficina Auto</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(17, false) " asp-area="GestaoClinica" asp-controller="HomClinica" asp-action="DashboardClinica"><i class="material-icons">local_hospital</i><span class="menu-title" data-i18n="File Manager">Gestão Clínica</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(1, false)" href='@Url.Action("DashboardComercial", "GestaoComercial", new { area = "GestaoComercial" })'><i class="material-icons">local_grocery_store</i><span class="menu-title" data-i18n="Contacts">Gestão Comercial</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(9, false)" asp-area="CRM" asp-controller="HomeCRM" asp-action="DashboardCRM"><i class="material-icons">contact_phone</i><span class="menu-title" data-i18n="Contacts">CRM</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(12, false)" asp-area="GestaoStock" asp-controller="HomeStock" asp-action="DashboardStock"><i class="material-icons">store</i><span class="menu-title" data-i18n="Contacts">Stock & Inventario</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(11, false)" asp-area="Tesouraria" asp-controller="HomeTesouraria" asp-action="DashboardTesouraria"><i class="material-icons">attach_money</i><span class="menu-title" data-i18n="Contacts">Tesouraria</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(5, false)" asp-area="RecursosHumanos" asp-controller="HomeRH" asp-action="DashboardRH"><i class="material-icons">group</i><span class="menu-title" data-i18n="Contacts">Recursos Humanos</span></a>
+        </li>
+        <li class="bold"> 
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(3, false)" asp-area="Contabilidade" asp-controller="HomeContabilidade" asp-action="DashboardContabilidade"><i class="material-icons">pie_chart</i><span class="menu-title" data-i18n="Contacts">Contabilidade</span></a>
+        </li>
+        <li class="bold hidden">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(10, false)" href="/Imobilizado/Index"><i class="material-icons">chrome_reader_mode</i><span class="menu-title" data-i18n="Contacts">Imobilizado</span></a>
+        </li>
+        <li class="bold">
+            <a class="waves-effect waves-cyan @_config.AllowedModulo(8, false)" asp-area="Seguranca" asp-controller="Home" asp-action="Index"><i class="material-icons">settings</i><span class="menu-title" data-i18n="Contacts">Painel de Controlo</span></a>
+        </li> 
+    </ul>
+        }
         <div class="navigation-background "></div>
         <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only " href="# " data-target="slide-out ">
             <i class="material-icons ">menu</i>
         </a>
 
     </aside>
+
+    <div id="modalLogout" class="modal" style="width:30%;">
+        <div class=" modal-content ">
+            <h6>Você deseja terminar sessão agora ?</h6>
+        </div>
+        <div class=" modal-footer ">
+            <a href="#" class=" modal-close waves-effect waves-green btn-flat ">Não</a>
+            <a href="Home/LogOut " class=" modal-close waves-effect waves-green btn-flat ">Sim</a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal2" class="modal" style=" width: 30%;">
+        <div class=" modal-content ">
+            <div class=" col s12 ">
+                <h4>Configurações</h4>
+                <p>
+                    Você também pode estilizá-lo facilmente com materializar classes de conjunto de cores predefinidas de tema de administração.
+                </p>
+                <div class=" section ">
+                    <a class=" chip cyan white-text " href=" Seguranca/Utilizadores ">
+                        <i class=" material-icons iicon ">person_add</i> Contas de utlizadores
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Seguranca/perfis ">
+                        <i class=" material-icons iicon ">panorama_horizontal</i> Perfis de Acesso
+                    </a>
+                </div>
+                <div class=" section ">
+                    <a class=" chip cyan white-text " href=" Seguranca/surcusais ">
+                        <i class=" material-icons iicon ">note_add</i> Gestão de Sucursais
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Home/Dashboard/utilizadores ">
+                        <i class=" material-icons iicon ">build</i> Configuração
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Home/Dashboard/utilizadores ">
+                        <i class=" material-icons iicon ">contact_mail</i> Email Monitor
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Geral/TabelaConsulta ">
+                        <i class=" material-icons iicon ">grid_on</i> Tabelas
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class=" modal-footer ">
+            <a type=" button " class=" modal-close waves-effect waves-green btn-flat ">Sair</a>
+
+        </div>
+    </div>
 
     <footer class="page-footer footer footer-static footer-dark radient-shadow navbar-border navbar-shadow ">
         <div class="footer-copyright ">
@@ -122,7 +210,7 @@
     <script src="~/template/app-assets/js/plugins.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/geral.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/scripts/advance-ui-modals.js" asp-append-version="true"></script>
-    <script src="~/template/app-assets/js/login.js" asp-append-version="true"></script> 
+    <script src="~/template/app-assets/js/login.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/alertify.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)

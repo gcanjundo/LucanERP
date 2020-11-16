@@ -41,7 +41,7 @@ namespace WebUI
                         options.LoginPath = "/Seguranca/Login/";
 
                     });
-            services.AddMvc(options => options.EnableEndpointRouting = false);
+            services.AddMvc();
 
             services.AddSingleton<KitandaConfig>();
             services.AddSingleton<ITempDataProvider, CookieTempDataProvider>();
@@ -64,31 +64,39 @@ namespace WebUI
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseRouting(); 
-            app.UseAuthorization(); 
+            app.UseRouting();
+            app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
 
                 /*
-                endpoints.MapAreaControllerRoute(
-                    name: "Seguranca",
-                    areaName:"Seguranca", 
-                    pattern: "Seguranca/{controller=Acesso}/{action=Login}/{id?}") ;
+                    endpoints.MapAreaControllerRoute(
+                        name: "Seguranca",
+                        areaName:"Seguranca", 
+                        pattern: "Seguranca/{controller=Acesso}/{action=Login}/{id?}") ;
                 
-                endpoints.MapAreaControllerRoute(
-                    name: "Geral",
-                    areaName: "Geral",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    endpoints.MapAreaControllerRoute(
+                        name: "Geral",
+                        areaName: "Geral",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapAreaControllerRoute(
-                    name: "RecursosHumanos",
-                    areaName: "RecursosHumanos",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");*/
+                    endpoints.MapAreaControllerRoute(
+                        name: "RecursosHumanos",
+                        areaName: "RecursosHumanos",
+                        pattern: "{controller=Home}/{action=Index}/{id?}");
+                */
+                endpoints.MapControllerRoute(
+                   name: "areaRoute",
+                   pattern: "{area}/{controller=GestaoComercial}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
+                   name: "areaRoute",
+                   pattern: "{area}/{controller=GestaoEscolar}/{action=DashBoardSikola}/{id?}");
 
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Login}/{id?}");
-            }); 
+            });
         }
     }
 }
