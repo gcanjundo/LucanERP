@@ -18,7 +18,7 @@ namespace DataAccessLayer
 
         public ConexaoDB()
         {
-            StringConnection = "server=localhost; user id=root;password=!2u80oklb@@13%; port=3307; database=base_kitanda_erp;";
+            StringConnection = "server=localhost; user id=root;password=2u80oklb@@13%; port=3307; database=base_kitanda_erp;";
             
             MySqlConnection conexao = new MySqlConnection(StringConnection); 
             Comando.Connection = conexao; 

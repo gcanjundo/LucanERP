@@ -1,92 +1,64 @@
-﻿@{ 
+﻿@{
     Layout = "";
 }
-
-<html class="loading" lang="en" data-textdirection="ltr">
-<!-- BEGIN: Head-->
+<!DOCTYPE html>
+<html lang="pt">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="Materialize is a Material Design Admin Template,It's modern, responsive and based on Material Design by Google.">
-    <meta name="keywords" content="materialize, admin template, dashboard template, flat admin template, responsive admin template, eCommerce dashboard, analytic dashboard">
-    <meta name="author" content="ThemeSelect">
-    <title>KitandaERP Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1,user-scalable=yes">
+    <meta name="description" content="">
+    <title>KitandaREP | Entrar</title>
+
     <link rel="stylesheet" type="text/css" href="~/template/app-assets/xcsslogin/style.css">
     <link rel="stylesheet" type="text/css" href="~/template/app-assets/xcsslogin/alertify.css">
     <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/materialize.css">
     <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/style.css">
+    <link href="~/css/proload.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
-    <!-- END: Custom CSS-->
-    <script>
-        function EntrarOld()
-        {
-            var username = $("#txtUsername").val();
-            var password = $("#txtPassword").val();
+    <style> i {color: #2196f3;}</style>
 
-            if (username === "") {
-                alert("Digite o Utilizador");
-            } else if (password == "") {
-                alert("Digite a Senha");
-            } else {
-
-                $.ajax(
-                    {
-                        type: "POST",
-                        url: '@Url.Action("Entrar", "Home")',
-                        data: {
-                            Utilizador: username,
-                            CurrentPassword: password
-                        },
-                        error: function (result)
-                        {
-                            alert("There is a Problem, Try Again!");
-                        },
-                        success: function (result)
-                        {
-                            if (result.Sucesso == false && result.MensagemErro != "") {
-                                alert(result.MensagemErro);
-                            } else {
-                                var url = '@Url.Action("ActionName", "Home")';
-
-                                window.location.href = url.replace("ActionName", result.Url);
-                            }
-                        }
-                    });
-            }
-        }
-    </script>
 </head>
-<!-- END: Head-->
 
 <body>
+
+    <!-- Preloader -->
+    <div id="preloader">
+        <div id="status">
+            <div> <img src="~/template/app-assets/static/logo_login.png" class="img_logo" id="teste_position" /> 
+              <img src="../images/status.gif" id="gif"/> 
+            </div>           
+        </div>
+    </div>
+
     <div class="background-container"></div>
     <div class="login-outer-container">
         <div class="login-inner-container">
             <div class="login">
                 <div class="platform-logo">
-                    <a pcfg-href="siteUrl" tabindex="-1"><img pcfg-title="brandName" src="../template/app-assets/static/logo_login.png"></a>
+                    <a pcfg-href="siteUrl" tabindex="-1"><img pcfg-title="brandName" src="~/template/app-assets/static/logo_login.png"></a>
                 </div>
-                <form class="loginContainer" action="" autocomplete="off">
+                <form class="loginContainer" method="dialog" autocomplete="off">
                     <div class="row margin">
                         <div class="input-field">
                             <i class="material-icons prefix pt-2" id="icon1">person_outline</i>
-                            <input type="text" name="txtUsername" id="txtUsername">
+                            <input type="text" name="txtUsername" id="txtUsername" required >
                             <label for="username" class="center-align">Utilizador</label>
                         </div>
                         <span class="errorText" id="emailError"></span>
                     </div>
+
                     <div class="row margin">
                         <div class="input-field">
                             <i class="material-icons prefix pt-2" id="icon2">lock_outline</i>
-                            <input type="password" name="password" id="txtPassword">
+                            <input type="password" name="password" id="txtPassword" required>
                             <label for="txtPassword">Palavra-Passe</label>
                         </div>
+                    
                         <span class="errorText" id="passwordError"></span>
                     </div>
                     <!--validLogin()-->
-                    <input type="button" class="button ipbP" id="btnEntrar" value="ENTRAR" onclick="Entrar()"/>
+                    <input type="submit" class="button ipbP" id="btnEntrar" value="ENTRAR" onclick="Entrar()" />
                     <span id="result" class="errorText"></span>
                     <br>
                 </form>
@@ -94,21 +66,21 @@
             <div class="social-info">
                 <div class="inner-social-info">
                     <a class="social-info-icon" pcfg-href="brandFacebook" tabindex="-1" target="_blank">
-                         Copyright © 2016 - 2020 &nbsp;<b>GC LUCAN</b>&nbsp; Todos direito reservado. 
-                        </a>
+                        Copyright © 2016 - 2020 &nbsp;<b>GC LUCAN</b>&nbsp; Todos direito reservado.
+                    </a>
                 </div>
             </div>
-
         </div>
     </div>
 
-    <script src="~/template/app-assets/js/vendors.min.js" asp-append-version="true"></script>
-    <script src="~/template/app-assets/js/jquery.validate.min.js" asp-append-version="true"></script>
-    <script src="~/template/app-assets/vendor/animsition/js/animsition.min.js" asp-append-version="true"></script>
-    <script src="~/template/app-assets/js/plugins.js" asp-append-version="true"></script>
-    <script src="~/template/app-assets/js/login.js" asp-append-version="true"></script>
-    <script src="~/template/app-assets/js/alertify.js" asp-append-version="true"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/vendors.min.js"></script>
+    <script src="~/template/app-assets/js/jquery.validate.min.js"></script>
+    <script src="~/template/app-assets/vendor/animsition/js/animsition.min.js"></script>
+    <script src="~/template/app-assets/js/plugins.js"></script>
+    <script src="~/template/app-assets/js/login.js"></script>
+    <script src="~/template/app-assets/js/alertify.js"></script>
+    <script src="~/js/proload.js"></script>
 
+    <!--<script src="~/" asp-append-version="true"></script>-->
 </body>
 </html>

@@ -10,9 +10,9 @@ function Entrar() {
     if (username === '' || password === '') {
 
         if (username === '') {
-            $('#emailError').html('Digite o Utilizador');
+         //   $('#emailError').html('Digite o Utilizador');
         } else if (password === '') {
-            $('#passwordError').html('Digite a Palavra-Passe');
+         //   $('#passwordError').html('Digite a Palavra-Passe');
         } 
         is_error = 'yes';
     }
