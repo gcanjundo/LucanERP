@@ -15,16 +15,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\GestaoEscolar\Controllers\" />
+    <Folder Include="Areas\Contabilidade\Data\" />
+    <Folder Include="Areas\Contabilidade\Models\" />
+    <Folder Include="Areas\GestaoClinica\Data\" />
+    <Folder Include="Areas\GestaoClinica\Models\" />
+    <Folder Include="Areas\GestaoComercial\Data\" />
+    <Folder Include="Areas\GestaoComercial\Models\" />
     <Folder Include="Areas\GestaoEscolar\Data\" />
     <Folder Include="Areas\GestaoEscolar\Models\" />
-    <Folder Include="Areas\GestaoEscolar\Views\" />
-    <Folder Include="Areas\RecusosHumanos\Controllers\" />
+    <Folder Include="Areas\GestaoOficina\Data\" />
+    <Folder Include="Areas\GestaoOficina\Models\" />
+    <Folder Include="Areas\GestaoStock\Data\" />
+    <Folder Include="Areas\GestaoStock\Models\" />
     <Folder Include="Areas\RecusosHumanos\Data\" />
     <Folder Include="Areas\RecusosHumanos\Models\" />
-    <Folder Include="Areas\RecusosHumanos\Views\" />
     <Folder Include="Areas\Seguranca\Data\" />
     <Folder Include="Areas\Seguranca\Models\" />
+    <Folder Include="Areas\Tesouraria\Data\" />
+    <Folder Include="Areas\Tesouraria\Models\" />
     <Folder Include="Identity\" />
   </ItemGroup>
 

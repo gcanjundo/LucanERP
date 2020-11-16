@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
@@ -12,14 +11,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WebUI.Extensions;
 using WebUI.Models;
-using WebUI.Models.Geral;
 
 namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly KitandaConfig _kitandaConfig;
+        private readonly KitandaConfig _kitandaConfig; 
         public HomeController(ILogger<HomeController> logger, KitandaConfig kitandaConfig)
         {
             _logger = logger;
@@ -27,53 +25,50 @@ namespace WebUI.Controllers
         }
 
         public IActionResult Login()
-        {   
-            return View();
-        } 
-        
-        public IActionResult Home()
         {
+            HttpContext.Session.Set<AcessoDTO>("userCredencials", null);
             return View();
+        }
+
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
         }
 
         public IActionResult BranchSelection()
         {
-            var acesso = HttpContext.Session.Get<AcessoDTO>("userCredencials");
             GetSessionDetails();
-            var myBranchList =EmpresaRN.GetInstance().ObterMinhasFiliais(acesso.Utilizador);
+            if (_kitandaConfig.pSessionInfo==null)
+                return Login();
+
+            var myBranchList = EmpresaRN.GetInstance().ObterMinhasFiliais(_kitandaConfig.pSessionInfo.Utilizador);
             return View(myBranchList);
+
         }
 
-        public IActionResult Default()
+        public IActionResult Index()
         { 
-            GetSessionDetails();
-            var acesso = HttpContext.Session.Get<AcessoDTO>("userCredencials");
-            var agenda = TaskRN.GetInstance().ObterPorFiltro(new TaskDTO { Utilizador = acesso.Utilizador, Filial = acesso.Filial });
-            return View();
-        }
+            GetSessionDetails(); 
+            if (_kitandaConfig.pSessionInfo == null)
+                return LogOut();
 
-        public IActionResult DashBoard()
-        {
-            var userName = HttpContext.Session.Get<AcessoDTO>("userCredencials");
-            GetSessionDetails();
-            var myBranchList = EmpresaRN.GetInstance().ObterMinhasFiliais(userName.Utilizador);
-            return View(myBranchList);
-        }
-        void GetSessionDetails()
-        {
-            ViewData["SessionDetails"] = HttpContext.Session.Get<AcessoDTO>("userCredencials");
-        }
+            var agenda = TaskRN.GetInstance().ObterPorFiltro(new TaskDTO { Utilizador = _kitandaConfig.pSessionInfo.Utilizador, Filial = _kitandaConfig.pSessionInfo.Filial });
+            return View(agenda);
+        } 
+         
+        
 
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
+ 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult SessaoExpirada()
+        {
+            return View();
         }
 
         public ActionResult Entrar(AcessoDTO userCredentials)
@@ -100,7 +95,11 @@ namespace WebUI.Controllers
             return ipHostInfo.AddressList.Where(t => t.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork).FirstOrDefault().ToString();
         }
 
-
+        public IActionResult LogOut()
+        { 
+            
+            return Login();
+        }
 
     }
 }

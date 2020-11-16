@@ -1,12 +1,15 @@
 function Entrar() {
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
+    var companyId = $("#hdSelectedCompany").val();
 
     $('.errorText').html('');
 
     var is_error = '';
 
-    
+    if (companyId == undefined) {
+        companyId = "";
+    }
     if (username === '' || password === '') {
 
         if (username === '') {
@@ -27,7 +30,8 @@ function Entrar() {
                 url: '/Home/Entrar',
                 data: {
                     Utilizador: username,
-                    CurrentPassword: password
+                    CurrentPassword: password,
+                    Filial : companyId
                 },
                 error: function (result)
                 {

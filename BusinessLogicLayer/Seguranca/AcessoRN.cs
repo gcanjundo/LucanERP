@@ -431,7 +431,7 @@ namespace BusinessLogicLayer.Seguranca
 
                     if (pAcesso.Sucesso)
                     {
-                        pAcesso.Url = "Home";
+                        pAcesso.Url = "Index";
 
 
                         if (pSys == "REST")
