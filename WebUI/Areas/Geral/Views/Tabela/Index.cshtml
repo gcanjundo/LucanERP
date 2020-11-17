@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Tabelas Gerais";`
+}
+
+<div class="row">
+    <nav class="dropdownmenu navab">
+        <div>
+            <ul class="rights">
+                <li><a href="#">POS</a></li>
+                <li><a href="#">Oficina Auto</a></li>
+                <li><a href="#">Serviço de Saude</a></li>
+                <li><a href="#">Gestão Comercial</a></li>
+                <li><a href="#">Stock & Inventario</a></li>
+                <li><a href="#">Tesouraria</a></li>
+                <li><a href="#">Recursos Humanos</a></li>
+                <li><a href="#">Contabilidade</a></li>
+                <li><a href="#">Imobilizado</a></li>
+                <li class="bold active open"><a class="modal-trigger" href="#modal2">Configurações</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper-before app_color"></div>
+    <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="breadcrumbs-title"><span class="ups"></span></h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                    <ol class="breadcrumbs mb-0 ups">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Início</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#"> Painel de Controlo</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Tabela de consulta
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="container">
+            <!-- Full Calendar -->
+            <section class="users-list-wrapper section">
+                <div class="users-list-table">
+                    <div class="card">
+                        <div class="card-content card_sem_padd-4">
+                            <div class="col s12 m6 l8">
+                                <h6 class="title">Tabela de consulta</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content card_sem_padd">
+                            <div class="fundo">
+
+                                <div class="row">
+                                    <div class="col s12">
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Paises"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">flag</i> PAÍSES & REGIÕES
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Terceiros"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">account_balance_wallet</i>GRUPOS &
+                                            TERCEIROS
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Categorias"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">assignment</i> FAMILÍA DE ARTIGOS
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Terceiros"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">account_box</i>TERCEIROS
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Bancos"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">bookmark</i>BANCO & CONTAS
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Armazens"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">account_balance</i>Armazéns
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Impostos"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">description</i>Impostos
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/RetencaoFonte"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">highlight</i>RETENÇÃO NA FONTE
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/CondicoesPagamento"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">hourglass_empty</i>Prazos De
+                                            Vencimento
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/MetodoPagamento"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">perm_data_setting</i>Métodos De
+                                            Pagamento
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Marcas"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">local_activity</i>MARCAS & MODELOS
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/UnidadesMedidas"
+                                           class="waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">move_to_inbox</i>UNIDADES DE MEDIDA
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/DocumentosJuridicos"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">note</i>DOC. JURÍDICO
+                                        </a>
+
+                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/UnidadesMedidas"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">receipt</i>DOC. COMERCIAS
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Expedicao"
+                                           class="waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">settings_applications</i>Métodos de
+                                            Expedição
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Cores"
+                                           class="waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">format_color_fill</i>Cores
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Series"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">date_range</i>SÉRIE DE FATURAÇÃO
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Fabricantes"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">confirmation_number</i>FABRICANTE
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Tamanhos"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">zoom_out_map</i>TAMANHO
+                                        </a>
+
+                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Funcionarios"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">people</i>FUNCIONÁRIOS
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>

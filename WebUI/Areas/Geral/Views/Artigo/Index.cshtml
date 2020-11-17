@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div id="main">
+    <div class="row">
+        <div><br></div>
+
+
+        <div class=" col s12 m3">
+            <div class="card">
+                <div class="card-content ajustar cyan white-text ">
+                    <p class="card-stats-title">
+                        <i class="material-icons">shop_two</i>Total De Artigos
+                    </p>
+                    <h5 class="card-stats-number white-text">566</h5>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="col s12 m12 l8" style="width: 100%;">
+
+            <div class="card">
+                <div class="card-title">
+
+                    <div class="row">
+                        <div class="Centralizar col s8 left">
+                            <i class="material-icons medium left">shopping_cart</i>
+                            <span>Gestão De Artigo</span>
+                        </div>
+
+                    </div>
+                </div>
+                <br>
+
+                <div class="row">
+                    <div class=" col s3 right">
+                        <a href="#" class="btn btn-light-blue right" type="submit" name="action">
+                            Listar Todos
+                        </a>
+                    </div>
+
+                </div>
+                <div class="card-content">
+
+                    <div class="row">
+                        <div class="input-field col m4">
+                            <select class="validate">
+                                <option value=" " disabled selected></option>
+                                <option value="1">Deposito a pronto</option>
+                                <option value="2">Deposito a prazo</option>
+                            </select>
+                            <label for="nC">Família</label>
+                        </div>
+                        <div class="input-field col m4">
+                            <select class="validate">
+                                <option value=" " disabled selected></option>
+                                <option value="1">Deposito a pronto</option>
+                                <option value="2">Deposito a prazo</option>
+                            </select>
+                            <label for="nC">Sub-Família</label>
+                        </div>
+                        <div class=" col m4 s12">
+                            <label for="nC">Nº de Série</label>
+                            <input type="text" class="validate" id="firstName" required>
+                        </div>
+                    </div>
+
+                    <div class="Centralizar right col s6">
+
+                        <button class="btn btnPequeno" type="submit" name="action">
+                            <i class="material-icons ">search</i>
+                        </button>
+                        <input type="text" class="defineInput" placeholder="descrição de artigo">
+                    </div>
+
+                    <br>
+
+
+                    <div class="row">
+                        <div class="col s12 bordas">
+                            <table id="scroll-dynamic" class="display">
+
+                                <thead class="teal lighten-4 ">
+
+                                    <tr>
+                                        <th colspan="47" data-field="id">Nome</th>
+                                        <th colspan="47" data-field="name">Composição</th>
+                                        <th colspan="47" data-field="name">Img</th>
+                                        <th colspan="1" data-field="price">  </th>
+                                        <th colspan="1" data-field="price">  </th>
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td colspan="47">Pc </td>
+                                        <td colspan="47">28392819800 </td>
+                                        <td colspan="47"></td>
+                                        <td colspan="1">
+                                            <button class="btn btnPequeno" type="submit" name="action">
+                                                <i class="material-icons ">edit</i>
+                                            </button>
+                                        </td>
+                                        <td colspan="1">
+                                            <button class="btn btnPequeno3" type="submit" name="action">
+                                                <i class="material-icons ">monetization_on</i>
+                                            </button>
+                                        </td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td colspan="47">Arroz</td>
+                                        <td colspan="47">null</td>
+                                        <td colspan="47"></td>
+                                        <td colspan="1">
+                                            <button class="btn btnPequeno" type="submit" name="action">
+                                                <i class="material-icons ">edit</i>
+                                            </button>
+                                        </td>
+                                        <td colspan="1">
+                                            <button class="btn btnPequeno3" type="submit" name="action">
+                                                <i class="material-icons ">monetization_on</i>
+                                            </button>
+                                        </td>
+
+                                    </tr>
+
+
+
+                                </tbody>
+                            </table>
+                            <div> <br> </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div> <br> </div>
+    </div>
+</div>
+
