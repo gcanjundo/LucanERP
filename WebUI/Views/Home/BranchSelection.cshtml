@@ -176,25 +176,23 @@
 
     <!-- Modal -->
     <div id="modalPassword" class="modal modal-fixed-footer modalPass">
-        <form action="">
-            <div class="modal-content">
-                <h5 class="titulo-modal">Confirmar Palavra Passe</h5>
-                <div class="row">
-                    <div class="col s12">
-                        <div class="input-field col s12 rep-1">
-                            <input id="txtPassword" type="password" required>
-                            <input type="hidden" id="hdSelectedCompany">
-                            <input type="hidden" id="txtUsername">
-                            <label for="password">Password</label>
-                        </div>
-                        <span class="errorText" id="passwordError"></span>
+        <div class="modal-content">
+            <h5 class="titulo-modal">Confirmar Palavra Passe</h5>
+            <div class="row">
+                <div class="col s12">
+                    <div class="input-field col s12 rep-1">
+                        <input id="txtPassword" type="password" required>
+                        <input type="hidden" id="hdSelectedCompany">
+                        <input type="hidden" id="txtUsername">
+                        <label for="password">Password</label>
                     </div>
+                    <span class="errorText" id="passwordError"></span>
                 </div>
             </div>
-            <div class="modal-footer">
-                <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Confirmar" onclick="Entrar()" />
-            </div>
-        </form>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Confirmar" onclick="Entrar()" />
+        </div>
     </div>
     <!-- Modal -->
     <div id="modalLogout" class="modal" style="width:30%;">
@@ -241,7 +239,7 @@
             </div>
         </div>
         <div class=" modal-footer ">
-            <a type=" button " class=" modal-close waves-effect waves-green btn-flat ">Sair</a>
+            <a class=" modal-close waves-effect waves-green btn-flat ">Sair</a>
 
         </div>
     </div>
