@@ -1,0 +1,28 @@
+﻿/* Empresa  oficial*/
+
+
+.mainp {
+    padding-left: 0 !important;
+}
+
+.navbar .header-search-wrapper {
+   
+    margin: 0px auto 0 75px !important;
+   
+}
+
+.modalPass {
+    width: 30% !important;
+    z-index: 1003;
+    height: 45% !important;
+    display: block;
+    opacity: 1;
+    top: 10%;
+    transform: scaleX(1) scaleY(1);
+}
+.titulo-modal {
+    margin-left: 23px;
+}
+.rep-1 {
+    margin-top: 15% !important;
+}

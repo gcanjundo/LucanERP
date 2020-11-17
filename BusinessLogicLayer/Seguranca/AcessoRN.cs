@@ -136,11 +136,11 @@ namespace BusinessLogicLayer.Seguranca
                             {
                                 hostEntry = Dns.GetHostEntry(serverCredencials.Item2);
                                 string hostName = hostEntry.HostName;
-                            }*/
+                            }
 
                             if (!LicenseRN.GetInstance().ExistLicFile(acesso.Url))
                             {
-                                if (isMasterAdmin(acesso.Utilizador) /*&& dto.IP == LocalHost*/)
+                                if (isMasterAdmin(acesso.Utilizador))
                                 {
                                     var licenca = LicenseRN.GetInstance().GenerateLicense(new LicencaDTO
                                     {
@@ -168,7 +168,7 @@ namespace BusinessLogicLayer.Seguranca
                                 {
                                     acesso.MensagemErro = IsValidLicense.Item2; 
                                 }
-                            }
+                            }*/
                         }
                         else
                         {

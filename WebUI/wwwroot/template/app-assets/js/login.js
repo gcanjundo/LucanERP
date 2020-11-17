@@ -70,9 +70,12 @@ function Entrar() {
                     }
                 }
             }).done(function () {
+
                 setTimeout(function () {
                     $("#overlay").fadeOut(300);
                 }, 500);
+
+                $('#modalPassword').modal('close');
             });
     }
 }

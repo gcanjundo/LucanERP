@@ -1,77 +1,269 @@
 ﻿@model List<Dominio.Seguranca.EmpresaDTO>
-@{
-
+@{ 
     ViewData["Title"] = "Seleccione a Empresa";
+    Layout = "";
+    var _config = ViewData["_kitandaConfig"] as KitandaConfig;
+    var sessionDetails = _config.pSessionInfo;
+
 }
-<div>
-    <div class="row">
-        <div class="content-wrapper-before app_color_1"></div>
-        <div class="col s12 m12 l12">
-            <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
-                <!-- Search for small screen-->
-                <div class="container">
-                    <div class="row">
-                        <div class="col s12 m6 l6">
-                            <h5 class="breadcrumbs-title"><span></span></h5>
-                        </div>
-                        <div class="col s12 m6 l6 right-align-md">
-                            <ol class="breadcrumbs mb-0">
-                                <li class="breadcrumb-item">
-                                    <a href="#">Home</a>
-                                </li>
-                                <li class="breadcrumb-item active">
-                                    Empresas
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container">
-                <ul class="cards">
-                    @foreach (var branch in Model)
-                    {
-                        <li class="paddings">
-                            <a href="#" onclick="SelecteCompany('@branch.Codigo', '@branch.Utilizador')">
-                                <article class="cardi card">
-                                    <div class="text">
-                                        <div class="stack content">
-                                            <p> <label class="titulo">@branch.NomeComercial</label></p>
+<!DOCTYPE html>
+<html class="loading" lang="pt" data-textdirection="ltr">
 
-                                            <p><small>@branch.Morada</small></p>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
 
-                                            <label><small>Contribuinte:</small></label> <small>@branch.CompanyVAT</small>
-                                        </div>
+    <title> KitandaSoft ERP - @ViewData["Title"]</title>
 
-                                    </div>
-                                    <div class="thumbnail">
-                                        <img src="@branch.PathFoto" alt="">
-                                    </div>
-                                </article>
-                            </a>
-                        </li> 
-                    }
-                </ul> 
-            </div>
-            <div id="modalPassword" class="modal modal-fixed-footer" style="width:30%;">
-                <div class="modal-content">
-                    <h4>Confirmar Palavra Passe</h4>
-                     <div class="=row">
-                         <div class="col s12">
-                             <div class="input-field col s12">
-                                 <input id="txtPassword" type="password" class="validate">
-                                 <input type="hidden" id="hdSelectedCompany">
-                                 <input type="hidden" id="txtUsername">
-                                 <label for="password">Password</label>
-                                </div>
-                         </div>
-                     </div>
-                </div>
-                <div class="modal-footer"> 
-                    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat" onclick="Entrar()">Confirmar</a>
-                </div>
+    <link rel="apple-touch-icon" href="~/template/app-assets/images/favicon/apple-touch-icon-152x152.png">
+    <link rel="shortcut icon" type="image/x-icon" href="">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300&display=swap" rel="stylesheet">
+    <link href="~/css/empresa.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/materialize.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/themes/vertical-modern-menu-template/style.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/pages/dashboard.css">
+
+
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/custom/custom.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/xcsslogin/alertify.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/css/pages/page-users.css">
+    <link rel="stylesheet" type="text/css" href="~/template/app-assets/vendors/vendors.min.css">
+    <link href="~/css/proload.css" rel="stylesheet" />
+
+
+</head>
+<body class="vertical-layout vertical-menu-collapsible page-header-dark vertical-modern-menu preload-transitions 2-columns" data-open="click" data-menu="vertical-modern-menu" data-col="2-columns" onload="time()">
+    <!-- Preloader normal-->
+    <div id="preloader">
+        <div id="status">
+            <div>
+                <img src="~/template/app-assets/static/logo_login.png" class="img_logo" id="teste_position" />
+                <img src="../images/status.gif" id="gif" />
             </div>
         </div>
     </div>
-</div>
+    <!-- Preloader ajax-->
+    <div id="overlay">
+        <div class="cv-spinner">
+            <span class="spinner"></span>
+        </div>
+    </div>
+    <header class="page-topbar" id="header">
+        <div class="navbar navbar-fixed">
+            <nav class="navbar-main navbar-color nav-collapsible first sideNav-lock navbar-dark no-shadow">
+                <div class="nav-wrapper">
+                    <div class="header-search-wrapper hide-on-med-and-down">
+                        <div class="img-empresa logo-somi">
+                            <img src="@sessionDetails.CompanyLogo" class="imgs-empresa" alt="avatar">
+                            <h3 class="font-20s"> @sessionDetails.CompanyName</h3>
+                        </div>
+                    </div>
+                    <ul class="navbar-list right">
+                        <li id="saudacoes" style="display: none"> </li>
+                        <li>
+                            <a class="htc1" id="txt"></a>
+                        </li>
+                        <li class="dropdown-language "><a class="wav waves-effect waves-block waves-light translation-button" href="#" data-target="translation-dropdown"><span class="flag-icon flag-icon-pt"></span></a></li>
+                        <li class="hide-on-med-and-down"><a class="waves-effect waves-block waves-light toggle-fullscreen" href="javascript:void(0);"><i class="material-icons">settings_overscan</i></a></li>
+                        <li><a class="waves-effect waves-block waves-light profile-button" href="javascript:void(0);" data-target="profile-dropdown"><span class="avatar-status avatar-online"><img src="../template/app-assets/upload/mingui.jpg" alt="avatar"><i></i></span></a></li>
+
+                    </ul>
+                    <!-- translation-button-->
+                    <ul class="dropdown-content" id="translation-dropdown">
+                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="en"><i class="flag-icon flag-icon-gb"></i> Inglês</a></li>
+                        <li class="dropdown-item"><a class="grey-text text-darken-1" href="#!" data-language="pt"><i class="flag-icon flag-icon-pt"></i> Português</a></li>
+                    </ul>
+
+                    <!-- profile-dropdown-->
+                    <ul class="dropdown-content" id="profile-dropdown">
+                        <li><a class="grey-text text-darken-1" href="user-profile-page.html"><i class="material-icons">person_outline</i> Perfil</a></li>
+                        <li><a class="grey-text text-darken-1" href="page-faq.html"><i class="material-icons">help_outline</i> Ajuda</a></li>
+                        <li class="divider"></li>
+                        <li><a class="grey-text text-darken-1 modal-trigger" href="#modalLogout"><i class="material-icons">keyboard_tab</i> Logout</a></li>
+                    </ul>
+                </div>
+                <nav class="display-none search-sm">
+                    <div class="nav-wrapper">
+                        <form id="navbarForm">
+                            <div class="input-field search-input-sm">
+                                <input class="search-box-sm mb-0" type="search" required="" id="search" placeholder="" data-search="template-list">
+                                <label class="label-icon" for="search"><i class="material-icons search-sm-icon">search</i></label><i class="material-icons search-sm-close">close</i>
+                                <ul class="search-list collection search-list-sm display-none"></ul>
+                            </div>
+                        </form>
+                    </div>
+                </nav>
+            </nav>
+        </div>
+    </header>
+
+    <div id="main" class="mainp main-full">
+        <div class="row">
+            <div class="content-wrapper-before app_color_1"></div>
+            <div class="col s12 m12 l12">
+                <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+                    <!-- Search for small screen-->
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                <h5 class="breadcrumbs-title"><span></span></h5>
+                            </div>
+                            <div class="col s12 m6 l6 right-align-md">
+                                <ol class="breadcrumbs mb-0">
+                                    <li class="breadcrumb-item">
+                                        <a href="#">Home</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">
+                                        Empresas
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row">
+                        @foreach (var branch in Model)
+                        {
+                            <div class="col s3">
+                                <a href="#" onclick="SelecteCompany('@branch.Codigo', '@branch.Utilizador')">
+                                    <article class="cardi card">
+                                        <div class="text">
+                                            <div class="stack content">
+                                                <p> <label class="titulo">@branch.NomeComercial</label></p>
+
+                                                <p><small>@branch.Morada</small></p>
+
+                                                <label><small>Contribuinte:</small></label> <small>@branch.CompanyVAT</small>
+                                            </div>
+
+                                        </div>
+                                        <div class="thumbnail">
+                                            <img src="@branch.PathFoto" alt="">
+                                        </div>
+                                    </article>
+                                </a>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <aside class="sidenav-main nav-collapsible sidenav-light sidenav-active-square nav-collapsed">
+        <div class="brand-sidebar ">
+            <h1 class="logo-wrapper ">
+                <a class="brand-logo darken-1">
+                    <img class="hide-on-med-and-down " src="../template/app-assets/images/logo/loggo.png " alt="materialize logo " />
+                    <img class="show-on-medium-and-down hide-on-med-and-up " src="../template/app-assets/images/logo/loggo.png " alt="materialize logo " />
+                    <span class="logop logo-text hide-on-med-and-down ">KitandaSoft ERP</span>
+                </a>
+            </h1>
+        </div>
+
+        <div class="navigation-background "></div>
+        <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only " href="# " data-target="slide-out ">
+            <i class="material-icons ">menu</i>
+        </a>
+
+    </aside>
+
+
+    <!-- Modal -->
+    <div id="modalPassword" class="modal modal-fixed-footer modalPass">
+        <form action="">
+            <div class="modal-content">
+                <h5 class="titulo-modal">Confirmar Palavra Passe</h5>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="input-field col s12 rep-1">
+                            <input id="txtPassword" type="password" required>
+                            <input type="hidden" id="hdSelectedCompany">
+                            <input type="hidden" id="txtUsername">
+                            <label for="password">Password</label>
+                        </div>
+                        <span class="errorText" id="passwordError"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Confirmar" onclick="Entrar()" />
+            </div>
+        </form>
+    </div>
+    <!-- Modal -->
+    <div id="modalLogout" class="modal" style="width:30%;">
+        <div class=" modal-content ">
+            <h6>Você deseja terminar sessão agora ?</h6>
+        </div>
+        <div class=" modal-footer ">
+            <a href="#" class=" modal-close waves-effect waves-green btn-flat ">Não</a>
+            <a href="Home/LogOut " class=" modal-close waves-effect waves-green btn-flat ">Sim</a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="modal2" class="modal" style=" width: 30%;">
+        <div class=" modal-content ">
+            <div class=" col s12 ">
+                <h4>Configurações</h4>
+                <p>
+                    Você também pode estilizá-lo facilmente com materializar classes de conjunto de cores predefinidas de tema de administração.
+                </p>
+                <div class=" section ">
+                    <a class=" chip cyan white-text " href=" Seguranca/Utilizadores ">
+                        <i class=" material-icons iicon ">person_add</i> Contas de utlizadores
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Seguranca/perfis ">
+                        <i class=" material-icons iicon ">panorama_horizontal</i> Perfis de Acesso
+                    </a>
+                </div>
+                <div class=" section ">
+                    <a class=" chip cyan white-text " href=" Seguranca/surcusais ">
+                        <i class=" material-icons iicon ">note_add</i> Gestão de Sucursais
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Home/Dashboard/utilizadores ">
+                        <i class=" material-icons iicon ">build</i> Configuração
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Home/Dashboard/utilizadores ">
+                        <i class=" material-icons iicon ">contact_mail</i> Email Monitor
+                    </a>
+                    <a class=" chip cyan white-text z-depth-4 " href=" Geral/TabelaConsulta ">
+                        <i class=" material-icons iicon ">grid_on</i> Tabelas
+                    </a>
+                </div>
+
+            </div>
+        </div>
+        <div class=" modal-footer ">
+            <a type=" button " class=" modal-close waves-effect waves-green btn-flat ">Sair</a>
+
+        </div>
+    </div>
+
+    <footer class="page-footer footer footer-static footer-dark radient-shadow navbar-border navbar-shadow ">
+        <div class="footer-copyright ">
+            <div class="container ">
+                <span>&copy; 2016 - @DateTime.Today.Year <a href="www.lucansolucoes.co.ao" target="_blank ">GC LUCAN SOFTWARE E SERVIÇOS</a> Todos os direitos reservados. </span>
+                <span class="right hide-on-small-only">Licenciado para @sessionDetails.CompanyName</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/template/app-assets/js/vendors.min.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/plugins.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/geral.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/scripts/advance-ui-modals.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/login.js" asp-append-version="true"></script>
+    <script src="~/template/app-assets/js/alertify.js" asp-append-version="true"></script>
+    <script src="~/js/proload.js" asp-append-version="true"></script>
+
+
+</body>
+</html>
 
