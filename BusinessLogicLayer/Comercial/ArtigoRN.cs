@@ -90,6 +90,7 @@ namespace BusinessLogicLayer.Comercial
             return daoProduct.ObterPorFiltro(dto);
         }
 
+ 
         public List<ArtigoDTO> ObterPorTodos(string pFilial, string pUtilizador)
         {
             ArtigoDTO dto = new ArtigoDTO

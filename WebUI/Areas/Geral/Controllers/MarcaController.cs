@@ -14,12 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
         private List<MarcaDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateMarca()
+        public ActionResult SaveMarca(int? codigo, [Bind] MarcaDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = MarcaRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
-        public ActionResult CreateMarca([Bind] MarcaDTO dto)
+        public ActionResult SaveMarca([Bind] MarcaDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -29,21 +37,7 @@ namespace WebUI.Areas.Geral.Controllers
             }
             return View(dto);
         }
-        [HttpGet]
-        public IActionResult UpdateMarca(int? id, [Bind] MarcaDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateMarca([Bind] MarcaDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                MarcaRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateMarca");
-            }
-            return View(dto);
-        }
+
         public ActionResult DeleteMarca(MarcaDTO dto)
         {
             MarcaRN.GetInstance().Excluir(dto);

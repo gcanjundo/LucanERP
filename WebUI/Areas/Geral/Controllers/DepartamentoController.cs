@@ -13,13 +13,21 @@ namespace WebUI.Areas.Geral.Controllers
     {
         private List<DepartamentoDTO> lista;
 
-        [HttpGet]
-        public ActionResult CreateDepartamento()
+        public ActionResult SaveDepartamento(int? codigo, [Bind] DepartamentoDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = DepartamentoRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
+
         }
         [HttpPost]
-        public ActionResult CreateDepartamento([Bind] DepartamentoDTO dto)
+        public ActionResult SaveDepartamento([Bind] DepartamentoDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -29,21 +37,7 @@ namespace WebUI.Areas.Geral.Controllers
             }
             return View(dto);
         }
-        [HttpGet]
-        public IActionResult UpdateDepartamento(int? id, [Bind] DepartamentoDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateDepartamento([Bind] DepartamentoDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                DepartamentoRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateDepartamento");
-            }
-            return View(dto);
-        }
+
         public ActionResult DeleteDepartamento(DepartamentoDTO dto)
         {
             DepartamentoRN.GetInstance().Excluir(dto);

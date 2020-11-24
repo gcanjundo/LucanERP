@@ -99,57 +99,57 @@
         </div>
         @if (!string.IsNullOrEmpty(sessionDetails.Filial))
         {
-    <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow " id="slide-out " data-menu="menu-navigation " data-collapsible="menu-accordion ">
-        <li class="bold ">
-            <a class="waves-effect waves-cyan active " href="app-todo.html ">
-                <i class="material-icons "></i>
-                <span class="menu-title " data-i18n="ToDo ">@ViewData["Title"]</span>
-            </a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(4, false)" asp-area="GestaoEscolar" asp-controller="HomeSikola" asp-action="DashboardSikola"><i class="material-icons">school</i><span class="menu-title" data-i18n="Kanban">Gestão Escolar</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(6, false)" asp-area="GestaoOficina" asp-controller="HomeOficina" asp-action="DashboardOficina"><i class="material-icons">build</i><span class="menu-title" data-i18n="Kanban">Gestão Oficina Auto</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(17, false) " asp-area="GestaoClinica" asp-controller="HomClinica" asp-action="DashboardClinica"><i class="material-icons">local_hospital</i><span class="menu-title" data-i18n="File Manager">Gestão Clínica</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(1, false)" href='@Url.Action("DashboardComercial", "GestaoComercial", new { area = "GestaoComercial" })'><i class="material-icons">local_grocery_store</i><span class="menu-title" data-i18n="Contacts">Gestão Comercial</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(9, false)" asp-area="CRM" asp-controller="HomeCRM" asp-action="DashboardCRM"><i class="material-icons">contact_phone</i><span class="menu-title" data-i18n="Contacts">CRM</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(12, false)" asp-area="GestaoStock" asp-controller="HomeStock" asp-action="DashboardStock"><i class="material-icons">store</i><span class="menu-title" data-i18n="Contacts">Stock & Inventario</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(11, false)" asp-area="Tesouraria" asp-controller="HomeTesouraria" asp-action="DashboardTesouraria"><i class="material-icons">attach_money</i><span class="menu-title" data-i18n="Contacts">Tesouraria</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(5, false)" asp-area="RecursosHumanos" asp-controller="HomeRH" asp-action="DashboardRH"><i class="material-icons">group</i><span class="menu-title" data-i18n="Contacts">Recursos Humanos</span></a>
-        </li>
-        <li class="bold">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(3, false)" asp-area="Contabilidade" asp-controller="HomeContabilidade" asp-action="DashboardContabilidade"><i class="material-icons">pie_chart</i><span class="menu-title" data-i18n="Contacts">Contabilidade</span></a>
-        </li>
-        <li class="bold hidden">
-            <a class="waves-effect waves-cyan @_config.AllowedModulo(10, false)" href="/Imobilizado/Index"><i class="material-icons">chrome_reader_mode</i><span class="menu-title" data-i18n="Contacts">Imobilizado</span></a>
-        </li>
-        <li class="bold">
-            <a class="collapsible-header waves-effect waves-cyan @_config.AllowedModulo(8, false)" href="JavaScript:void(0)">
-                <i class="material-icons">settings</i>
-                <span class="menu-title">Painel de Controlo</span>
-            </a>
-            <div class="collapsible-body">
-                <ul class="collapsible collapsible-sub" data-collapsible="accordion">
-                    <li>
-                        <a asp-area="Geral" asp-controller="Tabela" asp-action="Index"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Tabela Geral</span></a>
-                    </li>
-                </ul>
-            </div>
-        </li>
-    </ul>
+            <ul class="sidenav sidenav-collapsible leftside-navigation collapsible sidenav-fixed menu-shadow " id="slide-out " data-menu="menu-navigation " data-collapsible="menu-accordion ">
+                <li class="bold ">
+                    <a class="waves-effect waves-cyan active " href="app-todo.html ">
+                        <i class="material-icons "></i>
+                        <span class="menu-title " data-i18n="ToDo ">@ViewData["Title"]</span>
+                    </a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(4, false)" asp-area="GestaoEscolar" asp-controller="HomeSikola" asp-action="DashboardSikola"><i class="material-icons">school</i><span class="menu-title" data-i18n="Kanban">Gestão Escolar</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(6, false)" asp-area="GestaoOficina" asp-controller="HomeOficina" asp-action="DashboardOficina"><i class="material-icons">build</i><span class="menu-title" data-i18n="Kanban">Gestão Oficina Auto</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(17, false) " asp-area="GestaoClinica" asp-controller="HomClinica" asp-action="DashboardClinica"><i class="material-icons">local_hospital</i><span class="menu-title" data-i18n="File Manager">Gestão Clínica</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(1, false)" href='@Url.Action("DashboardComercial", "GestaoComercial", new { area = "GestaoComercial" })'><i class="material-icons">local_grocery_store</i><span class="menu-title" data-i18n="Contacts">Gestão Comercial</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(9, false)" asp-area="CRM" asp-controller="HomeCRM" asp-action="DashboardCRM"><i class="material-icons">contact_phone</i><span class="menu-title" data-i18n="Contacts">CRM</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(12, false)" asp-area="GestaoStock" asp-controller="HomeStock" asp-action="DashboardStock"><i class="material-icons">store</i><span class="menu-title" data-i18n="Contacts">Stock & Inventario</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(11, false)" asp-area="Tesouraria" asp-controller="HomeTesouraria" asp-action="DashboardTesouraria"><i class="material-icons">attach_money</i><span class="menu-title" data-i18n="Contacts">Tesouraria</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(5, false)" asp-area="RecursosHumanos" asp-controller="HomeRH" asp-action="DashboardRH"><i class="material-icons">group</i><span class="menu-title" data-i18n="Contacts">Recursos Humanos</span></a>
+                </li>
+                <li class="bold">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(3, false)" asp-area="Contabilidade" asp-controller="HomeContabilidade" asp-action="DashboardContabilidade"><i class="material-icons">pie_chart</i><span class="menu-title" data-i18n="Contacts">Contabilidade</span></a>
+                </li>
+                <li class="bold hidden">
+                    <a class="waves-effect waves-cyan @_config.AllowedModulo(10, false)" href="/Imobilizado/Index"><i class="material-icons">chrome_reader_mode</i><span class="menu-title" data-i18n="Contacts">Imobilizado</span></a>
+                </li>
+                <li class="bold">
+                    <a class="collapsible-header waves-effect waves-cyan @_config.AllowedModulo(8, false)" href="JavaScript:void(0)">
+                        <i class="material-icons">settings</i>
+                        <span class="menu-title">Painel de Controlo</span>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul class="collapsible collapsible-sub" data-collapsible="accordion">
+                            <li>
+                                <a asp-area="Geral" asp-controller="Tabela" asp-action="Index"><i class="material-icons">radio_button_unchecked</i><span data-i18n="Carousel">Tabela Geral</span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
         }
         <div class="navigation-background "></div>
         <a class="sidenav-trigger btn-sidenav-toggle btn-floating btn-medium waves-effect waves-light hide-on-large-only " href="# " data-target="slide-out ">
@@ -207,6 +207,22 @@
         </div>
     </div>
 
+    <!--Modal-->
+    <div id="form-modal" class="modal" style="width: 40%;max-height: 100%;">
+        <div class="modal-content">
+            <h5 class="mb-5 modal-title">Core</h5>
+            <div class="container">
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
+            <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
+        </div>
+    </div>
+
     <footer class="page-footer footer footer-static footer-dark radient-shadow navbar-border navbar-shadow ">
         <div class="footer-copyright ">
             <div class="container ">
@@ -216,6 +232,10 @@
         </div>
     </footer>
 
+    <script src="~/lib/jquery/dist/jquery.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery/dist/jquery.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js" asp-append-version="true"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" asp-append-version="true"></script>
     <script src="/template/app-assets/js/vendors.min.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/plugins.js" asp-append-version="true"></script>
     <script src="~/template/app-assets/js/geral.js" asp-append-version="true"></script>

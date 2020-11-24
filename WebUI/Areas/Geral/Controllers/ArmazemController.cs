@@ -17,6 +17,7 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public ActionResult CreateArmazem()
         {
+            
             return View();
         }
         [HttpPost]

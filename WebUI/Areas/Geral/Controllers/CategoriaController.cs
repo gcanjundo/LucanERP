@@ -14,12 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
         private List<CategoriaDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateCategoria()
+        public ActionResult SaveCategoria(int? codigo, [Bind] CategoriaDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = CategoriaRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
-        public ActionResult CreateCategoria([Bind] CategoriaDTO dto)
+        public ActionResult SaveCategoria([Bind] CategoriaDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -29,21 +37,7 @@ namespace WebUI.Areas.Geral.Controllers
             }
             return View(dto);
         }
-        [HttpGet]
-        public IActionResult UpdateCategoria(int? id, [Bind] CategoriaDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateCategoria([Bind] CategoriaDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                CategoriaRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateCategoria");
-            }
-            return View(dto);
-        }
+     
         public ActionResult DeleteCategoria(CategoriaDTO dto)
         {
             CategoriaRN.GetInstance().Excluir(dto);

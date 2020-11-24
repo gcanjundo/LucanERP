@@ -14,33 +14,26 @@ namespace WebUI.Areas.Geral.Controllers
         private List<ArtigoDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateArtigo()
+        public ActionResult SaveArtigo(int? codigo, [Bind] ArtigoDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = ArtigoRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
-        public ActionResult CreateArtigo([Bind] ArtigoDTO dto)
+        public ActionResult SaveArtigo([Bind] ArtigoDTO dto)
         {
             if (ModelState.IsValid)
             {
                 ArtigoRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateArtigo");
-            }
-            return View(dto);
-        }
-        [HttpGet]
-        public IActionResult UpdateArtigo(int? id, [Bind] ArtigoDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateArtigo([Bind] ArtigoDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                ArtigoRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateArtigo");
             }
             return View(dto);
         }
@@ -52,6 +45,7 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListArtigo(ArtigoDTO dto)
         {
+
             lista = new List<ArtigoDTO>();
             lista = ArtigoRN.GetInstance().ObterPorFiltro(dto);
             return View(lista);

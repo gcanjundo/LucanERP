@@ -14,12 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
     private List<DocumentoDTO> lista;
 
     [HttpGet]
-    public ActionResult CreateDocumento()
+    public ActionResult SaveDocumento(int? codigo,[Bind] DocumentoDTO dto)
     {
-        return View();
-    }
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = DocumentoRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
+        }
     [HttpPost]
-    public ActionResult CreateDocumento([Bind] DocumentoDTO dto)
+    public ActionResult SaveDocumento([Bind] DocumentoDTO dto)
     {
         if (ModelState.IsValid)
         {

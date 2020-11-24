@@ -14,12 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
         private List<ImpostosDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateImpostos()
+        public ActionResult SaveImpostos(int? codigo, [Bind] ImpostosDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = ImpostosRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
-        public ActionResult CreateImpostos([Bind] ImpostosDTO dto)
+        public ActionResult SaveImpostos([Bind] ImpostosDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -29,21 +37,7 @@ namespace WebUI.Areas.Geral.Controllers
             }
             return View(dto);
         }
-        [HttpGet]
-        public IActionResult UpdateImpostos(int? id, [Bind] ImpostosDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateImpostos([Bind] ImpostosDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                ImpostosRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateImpostos");
-            }
-            return View(dto);
-        }
+
         public ActionResult DeleteImpostos(ImpostosDTO dto)
         {
             ImpostosRN.GetInstance().Apagar(dto);

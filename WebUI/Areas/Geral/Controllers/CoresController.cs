@@ -18,35 +18,30 @@ namespace WebUI.Areas.Geral.Controllers
         private List<CoresDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateCores()
+        public IActionResult SaveCores(int? codigo, [Bind] CoresDTO dto)
         {
-            return View();
+            if(codigo == 0)
+            {
+                return View( new CoresDTO());
+            }
+            else
+            {
+                var result =  CoresRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
+            
         }
         [HttpPost]
-        public ActionResult CreateCores([Bind] CoresDTO dto)
+        public IActionResult SaveCores([Bind] CoresDTO dto)
         {
             if (ModelState.IsValid)
             {
                 CoresRN.GetInstance().Salvar(dto);
-                return RedirectToAction("CreateCores");
+                return Json(new { isValid = true });
             }
-            return View(dto);
+            return Json(new { isValid = false });
         }
         [HttpGet]
-        public IActionResult UpdateCores(int? id, [Bind] CoresDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateCores([Bind] CoresDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                CoresRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateCores");
-            }
-            return View(dto);
-        }
         public ActionResult DeleteCores(CoresDTO dto)
         {
             CoresRN.GetInstance().Excluir(dto);
@@ -61,9 +56,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
 
 
-        public IActionResult Pesquisar(CoresDTO dto)
+        public IActionResult Pesquisar(string? dto)
         {
-             IEnumerable<CoresDTO> resultado = CoresRN.GetInstance().ObterPorFiltro(dto);
+             IEnumerable<CoresDTO> resultado = CoresRN.GetInstance().ListaCoress(dto);
             return View(resultado);
         }
     }

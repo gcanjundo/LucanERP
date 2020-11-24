@@ -14,11 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
         {
             private List<EntidadeDTO> lista;
 
-            [HttpGet]
-            public ActionResult CreateEntidade()
+            public ActionResult SaveEntidade(int? codigo, [Bind] EntidadeDTO dto)
             {
+                if(codigo == 0)
+                {
                 return View();
+                }
+                else
+                {
+                    var result = EntidadeRN.GetInstance().ObterPorPK(dto);
+                    return View(result);
+                }
+                
             }
+
             [HttpPost]
             public ActionResult CreateEntidade([Bind] EntidadeDTO dto)
             {
@@ -30,21 +39,7 @@ namespace WebUI.Areas.Geral.Controllers
                 }
                 return View(dto);
             }
-            [HttpGet]
-            public IActionResult UpdateEntidade(int? id, [Bind] EntidadeDTO dto)
-            {
-                return View(dto);
-            }
-            [HttpPut]
-            public IActionResult UpdateEntidade([Bind] EntidadeDTO dto)
-            {
-                if (ModelState.IsValid)
-                {
-                    EntidadeRN.GetInstance().Salvar(dto);
-                    return RedirectToAction("UpdateEntidade");
-                }
-                return View(dto);
-            }
+           
             public ActionResult DeleteEntidade(EntidadeDTO dto)
             {
                 EntidadeRN.GetInstance().Eliminar(dto);

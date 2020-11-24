@@ -14,12 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
         private List<FabricanteDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateFabricante()
+        public ActionResult SaveFabricante(int? codigo, [Bind] FabricanteDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = FabricanteRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
-        public ActionResult CreateFabricante([Bind] FabricanteDTO dto)
+        public ActionResult SaveFabricante([Bind] FabricanteDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -29,21 +37,7 @@ namespace WebUI.Areas.Geral.Controllers
             }
             return View(dto);
         }
-        [HttpGet]
-        public IActionResult UpdateFabricante(int? id, [Bind] FabricanteDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateFabricante([Bind] FabricanteDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                FabricanteRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateFabricante");
-            }
-            return View(dto);
-        }
+
         public ActionResult DeleteFabricante(FabricanteDTO dto)
         {
             FabricanteRN.GetInstance().Excluir(dto);

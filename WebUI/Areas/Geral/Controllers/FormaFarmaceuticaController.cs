@@ -14,12 +14,20 @@ namespace WebUI.Areas.Geral.Controllers
         private List<FormaFarmaceuticaDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateFormaFarmaceutica()
+        public ActionResult SaveFormaFarmaceutica(int? codigo, [Bind] FormaFarmaceuticaDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = FormaFarmaceuticaRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
-        public ActionResult CreateFormaFarmaceutica([Bind] FormaFarmaceuticaDTO dto)
+        public ActionResult SaveFormaFarmaceutica([Bind] FormaFarmaceuticaDTO dto)
         {
             if (ModelState.IsValid)
             {
@@ -29,21 +37,7 @@ namespace WebUI.Areas.Geral.Controllers
             }
             return View(dto);
         }
-        [HttpGet]
-        public IActionResult UpdateFormaFarmaceutica(int? id, [Bind] FormaFarmaceuticaDTO dto)
-        {
-            return View(dto);
-        }
-        [HttpPut]
-        public IActionResult UpdateFormaFarmaceutica([Bind] FormaFarmaceuticaDTO dto)
-        {
-            if (ModelState.IsValid)
-            {
-                FormaFarmaceuticaRN.GetInstance().Salvar(dto);
-                return RedirectToAction("UpdateFormaFarmaceutica");
-            }
-            return View(dto);
-        }
+
         public ActionResult DeleteFormaFarmaceutica(FormaFarmaceuticaDTO dto)
         {
             FormaFarmaceuticaRN.GetInstance().Excluir(dto);

@@ -13,9 +13,17 @@ namespace WebUI.Areas.Geral.Controllers
         private List<CategoriaDTO> lista;
 
         [HttpGet]
-        public ActionResult CreateCategoria()
+        public ActionResult CreateCategoria(int? codigo, [Bind] CategoriaDTO dto)
         {
-            return View();
+            if (codigo == 0)
+            {
+                return View();
+            }
+            else
+            {
+                var result = CategoriaRN.GetInstance().ObterPorPK(dto);
+                return View(result);
+            }
         }
         [HttpPost]
         public ActionResult CreateCategoria([Bind] CategoriaDTO dto)
