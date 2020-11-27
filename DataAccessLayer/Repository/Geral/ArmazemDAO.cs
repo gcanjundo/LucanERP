@@ -83,7 +83,7 @@ namespace DataAccessLayer.Geral
             {
                conexao.ComandText = "stp_GER_ARMAZEM_OBTERPORFILTRO";
 
-                conexao.AddParameter("@DESCRICAO", dto.Descricao);
+                conexao.AddParameter("@DESCRICAO", dto.Descricao ?? string.Empty);
                 conexao.AddParameter("@FILIAL", dto.Filial);
 
                 MySqlDataReader dr = conexao.ExecuteReader();

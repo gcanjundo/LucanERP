@@ -59,10 +59,10 @@ namespace WebUI.Areas.Geral.Controllers
             return RedirectToAction("DeleteArmazem");
 
         }
-        public IActionResult ListArmazem()
+        public IActionResult ListArmazem(ArmazemDTO dto)
         {
             lista = new List<ArmazemDTO>();
-            lista = ArmazemRN.GetInstance().ObterPorFiltro(new ArmazemDTO { Codigo = _kitandaConfig.pSessionInfo.Codigo, Filial = _kitandaConfig.pSessionInfo.Filial });
+            lista = ArmazemRN.GetInstance().ObterPorFiltro(dto);
             return View(lista);
         }
 
