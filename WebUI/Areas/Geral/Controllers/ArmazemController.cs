@@ -12,7 +12,15 @@ namespace WebUI.Areas.Geral.Controllers
     [Area("Geral")]
     public class ArmazemController : Controller
     {
+        private readonly KitandaConfig _kitandaConfig;
         private List<ArmazemDTO> lista;
+        private IEnumerable<ArmazemDTO> resultado;
+
+        public  ActionResult Index() 
+        {
+            return View();
+        }
+
 
         [HttpGet]
         public ActionResult CreateArmazem()
@@ -51,17 +59,17 @@ namespace WebUI.Areas.Geral.Controllers
             return RedirectToAction("DeleteArmazem");
 
         }
-        public IActionResult ListArmazem(ArmazemDTO dto)
+        public IActionResult ListArmazem()
         {
             lista = new List<ArmazemDTO>();
-            lista = ArmazemRN.GetInstance().ObterPorFiltro(dto);
+            lista = ArmazemRN.GetInstance().ObterPorFiltro(new ArmazemDTO { Codigo = _kitandaConfig.pSessionInfo.Codigo, Filial = _kitandaConfig.pSessionInfo.Filial });
             return View(lista);
         }
 
 
         public IActionResult Pesquisar(ArmazemDTO dto)
         {
-            IEnumerable<ArmazemDTO> resultado = ArmazemRN.GetInstance().ObterPorFiltro(dto);
+            resultado = ArmazemRN.GetInstance().ObterPorFiltro(dto);
             return View(resultado);
         }
 

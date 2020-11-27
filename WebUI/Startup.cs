@@ -88,6 +88,10 @@ namespace WebUI
                 endpoints.MapControllerRoute(
                    name: "areaRoute",
                    pattern: "{area}/{controller=GestaoComercial}/{action=Index}/{id?}");
+                
+                endpoints.MapControllerRoute(
+                  name: "areaRoute",
+                  pattern: "{area}/{controller=Geral}/{action=Index}/{id?}");
 
                 endpoints.MapControllerRoute(
                    name: "areaRoute",

@@ -73,7 +73,7 @@
                                             TERCEIROS
                                         </a>
 
-                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Categorias"
+                                        <a asp-area="Geral" asp-controller="Armazem" asp-action="ListArtigo"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">assignment</i> FAMILÍA DE ARTIGOS
                                         </a>
@@ -83,12 +83,11 @@
                                             <i class="material-icons icn">account_box</i>TERCEIROS
                                         </a>
 
-                                        <a 
-                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                        <a class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">bookmark</i>BANCO & CONTAS
                                         </a>
 
-                                        <a asp-area="Geral" asp-controller="Armazem" asp-action="Index"
+                                        <a asp-area="Geral" asp-controller="Armazem" asp-action="ListArmazem"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">account_balance</i>Armazéns
                                         </a>
@@ -141,8 +140,8 @@
                                             Expedição
                                         </a>
 
-                                        <a href="<?php echo base_url();?>Geral/TabelaConsulta/Cores"
-                                           class="waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                        <a asp-area="Geral" asp-controller="Cores" asp-action="Pesquisar"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">format_color_fill</i>Cores
                                         </a>
 

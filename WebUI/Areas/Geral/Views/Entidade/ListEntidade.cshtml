@@ -1,0 +1,1131 @@
+﻿@model IEnumerable<Dominio.Geral.EntidadeDTO>
+
+@{
+    ViewData["Title"] = "ListEntidade";
+}
+
+<div class="row">
+    <nav class="dropdownmenu navab">
+        <div>
+            <ul class="rights">
+                <li><a href="#">POS</a></li>
+                <li><a href="#">Oficina Auto</a></li>
+                <li><a href="#">Serviço de Saude</a></li>
+                <li><a href="#">Gestão Comercial</a></li>
+                <li><a href="#">Stock & Inventario</a></li>
+                <li><a href="#">Tesouraria</a></li>
+                <li><a href="#">Recursos Humanos</a></li>
+                <li><a href="#">Contabilidade</a></li>
+                <li><a href="#">Imobilizado</a></li>
+                <li class="bold active open"><a class="modal-trigger" href="#modal2">Configurações</a></li>
+
+            </ul>
+        </div>
+    </nav>
+    <div class="content-wrapper-before app_color"></div>
+    <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+        <!-- Search for small screen-->
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 l6">
+                    <h5 class="breadcrumbs-title"><span class="ups"></span></h5>
+                </div>
+                <div class="col s12 m6 l6 right-align-md">
+                    <ol class="breadcrumbs mb-0 ups">
+                        <li class="breadcrumb-item">
+                            <a href="index.html">Início</a>
+                        </li>
+                        <li class="breadcrumb-item">
+                            <a href="#"> Tabela de consulta</a>
+                        </li>
+                        <li class="breadcrumb-item active">
+                            Lista de Entidades 
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col s12">
+        <div class="container">
+            <!-- Full Calendar -->
+            <section class="users-list-wrapper section">
+
+                <div class="users-list-table">
+                    <div class="card">
+                        <div class="card-content card_sem_padd-4">
+                            <div class="col s12 m6 l8">
+                                <h6 class="title"> Lista de Entidades</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="users-list-filter">
+                        <div class="card-panel">
+                            <div class="row">
+                                <form>
+                                    <div class="input-field col m3 s16">
+                                        <select>
+                                            <option value="" disabled selected>Selecione</option>
+                                            <option value="1">Option 1</option>
+                                            <option value="2">Option 2</option>
+                                            <option value="3">Option 3</option>
+                                        </select>
+                                        <label>Entidades</label>
+                                    </div>
+                                    <div class="input-field col s12 m4 s16">
+                                        <input id="icon_prefix3" type="text" class="validate">
+                                        <label for="icon_prefix3">Digite Entidades Financeiras</label>
+                                    </div>
+
+                                    <div class="col s12 m4 l14 display-flex align-items-center show-btn">
+                                        <a href="" class="btn-small custom darken-4 mrgin waves-effect waves-light">
+                                            <i class="material-icons left">search</i>
+                                        </a>
+                                        <a href="#modalArmazem" class="modal-trigger btn-small customPosition mrgin indigo waves-effect waves-light">Novo Armazém</a>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-content card_sem_padd">
+                            <!-- datatable start -->
+                            <div class="responsive-table">
+                                <table id="users-list-datatable" class="table">
+                                    <thead class="tab-color-blue">
+
+                                        <tr>
+                                            <th>Código</th>
+                                            <th>Nome</th>
+                                            <th>Identificação</th>
+                                            <th>Documento</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                                <th>@Html.DisplayFor(modelItem => item.NomeCompleto)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Identificacao)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Documento)</th>
+                                                <td class="txt">
+                                                    <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                </td>
+
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- datatable ends -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!--Modal-->
+<div id="modalArmazem" class="modal" style="width: 40%;max-height: 100%;">
+    <div class="modal-content">
+        <h5 class="mb-5">Grupos de Clientes</h5>
+        <div class="container">
+            <div class="row">
+                <form>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="icon_prefix3" type="text" class="validate">
+                        <label for="icon_prefix3">Sigla/ISO Code</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="icon_prefix3" type="text" class="validate">
+                        <label for="icon_prefix3">Designação do Pais </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="icon_prefix3" type="text" class="validate">
+                        <label for="icon_prefix3">Nacionalidade</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
+    </div>
+</div>
+
+
+
+
+<h1>ListEntidade</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nacionalidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Documento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identificacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Morada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rua)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bairro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunicipioMorada)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provincia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Municipio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefoneAlt)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TelefoneFax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WebSite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsActivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fotografia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ExtensaoFoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PathFoto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Emissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Validade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocalEmissao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeComercial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Saldo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Desconto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LimiteCredito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescontoLinha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiasVencimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentMethod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentTerms)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ModoExpedicao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaymentDays)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Currency)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountManager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TablePriceID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Banco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AccountBank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IBAN)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Swift)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComercialContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComercialContactFunction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComercialContactPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComercialContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministrativeContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministrativeContactFunction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministrativeContactPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AdministrativeContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChargesContactName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChargesContactFunction)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChargesContactPhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChargesContactEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsTerceiro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCompanyInsurance)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ChargesManager)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PaisNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MunicipioNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LocalNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeFormacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DesignacaoNacionalidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Distrito)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerFiscalCodeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllowAlert)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlertPendingValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AngariadorID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RetencaoID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerAccountPlanID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierAccountPlanID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AllowSefBilling)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanalContactoPreferencial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CanalAngariacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SupplierFiscalCodeID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Designacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sucesso)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MensagemErro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrderNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Utilizador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Filial)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Entidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DesignacaoEntidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentPassword)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SenhaNova)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyLogo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyVAT)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Street)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TituloDocumento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserProfile)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Situacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FuncionarioID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SocialName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Supervisor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCashRegister)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobileNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CaixaPostal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WareHouseName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NivelEnsino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataInicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataTermino)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate7)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate8)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate9)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate11)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupDate12)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NroOrdenacao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CancelledBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CancelledDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ShortName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField7)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField8)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField9)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupField11)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField2)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField4)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField5)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField6)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField7)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField8)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField9)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField10)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LookupNumericField11)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockIncomeSerieID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StockOutcomeSerieID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancelled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoLectivo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AnoCivil)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeCompleto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nacionalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Documento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Identificacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Morada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rua)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Bairro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MunicipioMorada)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Provincia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Municipio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Telefone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelefoneAlt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TelefoneFax)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WebSite)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fotografia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ExtensaoFoto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PathFoto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Emissao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Validade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalEmissao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Categoria)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeComercial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tipo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Saldo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Desconto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LimiteCredito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescontoLinha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DiasVencimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentMethod)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentTerms)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ModoExpedicao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaymentDays)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Currency)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountManager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TablePriceID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Banco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountBank)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IBAN)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Swift)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComercialContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComercialContactFunction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComercialContactPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ComercialContactEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdministrativeContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdministrativeContactFunction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdministrativeContactPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AdministrativeContactEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChargesContactName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChargesContactFunction)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChargesContactPhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChargesContactEmail)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsTerceiro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCompanyInsurance)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ChargesManager)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PaisNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MunicipioNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LocalNascimento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeFormacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignacaoNacionalidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Distrito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerFiscalCodeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowAlert)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AlertPendingValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AngariadorID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RetencaoID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerAccountPlanID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierAccountPlanID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AllowSefBilling)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BirthDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CanalContactoPreferencial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CanalAngariacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SupplierFiscalCodeID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Designacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Sucesso)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MensagemErro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Utilizador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Filial)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Entidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DesignacaoEntidade)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CurrentPassword)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SenhaNova)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyLogo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyCity)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyVAT)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CompanyPhone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Street)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TituloDocumento)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserProfile)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Situacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FuncionarioID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SocialName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Supervisor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsCashRegister)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MobileNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaixaPostal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WareHouseName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NivelEnsino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataInicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DataTermino)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate9)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate11)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupDate12)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NroOrdenacao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CancelledBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UpdatedDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CancelledDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShortName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField9)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupField11)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField6)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField7)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField8)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField9)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField10)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LookupNumericField11)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Url)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockIncomeSerieID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StockOutcomeSerieID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cancelled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoLectivo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AnoCivil)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

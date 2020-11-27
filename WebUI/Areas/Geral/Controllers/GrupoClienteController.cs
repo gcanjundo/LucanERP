@@ -50,10 +50,10 @@ namespace WebUI.Areas.Geral.Controllers
             return RedirectToAction("DeleteGrupoCliente");
 
         }
-        public IActionResult ListGrupoCliente(CategoriaDTO dto)
+        public IActionResult ListGrupoCliente()
         {
             lista = new List<CategoriaDTO>();
-            lista = CategoriaRN.GetInstance().ObterPorFiltro(dto);
+            lista = CategoriaRN.GetInstance().GetAllMedicalProfissionalCategoryList();
             return View(lista);
         }
 

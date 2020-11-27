@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Dominio.Geral.ArmazemDTO>
+﻿@model IEnumerable<Dominio.Geral.FormaFarmaceuticaDTO>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "ListFormaFarmaceutica";
 }
 
 <div class="row">
@@ -39,7 +39,7 @@
                             <a href="#"> Tabela de consulta</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Lista de Armazéns
+                            Lista de Forma Farmacêutica
                         </li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="card">
                         <div class="card-content card_sem_padd-4">
                             <div class="col s12 m6 l8">
-                                <h6 class="title">Lista de Armazéns</h6>
+                                <h6 class="title">  Lista de Forma Farmacêutica</h6>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                             <option value="2">Option 2</option>
                                             <option value="3">Option 3</option>
                                         </select>
-                                        <label>Armazéns</label>
+                                        <label>Farmacêutica</label>
                                     </div>
                                     <div class="input-field col s12 m4 s16">
                                         <input id="icon_prefix3" type="text" class="validate">
@@ -95,36 +95,32 @@
                                     <thead class="tab-color-blue">
 
                                         <tr>
-                                            <th>Armazém</th>
+                                            <th>Código</th>
                                             <th>Descrição</th>
+                                            <th>Sigla</th>
+                                            <th>Estado</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <tr>
-                                            <td>PEO MÓDULO COMERCIAL</td>
-                                            <td>dean3004 </td>
-                                            <td class="txt">
-                                                <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
-                                                    <i class="material-icons">edit</i>
-                                                </a>
-                                            </td>
-                                        </tr>
                                         @foreach (var item in Model)
                                         {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Designacao)</td>
-                                            <th>@Html.DisplayFor(modelItem => item.Sigla)</th>
-                                            <td class="txt">
-                                                <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
-                                                    <i class="material-icons">edit</i>
-                                                </a>
-                                            </td>
+                                            <tr>
 
-                                        </tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                                <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Sigla)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Estado)</th>
+                                                <td class="txt">
+                                                    <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                </td>
+
+                                            </tr>
                                         }
-                                    </tbody> 
+                                    </tbody>
                                 </table>
                             </div>
                             <!-- datatable ends -->
