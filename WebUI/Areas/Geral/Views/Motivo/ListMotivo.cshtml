@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Dominio.Geral.EntidadeDTO>
+﻿@model IEnumerable<Dominio.Geral.MotivoDTO>
 
 @{
-    ViewData["Title"] = "ListEntidade";
+    ViewData["Title"] = "ListMotivo";
 }
 
 <div class="row">
@@ -39,7 +39,7 @@
                             <a href="#"> Tabela de consulta</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Lista de Entidades 
+                            Lista de Grau Parentesco
                         </li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="card">
                         <div class="card-content card_sem_padd-4">
                             <div class="col s12 m6 l8">
-                                <h6 class="title"> Lista de Entidades</h6>
+                                <h6 class="title">  Lista de Grau Parentesco</h6>
                             </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                                             <option value="2">Option 2</option>
                                             <option value="3">Option 3</option>
                                         </select>
-                                        <label>Entidades</label>
+                                        <label>Parentesco</label>
                                     </div>
                                     <div class="input-field col s12 m4 s16">
                                         <input id="icon_prefix3" type="text" class="validate">
@@ -96,9 +96,8 @@
 
                                         <tr>
                                             <th>Código</th>
-                                            <th>Nome</th>
-                                            <th>Identificação</th>
-                                            <th>Documento</th>
+                                            <th>Descrição</th>
+                                            <th>Estado</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -108,9 +107,8 @@
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
-                                                <th>@Html.DisplayFor(modelItem => item.NomeCompleto)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Identificacao)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Documento)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Estado)</th>
                                                 <td class="txt">
                                                     <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
                                                         <i class="material-icons">edit</i>
@@ -159,6 +157,5 @@
         <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
     </div>
 </div>
-
 
 

@@ -385,9 +385,9 @@ namespace DataAccessLayer.Comercial
             {
                 bdContext.ComandText = "stp_GER_ARTIGO_OBTERPORFILTRO";
 
-                bdContext.AddParameter("@NOME", dto.Designacao);
+                bdContext.AddParameter("@NOME", dto.Designacao ?? string.Empty);
                 bdContext.AddParameter("@CODIGO_BARRAS", dto.CodigoBarras ?? string.Empty);
-                bdContext.AddParameter("@FILIAL", dto.Filial);
+                bdContext.AddParameter("@FILIAL", dto.Filial ?? (object)DBNull.Value);
                 bdContext.AddParameter("@REFERENCIA", dto.Referencia ?? string.Empty);
                 bdContext.AddParameter("@CODIGO", dto.Codigo);
                 bdContext.AddParameter("@CATEGORIA", string.IsNullOrEmpty(dto.Categoria) ? "-1" : dto.Categoria);
@@ -401,7 +401,7 @@ namespace DataAccessLayer.Comercial
                 else
                     bdContext.AddParameter("@DATA_TERM", DBNull.Value);
 
-                bdContext.AddParameter("@UTILIZADOR", dto.Utilizador);
+                bdContext.AddParameter("@UTILIZADOR", dto.Utilizador ?? string.Empty);
                 bdContext.AddParameter("@ARMAZEM", dto.WareHouseName ?? (object)DBNull.Value);
                 bdContext.AddParameter("@PVP", dto.PrecoVenda);
                 bdContext.AddParameter("@PRODUCT_TYPE", dto.Tipo ?? (object)DBNull.Value);
@@ -755,7 +755,7 @@ namespace DataAccessLayer.Comercial
             {
                 bdContext.ComandText = "stp_GER_ARTIGO_OBTERPORCATEGORIA";
 
-                bdContext.AddParameter("@ID_CATEGORIA", dto.Categoria);
+                bdContext.AddParameter("@ID_CATEGORIA", dto.Categoria );
                 bdContext.AddParameter("@WAREHOUSE", dto.WareHouseName);
 
                 MySqlDataReader dr = bdContext.ExecuteReader();

@@ -53,7 +53,7 @@ namespace WebUI.Areas.Geral.Controllers
         public IActionResult ListArtigo(ArtigoDTO dto)
         {
             lista = new List<ArtigoDTO>();
-            lista = ArtigoRN.GetInstance().ObterPorFiltro(dto);
+            lista = ArtigoRN.GetInstance().ObterPorCategoria(dto);
             return View(lista);
         }
 

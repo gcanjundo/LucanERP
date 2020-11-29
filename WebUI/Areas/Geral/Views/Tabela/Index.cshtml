@@ -73,12 +73,17 @@
                                             TERCEIROS
                                         </a>
 
-                                        <a asp-area="Geral" asp-controller="Armazem" asp-action="ListArtigo"
+                                        <a asp-area="Geral" asp-controller="Artigo" asp-action="ListArtigo"
+                                           class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
+                                            <i class="material-icons icn">assignment</i> ARTIGOS
+                                        </a>
+
+                                        <a asp-area="Geral" asp-controller="Categoria" asp-action="ListCategoria"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">assignment</i> FAMILÍA DE ARTIGOS
                                         </a>
 
-                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Terceiros"
+                                        <a asp-area="Geral" asp-controller="Entidade" asp-action="ListEntidade"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">account_box</i>TERCEIROS
                                         </a>
@@ -92,20 +97,20 @@
                                             <i class="material-icons icn">account_balance</i>Armazéns
                                         </a>
 
-                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/Impostos"
+                                        <a asp-area="Geral" asp-controller="Impostos" asp-action="ListImpostos"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">description</i>Impostos
                                         </a>
 
-                                        <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/RetencaoFonte"
+                                         <a asp-area="Geral" asp-controller="RetencaoFonte" asp-action="ListRetencaoFonte"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
                                             <i class="material-icons icn">highlight</i>RETENÇÃO NA FONTE
                                         </a>
-
+                                       
                                         <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/CondicoesPagamento"
                                            class=" waves-light tx btn btn-large gradient-45deg-yellow-teal z-depth-4  border-round mr-1 mb-3">
-                                            <i class="material-icons icn">hourglass_empty</i>Prazos De
-                                            Vencimento
+                                            <i class="material-icons icn">hourglass_empty</i>PRAZO DE
+                                            VENCIMENTO
                                         </a>
 
                                         <a href="<?php echo base_url(); ?>Geral/TabelaConsulta/MetodoPagamento"

@@ -12,7 +12,7 @@ namespace WebUI.Areas.Geral.Controllers
     [Area("Geral")]
     public class ArmazemController : Controller
     {
-        private readonly KitandaConfig _kitandaConfig;
+       
         private List<ArmazemDTO> lista;
         private IEnumerable<ArmazemDTO> resultado;
 

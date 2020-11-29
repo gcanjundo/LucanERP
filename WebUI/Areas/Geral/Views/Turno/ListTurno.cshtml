@@ -1,0 +1,162 @@
+﻿@model IEnumerable<Dominio.Geral.TurnoDTO>
+
+    @{
+        ViewData["Title"] = "ListTurno";
+    }
+
+    <div class="row">
+        <nav class="dropdownmenu navab">
+            <div>
+                <ul class="rights">
+                    <li><a href="#">POS</a></li>
+                    <li><a href="#">Oficina Auto</a></li>
+                    <li><a href="#">Serviço de Saude</a></li>
+                    <li><a href="#">Gestão Comercial</a></li>
+                    <li><a href="#">Stock & Inventario</a></li>
+                    <li><a href="#">Tesouraria</a></li>
+                    <li><a href="#">Recursos Humanos</a></li>
+                    <li><a href="#">Contabilidade</a></li>
+                    <li><a href="#">Imobilizado</a></li>
+                    <li class="bold active open"><a class="modal-trigger" href="#modal2">Configurações</a></li>
+
+                </ul>
+            </div>
+        </nav>
+        <div class="content-wrapper-before app_color"></div>
+        <div class="pt-1 pb-0" id="breadcrumbs-wrapper">
+            <!-- Search for small screen-->
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m6 l6">
+                        <h5 class="breadcrumbs-title"><span class="ups"></span></h5>
+                    </div>
+                    <div class="col s12 m6 l6 right-align-md">
+                        <ol class="breadcrumbs mb-0 ups">
+                            <li class="breadcrumb-item">
+                                <a href="index.html">Início</a>
+                            </li>
+                            <li class="breadcrumb-item">
+                                <a href="#"> Tabela de consulta</a>
+                            </li>
+                            <li class="breadcrumb-item active">
+                                Lista de Grau Parentesco
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col s12">
+            <div class="container">
+                <!-- Full Calendar -->
+                <section class="users-list-wrapper section">
+
+                    <div class="users-list-table">
+                        <div class="card">
+                            <div class="card-content card_sem_padd-4">
+                                <div class="col s12 m6 l8">
+                                    <h6 class="title">  Lista de Grau Parentesco</h6>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="users-list-filter">
+                            <div class="card-panel">
+                                <div class="row">
+                                    <form>
+                                        <div class="input-field col m3 s16">
+                                            <select>
+                                                <option value="" disabled selected>Selecione</option>
+                                                <option value="1">Option 1</option>
+                                                <option value="2">Option 2</option>
+                                                <option value="3">Option 3</option>
+                                            </select>
+                                            <label>Parentesco</label>
+                                        </div>
+                                        <div class="input-field col s12 m4 s16">
+                                            <input id="icon_prefix3" type="text" class="validate">
+                                            <label for="icon_prefix3">Digite Entidades Financeiras</label>
+                                        </div>
+
+                                        <div class="col s12 m4 l14 display-flex align-items-center show-btn">
+                                            <a href="" class="btn-small custom darken-4 mrgin waves-effect waves-light">
+                                                <i class="material-icons left">search</i>
+                                            </a>
+                                            <a href="#modalArmazem" class="modal-trigger btn-small customPosition mrgin indigo waves-effect waves-light">Novo Armazém</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-content card_sem_padd">
+                                <!-- datatable start -->
+                                <div class="responsive-table">
+                                    <table id="users-list-datatable" class="table">
+                                        <thead class="tab-color-blue">
+
+                                            <tr>
+                                                <th>Código</th>
+                                                <th>Descrição</th>
+                                                <th>Conversão</th>
+                                                <th>Estado</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @foreach (var item in Model)
+                                            {
+                                                <tr>
+                                                    <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                                    <th>@Html.DisplayFor(modelItem => item.)</th>
+                                                    <th>@Html.DisplayFor(modelItem => item.FactorConversao)</th>
+                                                    <th>@Html.DisplayFor(modelItem => item.Estado)</th>
+                                                    <td class="txt">
+                                                        <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
+                                                            <i class="material-icons">edit</i>
+                                                        </a>
+                                                    </td>
+
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- datatable ends -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!--Modal-->
+    <div id="modalArmazem" class="modal" style="width: 40%;max-height: 100%;">
+        <div class="modal-content">
+            <h5 class="mb-5">Grupos de Clientes</h5>
+            <div class="container">
+                <div class="row">
+                    <form>
+                        <div class="input-field col s12 m12 s16">
+                            <input id="icon_prefix3" type="text" class="validate">
+                            <label for="icon_prefix3">Sigla/ISO Code</label>
+                        </div>
+                        <div class="input-field col s12 m12 s16">
+                            <input id="icon_prefix3" type="text" class="validate">
+                            <label for="icon_prefix3">Designação do Pais </label>
+                        </div>
+                        <div class="input-field col s12 m12 s16">
+                            <input id="icon_prefix3" type="text" class="validate">
+                            <label for="icon_prefix3">Nacionalidade</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
+            <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
+        </div>
+    </div>
+
