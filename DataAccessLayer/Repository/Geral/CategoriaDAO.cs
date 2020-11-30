@@ -75,7 +75,7 @@ namespace DataAccessLayer.Geral
         {
             List<CategoriaDTO> listaCategorias = new List<CategoriaDTO>();
             try
-            { 
+            {
                 dataBase.ComandText = "stp_GER_CATEGORIA_OBTERPORFILTRO";
 
                 dataBase.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
