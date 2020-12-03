@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
@@ -12,9 +14,18 @@ namespace WebUI.Areas.Geral.Controllers
         [Area("Geral")]
         public class ReligiaoController : Controller
         {
-            private List<ReligiaoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public ReligiaoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
-            [HttpGet]
+        [HttpGet]
             public ActionResult CreateReligiao()
             {
                 return View();
@@ -53,16 +64,19 @@ namespace WebUI.Areas.Geral.Controllers
             }
             public IActionResult ListReligiao(ReligiaoDTO dto)
             {
-                lista = new List<ReligiaoDTO>();
-                lista = ReligiaoRN.GetInstance().ObterPorFiltro(dto);
-                return View(lista);
-            }
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ReligiaoRN.GetInstance().ObterPorFiltro(dto));
+           }
 
 
             public IActionResult Pesquisar(ReligiaoDTO dto)
             {
-                IEnumerable<ReligiaoDTO> resultado = ReligiaoRN.GetInstance().ObterPorFiltro(dto);
-                return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ReligiaoRN.GetInstance().ObterPorFiltro(dto));
             }
 
             public IActionResult ListaReligiao(ReligiaoDTO dto)

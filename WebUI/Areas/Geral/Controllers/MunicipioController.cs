@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class MunicipioController : Controller
     {
-        private List<MunicipioDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public MunicipioController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateMunicipio()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListMunicipio(MunicipioDTO dto)
         {
-            lista = new List<MunicipioDTO>();
-            lista = MunicipioRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MunicipioRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(MunicipioDTO dto)
         {
-            IEnumerable<MunicipioDTO> resultado = MunicipioRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MunicipioRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaMunicipio(MunicipioDTO dto)

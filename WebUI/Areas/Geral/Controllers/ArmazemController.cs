@@ -1,11 +1,14 @@
 ﻿using BusinessLogicLayer.Geral;
 using DataAccessLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
@@ -13,12 +16,17 @@ namespace WebUI.Areas.Geral.Controllers
     public class ArmazemController : Controller
     {
        
-        private List<ArmazemDTO> lista;
-        private IEnumerable<ArmazemDTO> resultado;
+    
 
-        public  ActionResult Index() 
+        private readonly KitandaConfig _kitandaConfig;
+        public ArmazemController(KitandaConfig kitandaConfig)
         {
-            return View();
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
         }
 
 
@@ -61,16 +69,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListArmazem(ArmazemDTO dto)
         {
-            lista = new List<ArmazemDTO>();
-            lista = ArmazemRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ArmazemRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(ArmazemDTO dto)
         {
-            resultado = ArmazemRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ArmazemRN.GetInstance().ObterPorFiltro(dto));
         }
 
     }

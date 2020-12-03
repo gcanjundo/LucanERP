@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class ProfissaoController : Controller
     {
-        private List<ProfissaoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public ProfissaoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateProfissao()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListProfissao(ProfissaoDTO dto)
         {
-            lista = new List<ProfissaoDTO>();
-            lista = ProfissaoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ProfissaoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(ProfissaoDTO dto)
         {
-            IEnumerable<ProfissaoDTO> resultado = ProfissaoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ProfissaoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaProfissao(ProfissaoDTO dto)

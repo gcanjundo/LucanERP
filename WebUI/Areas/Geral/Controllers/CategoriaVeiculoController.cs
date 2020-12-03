@@ -4,13 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     public class CategoriaVeiculoController : Controller
     {
-        private List<CategoriaDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public CategoriaVeiculoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateCategoria()
@@ -51,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListCategoria(CategoriaDTO dto)
         {
-            lista = new List<CategoriaDTO>();
-            lista = CategoriaRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(CategoriaRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(CategoriaDTO dto)
         {
-            IEnumerable<CategoriaDTO> resultado = CategoriaRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(CategoriaRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaArtigos(CategoriaDTO dto)

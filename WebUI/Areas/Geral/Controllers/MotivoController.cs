@@ -4,15 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class MotivoController : Controller
     {
-        private List<MotivoDTO> lista;
-
+        private readonly KitandaConfig _kitandaConfig;
+        public MotivoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
         [HttpGet]
         public ActionResult CreateMotivo()
         {
@@ -52,16 +62,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListMotivo(MotivoDTO dto)
         {
-            lista = new List<MotivoDTO>();
-            lista = MotivoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MotivoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(MotivoDTO dto)
         {
-            IEnumerable<MotivoDTO> resultado = MotivoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MotivoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaMotivo(MotivoDTO dto)

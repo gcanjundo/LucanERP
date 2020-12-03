@@ -4,14 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Comercial;
 using Dominio.Geral;
+using Dominio.Seguranca;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class ArtigoController : Controller
-    {
-        private List<ArtigoDTO> lista;
+    { 
+
+        private readonly KitandaConfig _kitandaConfig;
+        public ArtigoController(KitandaConfig kitandaConfig)
+        { 
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateArtigo()
@@ -52,16 +65,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListArtigo(ArtigoDTO dto)
         {
-            lista = new List<ArtigoDTO>();
-            lista = ArtigoRN.GetInstance().ObterPorCategoria(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ArtigoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(ArtigoDTO  dto)
         {
-            IEnumerable<ArtigoDTO> resultado = ArtigoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ArtigoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaArtigos(ArtigoDTO dto)

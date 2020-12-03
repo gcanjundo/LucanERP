@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class DepartamentoController : Controller
     {
-        private List<DepartamentoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public DepartamentoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateDepartamento()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListDepartamento(DepartamentoDTO dto)
         {
-            lista = new List<DepartamentoDTO>();
-            lista = DepartamentoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(DepartamentoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(DepartamentoDTO dto)
         {
-            IEnumerable<DepartamentoDTO> resultado = DepartamentoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(DepartamentoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaDepartamento(DepartamentoDTO dto)

@@ -4,16 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 { 
     [Area("Geral")]
     public class DocumentoController : Controller
     {
-    private List<DocumentoDTO> lista;
-
-    [HttpGet]
+        private readonly KitandaConfig _kitandaConfig;
+        public DocumentoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+        [HttpGet]
     public ActionResult CreateDocumento()
     {
         return View();
@@ -52,17 +62,20 @@ namespace WebUI.Areas.Geral.Controllers
     }
     public IActionResult ListDocumento(DocumentoDTO dto)
     {
-        lista = new List<DocumentoDTO>();
-        lista = DocumentoRN.GetInstance().ObterPorFiltro(dto);
-        return View(lista);
-    }
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(DocumentoRN.GetInstance().ObterPorFiltro(dto));
+        }
 
 
     public IActionResult Pesquisar(DocumentoDTO dto)
     {
-        IEnumerable<DocumentoDTO> resultado = DocumentoRN.GetInstance().ObterPorFiltro(dto);
-        return View(resultado);
-    }
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(DocumentoRN.GetInstance().ObterPorFiltro(dto));
+        }
 
     public IActionResult ListaDocumento(DocumentoDTO dto)
     {

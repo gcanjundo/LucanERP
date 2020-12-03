@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class MoedaController : Controller
     {
-        private List<MoedaDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public MoedaController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateMoeda()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListMoeda(MoedaDTO dto)
         {
-            lista = new List<MoedaDTO>();
-            lista = MoedaRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MoedaRN.GetInstance().ObterPorFiltro(dto));
         }
-
+      
 
         public IActionResult Pesquisar(MoedaDTO dto)
         {
-            IEnumerable<MoedaDTO> resultado = MoedaRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MoedaRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaMoeda(MoedaDTO dto)

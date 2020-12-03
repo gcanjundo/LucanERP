@@ -4,15 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class VeiculoController : Controller
     {
-        private List<VeiculoDTO> lista;
-
+        private readonly KitandaConfig _kitandaConfig;
+        public VeiculoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
         [HttpGet]
         public ActionResult CreateVeiculo()
         {
@@ -52,16 +62,20 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListVeiculo(VeiculoDTO dto)
         {
-            lista = new List<VeiculoDTO>();
-            lista = VeiculoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(VeiculoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(VeiculoDTO dto)
         {
-            IEnumerable<VeiculoDTO> resultado = VeiculoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(VeiculoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaVeiculo(VeiculoDTO dto)

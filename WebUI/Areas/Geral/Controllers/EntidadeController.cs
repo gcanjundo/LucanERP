@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
@@ -12,9 +14,17 @@ namespace WebUI.Areas.Geral.Controllers
         [Area("Geral")]
         public class EntidadeController : Controller
         {
-            private List<EntidadeDTO> lista;
-
-            [HttpGet]
+        private readonly KitandaConfig _kitandaConfig;
+        public EntidadeController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+        [HttpGet]
             public ActionResult CreateEntidade()
             {
                 return View();
@@ -53,17 +63,20 @@ namespace WebUI.Areas.Geral.Controllers
             }
             public IActionResult ListEntidade(EntidadeDTO dto)
             {
-                lista = new List<EntidadeDTO>();
-                lista = EntidadeRN.GetInstance().ObterPorFiltro(dto);
-                return View(lista);
-            }
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(EntidadeRN.GetInstance().ObterPorFiltro(dto));
+        }
 
 
-            public IActionResult Pesquisar(EntidadeDTO dto)
-            {
-                IEnumerable<EntidadeDTO> resultado = EntidadeRN.GetInstance().ObterPorFiltro(dto);
-                return View(resultado);
-            }
+        public IActionResult Pesquisar(EntidadeDTO dto)
+        {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(EntidadeRN.GetInstance().ObterPorFiltro(dto));
+        }
 
             public IActionResult ListaDocumento(EntidadeDTO dto)
             {

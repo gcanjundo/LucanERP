@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
@@ -12,9 +14,18 @@ namespace WebUI.Areas.Geral.Controllers
         [Area("Geral")]
         public class EntidadeDocumentacaoController : Controller
         {
-            private List<EntidadeDocumentacaoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public EntidadeDocumentacaoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
-            [HttpGet]
+        [HttpGet]
             public ActionResult CreateEntidadeDocumentacao()
             {
                 return View();
@@ -53,17 +64,20 @@ namespace WebUI.Areas.Geral.Controllers
             }
             public IActionResult ListEntidadeDocumentacao(EntidadeDocumentacaoDTO dto)
             {
-                lista = new List<EntidadeDocumentacaoDTO>();
-                lista = EntidadeDocumentacaoRN.GetInstance().ObterPorFiltro(dto);
-                return View(lista);
-            }
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(EntidadeDocumentacaoRN.GetInstance().ObterPorFiltro(dto));
+        }
 
 
-            public IActionResult Pesquisar(EntidadeDocumentacaoDTO dto)
-            {
-                IEnumerable<EntidadeDocumentacaoDTO> resultado = EntidadeDocumentacaoRN.GetInstance().ObterPorFiltro(dto);
-                return View(resultado);
-            }
+        public IActionResult Pesquisar(EntidadeDocumentacaoDTO dto)
+        {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(EntidadeDocumentacaoRN.GetInstance().ObterPorFiltro(dto));
+        }
 
             public IActionResult ListaEntidadeDocumentacao(EntidadeDocumentacaoDTO dto)
             {

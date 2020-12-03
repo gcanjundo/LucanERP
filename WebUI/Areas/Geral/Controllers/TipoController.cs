@@ -4,14 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class TipoController : Controller
     {
-        private List<TipoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public TipoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+
 
         [HttpGet]
         public ActionResult CreateTipo()
@@ -52,16 +64,20 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListTipo(TipoDTO dto)
         {
-            lista = new List<TipoDTO>();
-            lista = TipoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TipoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(TipoDTO dto)
         {
-            IEnumerable<TipoDTO> resultado = TipoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TipoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaTipo(TipoDTO dto)

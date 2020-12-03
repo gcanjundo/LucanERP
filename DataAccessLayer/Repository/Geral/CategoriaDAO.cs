@@ -78,7 +78,7 @@ namespace DataAccessLayer.Geral
             {
                 dataBase.ComandText = "stp_GER_CATEGORIA_OBTERPORFILTRO";
 
-                dataBase.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
+                dataBase.AddParameter("@DESCRICAO", dto.Descricao ?? string.Empty);
                 dataBase.AddParameter("@SIGLA", dto.Sigla ?? string.Empty); 
                 if (!string.IsNullOrEmpty(dto.Categoria))
                 {

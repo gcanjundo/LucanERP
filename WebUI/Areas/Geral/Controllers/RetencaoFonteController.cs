@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
@@ -12,9 +14,17 @@ namespace WebUI.Areas.Geral.Controllers
         [Area("Geral")]
         public class RetencaoFonteController : Controller
         {
-            private List<RetencaoFonteDTO> lista;
-
-            [HttpGet]
+        private readonly KitandaConfig _kitandaConfig;
+        public RetencaoFonteController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+        [HttpGet]
             public ActionResult CreateRetencaoFonte()
             {
                 return View();
@@ -53,16 +63,20 @@ namespace WebUI.Areas.Geral.Controllers
             }
             public IActionResult ListRetencaoFonte(RetencaoFonteDTO dto)
             {
-                lista = new List<RetencaoFonteDTO>();
-                lista = RetencaoFonteRN.GetInstance().ObterPorFiltro(dto);
-                return View(lista);
+               GetSessionDetails();
+               dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+               dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+               return View(RetencaoFonteRN.GetInstance().ObterPorFiltro(dto));
+
             }
 
 
             public IActionResult Pesquisar(RetencaoFonteDTO dto)
             {
-                IEnumerable<RetencaoFonteDTO> resultado = RetencaoFonteRN.GetInstance().ObterPorFiltro(dto);
-                return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(RetencaoFonteRN.GetInstance().ObterPorFiltro(dto));
             }
 
             public IActionResult ListaRetencaoFonte(RetencaoFonteDTO dto)

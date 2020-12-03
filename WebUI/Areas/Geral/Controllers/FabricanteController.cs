@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class FabricanteController : Controller
     {
-        private List<FabricanteDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public FabricanteController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateFabricante()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListFabricante(FabricanteDTO dto)
         {
-            lista = new List<FabricanteDTO>();
-            lista = FabricanteRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(FabricanteRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(FabricanteDTO dto)
         {
-            IEnumerable<FabricanteDTO> resultado = FabricanteRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(FabricanteRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaFabricante(FabricanteDTO dto)

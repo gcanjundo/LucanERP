@@ -2,6 +2,7 @@
 using BusinessLogicLayer.Geral;
 using DataAccessLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
@@ -9,13 +10,23 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class CoresController : Controller
     {
-        private List<CoresDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public CoresController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateCores()
@@ -55,16 +66,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListCores(CoresDTO dto)
         {
-            lista = new List<CoresDTO>();
-            lista = CoresRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(CoresRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(CoresDTO dto)
         {
-             IEnumerable<CoresDTO> resultado = CoresRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(CoresRN.GetInstance().ObterPorFiltro(dto));
         }
     }
 

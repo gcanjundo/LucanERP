@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
@@ -12,9 +14,17 @@ namespace WebUI.Areas.Geral.Controllers
         [Area("Geral")]
         public class GrupoSanguineoController : Controller
         {
-            private List<GrupoSanguineoDTO> lista;
-
-            [HttpGet]
+        private readonly KitandaConfig _kitandaConfig;
+        public GrupoSanguineoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+        [HttpGet]
             public ActionResult CreateGrupoSanguineo()
             {
                 return View();
@@ -53,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
             }
             public IActionResult ListGrupoSanguineo(GrupoSanguineoDTO dto)
             {
-                lista = new List<GrupoSanguineoDTO>();
-                lista = GrupoSanguineoRN.GetInstance().ObterPorFiltro(dto);
-                return View(lista);
+               GetSessionDetails();
+               dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+               dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+               return View(GrupoSanguineoRN.GetInstance().ObterPorFiltro(dto));
             }
 
 
             public IActionResult Pesquisar(GrupoSanguineoDTO dto)
             {
-                IEnumerable<GrupoSanguineoDTO> resultado = GrupoSanguineoRN.GetInstance().ObterPorFiltro(dto);
-                return View(resultado);
+               GetSessionDetails();
+               dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+               dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+               return View(GrupoSanguineoRN.GetInstance().ObterPorFiltro(dto));
             }
 
             public IActionResult ListaGrupoSanguineo(GrupoSanguineoDTO dto)

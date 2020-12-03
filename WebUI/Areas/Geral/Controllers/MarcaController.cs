@@ -4,15 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class MarcaController : Controller
     {
-        private List<MarcaDTO> lista;
-
+        private readonly KitandaConfig _kitandaConfig;
+        public MarcaController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
         [HttpGet]
         public ActionResult CreateMarca()
         {
@@ -52,16 +62,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListMarca(MarcaDTO dto)
         {
-            lista = new List<MarcaDTO>();
-            lista = MarcaRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MarcaRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(MarcaDTO dto)
         {
-            IEnumerable<MarcaDTO> resultado = MarcaRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(MarcaRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaMarca(MarcaDTO dto)

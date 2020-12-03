@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Comercial;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class TechnicianController : Controller
     {
-        private List<TechnicianDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public TechnicianController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateTechnician()
@@ -47,16 +58,20 @@ namespace WebUI.Areas.Geral.Controllers
       
         public IActionResult ListTechnician(TechnicianDTO dto)
         {
-            lista = new List<TechnicianDTO>();
-            lista = TechnicianRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TechnicianRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(TechnicianDTO dto)
         {
-            IEnumerable<TechnicianDTO> resultado = TechnicianRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TechnicianRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaTechnician(TechnicianDTO dto)

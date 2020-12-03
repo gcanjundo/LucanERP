@@ -4,14 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class TabelaPrecoController : Controller
     {
-        private List<TabelaPrecoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public TabelaPrecoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+
 
         [HttpGet]
         public ActionResult CreateTabelaPreco()
@@ -52,16 +64,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListTabelaPreco(TabelaPrecoDTO dto)
         {
-            lista = new List<TabelaPrecoDTO>();
-            lista = TabelaPrecoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TabelaPrecoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(TabelaPrecoDTO dto)
         {
-            IEnumerable<TabelaPrecoDTO> resultado = TabelaPrecoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TabelaPrecoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaTabelaPreco(TabelaPrecoDTO dto)

@@ -755,8 +755,8 @@ namespace DataAccessLayer.Comercial
             {
                 bdContext.ComandText = "stp_GER_ARTIGO_OBTERPORCATEGORIA";
 
-                bdContext.AddParameter("@ID_CATEGORIA", dto.Categoria  ?? string.Empty);
-                bdContext.AddParameter("@WAREHOUSE", dto.WareHouseName ?? string.Empty);
+                bdContext.AddParameter("@ID_CATEGORIA", dto.Categoria);
+                bdContext.AddParameter("@WAREHOUSE", dto.WareHouseName);
 
                 MySqlDataReader dr = bdContext.ExecuteReader();
 

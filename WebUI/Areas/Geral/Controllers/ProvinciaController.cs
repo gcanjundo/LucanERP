@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class ProvinciaController : Controller
     {
-        private List<ProvinciaDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public ProvinciaController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateProvincia()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListProvincia(ProvinciaDTO dto)
         {
-            lista = new List<ProvinciaDTO>();
-            lista = ProvinciaRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ProvinciaRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(ProvinciaDTO dto)
         {
-            IEnumerable<ProvinciaDTO> resultado = ProvinciaRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ProvinciaRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaProvincia(ProvinciaDTO dto)

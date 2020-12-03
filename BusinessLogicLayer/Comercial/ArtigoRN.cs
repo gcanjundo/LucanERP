@@ -416,7 +416,7 @@ namespace BusinessLogicLayer.Comercial
 
         public List<ArtigoDTO> ObterPorCategoria(ArtigoDTO dto)
         {
-            dto.WareHouseName = dto.WareHouseName == null ? "-1" : dto.WareHouseName;
+            dto.WareHouseName = dto.WareHouseName == null ? "-1": dto.WareHouseName;
             return daoProduct.ObterPorCategoria(dto);
         }
 

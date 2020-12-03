@@ -4,15 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class GrauParentescoController : Controller
     {
-        private List<GrauParentescoDTO> lista;
-
+        private readonly KitandaConfig _kitandaConfig;
+        public GrauParentescoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
         [HttpGet]
         public ActionResult CreateGrauParentesco()
         {
@@ -52,16 +62,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListGrauParentesco(GrauParentescoDTO dto)
         {
-            lista = new List<GrauParentescoDTO>();
-            lista = GrauParentescoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(GrauParentescoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(GrauParentescoDTO dto)
         {
-            IEnumerable<GrauParentescoDTO> resultado = GrauParentescoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(GrauParentescoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaGrauParentesco(GrauParentescoDTO dto)

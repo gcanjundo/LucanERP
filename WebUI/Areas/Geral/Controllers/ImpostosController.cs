@@ -4,14 +4,25 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class ImpostosController : Controller
     {
-        private List<ImpostosDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public ImpostosController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
 
         [HttpGet]
         public ActionResult CreateImpostos()
@@ -52,16 +63,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListImpostos(ImpostosDTO dto)
         {
-            lista = new List<ImpostosDTO>();
-            lista = ImpostosRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ImpostosRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(ImpostosDTO dto)
         {
-            IEnumerable<ImpostosDTO> resultado = ImpostosRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(ImpostosRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaImpostos(ImpostosDTO dto)

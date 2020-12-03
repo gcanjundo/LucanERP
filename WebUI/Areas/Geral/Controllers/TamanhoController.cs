@@ -4,14 +4,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessLogicLayer.Geral;
 using Dominio.Geral;
+using Dominio.Seguranca;
 using Microsoft.AspNetCore.Mvc;
+using WebUI.Extensions;
 
 namespace WebUI.Areas.Geral.Controllers
 {
     [Area("Geral")]
     public class TamanhoController : Controller
     {
-        private List<TamanhoDTO> lista;
+        private readonly KitandaConfig _kitandaConfig;
+        public TamanhoController(KitandaConfig kitandaConfig)
+        {
+            _kitandaConfig = kitandaConfig;
+        }
+        void GetSessionDetails()
+        {
+            _kitandaConfig.pSessionInfo = HttpContext.Session.Get<AcessoDTO>("userCredencials");
+            ViewData["_kitandaConfig"] = _kitandaConfig;
+        }
+
 
         [HttpGet]
         public ActionResult CreateTamanho()
@@ -52,16 +64,19 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public IActionResult ListTamanho(TamanhoDTO dto)
         {
-            lista = new List<TamanhoDTO>();
-            lista = TamanhoRN.GetInstance().ObterPorFiltro(dto);
-            return View(lista);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TamanhoRN.GetInstance().ObterPorFiltro(dto));
         }
 
 
         public IActionResult Pesquisar(TamanhoDTO dto)
         {
-            IEnumerable<TamanhoDTO> resultado = TamanhoRN.GetInstance().ObterPorFiltro(dto);
-            return View(resultado);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(TamanhoRN.GetInstance().ObterPorFiltro(dto));
         }
 
         public IActionResult ListaTamanho(TamanhoDTO dto)
