@@ -102,7 +102,7 @@ namespace DataAccessLayer.Geral
             {
                 BaseDados.ComandText = "stp_GER_PAIS_OBTERPORFILTRO";
 
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? String.Empty);
 
                 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
@@ -114,8 +114,8 @@ namespace DataAccessLayer.Geral
                     dto.Descricao = dr[1].ToString();
                     dto.Nacionalidade = dr[2].ToString();
                     dto.Estado = int.Parse(dr[3].ToString());
-                    //dto.Sigla = dr[4].ToString();
-                    //dto.Moeda = dr[5].ToString();
+                    dto.Sigla = dr[4].ToString();
+                    dto.Moeda = dr[5].ToString();
 
                     Paises.Add(dto);
 

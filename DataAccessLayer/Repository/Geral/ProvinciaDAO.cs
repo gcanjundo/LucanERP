@@ -99,8 +99,8 @@ namespace DataAccessLayer.Geral
             {
                 BaseDados.ComandText = "stp_GER_PROVINCIA_OBTERPORFILTRO";
 
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
-                BaseDados.AddParameter("PaisId", dto.PaisId);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
+                BaseDados.AddParameter("PAIS", dto.PaisId );
 
                 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
@@ -113,7 +113,9 @@ namespace DataAccessLayer.Geral
                     dto.Descricao = dr[2].ToString();
 
                     dto.Estado = int.Parse(dr[3].ToString());
-                    dto.CountryName = dr[4].ToString();
+                    dto.Sigla= dr[4].ToString();
+                    dto.CountryName = dr[5].ToString();
+                   
 
                     Provincias.Add(dto);
 

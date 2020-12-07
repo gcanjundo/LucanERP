@@ -224,7 +224,7 @@ namespace DataAccessLayer.Geral
             {
                 BaseDados.ComandText = "stp_GER_ENTIDADE_OBTERPORFILTRO";
 
-                BaseDados.AddParameter("NOME", dto.NomeCompleto);
+                BaseDados.AddParameter("NOME", dto.NomeCompleto ?? string.Empty);
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
                 lista = new List<EntidadeDTO>();

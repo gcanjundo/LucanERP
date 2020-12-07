@@ -107,7 +107,7 @@ namespace DataAccessLayer.Geral
             {
                 BaseDados.ComandText = "stp_GER_MUNICIPIO_OBTERPORFILTRO";
 
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
                 BaseDados.AddParameter("PROVINCIA", dto.Provincia);
 
                 

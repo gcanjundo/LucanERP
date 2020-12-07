@@ -97,8 +97,11 @@
                                         <tr>
                                             <th>Código</th>
                                             <th>Nome</th>
-                                            <th>Identificação</th>
-                                            <th>Documento</th>
+                                            <th>Morada</th>
+                                            <th>Telefone</th>
+                                            <th>Email</th>
+
+
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -106,18 +109,19 @@
 
                                         @foreach (var item in Model)
                                         {
-                                            <tr>
-                                                <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
-                                                <th>@Html.DisplayFor(modelItem => item.NomeCompleto)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Identificacao)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Documento)</th>
-                                                <td class="txt">
-                                                    <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
-                                                        <i class="material-icons">edit</i>
-                                                    </a>
-                                                </td>
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                            <th>@Html.DisplayFor(modelItem => item.NomeCompleto)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.Morada)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.Telefone)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.Email)</th>
+                                            <td class="txt">
+                                                <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                            </td>
 
-                                            </tr>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>
