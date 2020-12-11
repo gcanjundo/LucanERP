@@ -97,8 +97,8 @@ namespace DataAccessLayer.Geral
             {
                 ComandText = "stp_GER_TIPO_OBTERPORFILTRO";
 
-                AddParameter("DESCRICAO", dto.Descricao);
-                AddParameter("@SIGLA", dto.Sigla);
+                AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
+                AddParameter("@SIGLA", dto.Sigla ?? string.Empty);
 
                 MySqlDataReader dr = ExecuteReader();
 

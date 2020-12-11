@@ -98,7 +98,7 @@ namespace DataAccessLayer.Geral
             {
                 ComandText = "stp_GER_UNIDADE_MEDICAO_OBTERPORFILTRO";
 
-                AddParameter("@DESCRICAO", dto.Descricao); 
+                AddParameter("@DESCRICAO", dto.Descricao ?? string.Empty); 
                 
 
                 MySqlDataReader dr = ExecuteReader();

@@ -106,7 +106,7 @@ namespace DataAccessLayer.Geral
             {
                 
                 BaseDados.ComandText = "stp_GER_GRAU_PARENTECO_OBTERPORFILTRO";
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
                 listaGrauParentesco = new List<GrauParentescoDTO>();

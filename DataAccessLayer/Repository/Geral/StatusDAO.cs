@@ -100,8 +100,8 @@ namespace DataAccessLayer.Geral
             {
                 
                 BaseDados.ComandText = "stp_GER_STATUS_OBTERPORFILTRO";
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
-                BaseDados.AddParameter("@SIGLA", dto.Sigla);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
+                BaseDados.AddParameter("@SIGLA", dto.Sigla ?? string.Empty);
 
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();

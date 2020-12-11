@@ -133,7 +133,7 @@ namespace DataAccessLayer.Geral
             {
                 BaseDados.ComandText = "stp_GER_TECNICO_OBTERPORFILTRO";
 
-                BaseDados.AddParameter("@NOME", dto.Entity.NomeCompleto);
+                BaseDados.AddParameter("@NOME", dto.SocialName ?? string.Empty);
                 BaseDados.AddParameter("@FILIAL", dto.Filial);
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();

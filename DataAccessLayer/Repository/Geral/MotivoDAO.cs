@@ -94,15 +94,9 @@ namespace DataAccessLayer.Geral
             {
                 ComandText = "stp_GER_MOTIVO_OBTERPORFILTRO";
 
-                if (dto.Descricao == null)
-                {
-                    AddParameter("@DESCRICAO", String.Empty);
-                }
-                else 
-                {
-                    AddParameter("@DESCRICAO", dto.Descricao); 
-                }
-                AddParameter("@SIGLA", dto.Sigla);
+              
+                AddParameter("@DESCRICAO", dto.Descricao ?? string.Empty);
+                AddParameter("@SIGLA", dto.Sigla ?? string.Empty);
 
                 MySqlDataReader dr = ExecuteReader();
 

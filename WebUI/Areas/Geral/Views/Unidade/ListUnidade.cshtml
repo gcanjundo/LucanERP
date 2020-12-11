@@ -97,27 +97,30 @@
                                         <tr>
                                             <th>Código</th>
                                             <th>Descrição</th>
+                                            <th>Sigla</th>
+                                            <th>Quantidade</th>
                                             <th>Conversão</th>
                                             <th>Estado</th>
                                             <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
                                         @foreach (var item in Model)
                                         {
-                                            <tr>
-                                                <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
-                                                <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.FactorConversao)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Estado)</th>
-                                                <td class="txt">
-                                                    <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
-                                                        <i class="material-icons">edit</i>
-                                                    </a>
-                                                </td>
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                            <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.Sigla)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.Quantidade)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.FactorConversao)</th>
+                                            <th>@Html.DisplayFor(modelItem => item.Estado)</th>
+                                            <td class="txt">
+                                                <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
+                                                    <i class="material-icons">edit</i>
+                                                </a>
+                                            </td>
 
-                                            </tr>
+                                        </tr>
                                         }
                                     </tbody>
                                 </table>

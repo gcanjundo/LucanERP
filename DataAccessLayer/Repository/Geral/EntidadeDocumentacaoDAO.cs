@@ -161,10 +161,10 @@ namespace DataAccessLayer.Geral
 
             try
             {
-                BaseDados.ComandText = "spt_ACA_ENTIDADE_DOCUMENTOS_OBTERPORFILTRO";
+                BaseDados.ComandText = "stp_GER_ENTIDADE_DOCUMENTOS_OBTERPORFILTRO";
 
                  
-                BaseDados.AddParameter("@ENTIDADE", dto.Entidade);
+                BaseDados.AddParameter("DESCRICAO", dto.Numero ?? string.Empty);
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
                 documentos = new List<EntidadeDocumentacaoDTO>();
@@ -172,11 +172,10 @@ namespace DataAccessLayer.Geral
                 {
                     dto = new EntidadeDocumentacaoDTO();
 
-
-                    dto.Numero = dr[3].ToString();
+                    dto.Codigo = int.Parse(dr[0].ToString());
                     dto.Entidade = int.Parse(dr[1].ToString());
                     dto.Documento = int.Parse(dr[2].ToString());
-                    dto.Codigo = int.Parse(dr[0].ToString());
+                    dto.Numero = dr[3].ToString();
                     dto.Emissao = Convert.ToDateTime(dr[4].ToString());
                     dto.Validade = Convert.ToDateTime(dr[5].ToString());
                     dto.LocalEmissao = dr[6].ToString();

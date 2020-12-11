@@ -92,7 +92,7 @@ namespace DataAccessLayer.Geral
             {
                 ComandText = "stp_GER_VIATURA_OBTERPORFILTRO";
 
-                AddParameter("@DESIGNACAO", dto.Designation == null ? string.Empty : dto.Designation);
+                AddParameter("@DESIGNACAO", dto.Designation ?? string.Empty);
                 AddParameter("@MARCA_ID", dto.MarcaID);
                 AddParameter("@MODELO_ID", dto.ModeloID);
                 AddParameter("@MATRICULA_ID", dto.MatriculaID);

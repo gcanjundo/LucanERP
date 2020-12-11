@@ -1,9 +1,8 @@
-﻿@model IEnumerable<Dominio.Geral.DocumentoDTO>
+﻿@model IEnumerable<Dominio.Geral.EntidadeDocumentacaoDTO>
 
 @{
     ViewData["Title"] = "ListEntidadeDocumentacao";
 }
-
 
 <div class="row">
     <nav class="dropdownmenu navab">
@@ -96,10 +95,10 @@
                                     <thead class="tab-color-blue">
 
                                         <tr>
-                                            <th>Doc</th>
+                                            <th>Documento</th>
                                             <th>Descrição</th>
-                                            <th>Estado</th>
-                                            <th>Filial</th>
+                                            <th>Emissão</th>
+                                            <th>Validade</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -109,9 +108,9 @@
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
-                                                <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Estado)</th>
-                                                <th>@Html.DisplayFor(modelItem => item.Filial)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.NomeDocumento)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Emissao)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Validade)</th>
                                                 <td class="txt">
                                                     <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
                                                         <i class="material-icons">edit</i>
@@ -160,5 +159,6 @@
         <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
     </div>
 </div>
+
 
 

@@ -96,7 +96,7 @@ namespace DataAccessLayer.Geral
             {
                 ComandText = "stp_GER_TAMANHO_OBTERPORFILTRO";
 
-                AddParameter("DESCRICAO", dto.Descricao);
+                AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
 
                 MySqlDataReader dr = ExecuteReader();
 

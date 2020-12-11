@@ -98,7 +98,7 @@ namespace DataAccessLayer.Geral
             {
                 
                 BaseDados.ComandText = "stp_GER_PROFISSAO_OBTERPORFILTRO";
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
                 listaProfissao = new List<ProfissaoDTO>();

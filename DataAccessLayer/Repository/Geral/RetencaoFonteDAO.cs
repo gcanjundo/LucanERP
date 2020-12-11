@@ -73,7 +73,7 @@ namespace DataAccessLayer.Geral
             {
                 ComandText = "stp_GER_RETENCAO_FONTE_OBTERPORFILTRO";
 
-                AddParameter("DESCRICAO", dto.Descricao); 
+                AddParameter("DESCRICAO", dto.Descricao ?? string.Empty); 
 
                 MySqlDataReader dr = ExecuteReader();
 

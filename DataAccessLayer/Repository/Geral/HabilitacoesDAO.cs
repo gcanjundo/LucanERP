@@ -99,7 +99,7 @@ namespace DataAccessLayer.Geral
             {
                 
                 BaseDados.ComandText = "stp_GER_HABILITACOES_OBTERPORFILTRO";
-                BaseDados.AddParameter("DESCRICAO", dto.Descricao);
+                BaseDados.AddParameter("DESCRICAO", dto.Descricao ?? string.Empty);
 
                 MySqlDataReader dr = BaseDados.ExecuteReader();
                 listaHabilitacoes = new List<HabilitacoesDTO>();
