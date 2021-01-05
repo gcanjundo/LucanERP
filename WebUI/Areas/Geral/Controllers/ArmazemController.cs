@@ -40,6 +40,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ArmazemRN.GetInstance().Salvar(dto);
               
                 return RedirectToAction("CreateArmazem");
@@ -56,6 +59,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ArmazemRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateArmazem");
             }
@@ -63,6 +69,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteArmazem(ArmazemDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             ArmazemRN.GetInstance().Apagar(dto);
             return RedirectToAction("DeleteArmazem");
 

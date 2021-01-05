@@ -33,6 +33,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 HabilitacoesRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateHabilitacoes");
@@ -42,6 +45,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateHabilitacoes(int? id, [Bind] HabilitacoesDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -49,6 +55,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 HabilitacoesRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateHabilitacoes");
             }
@@ -56,6 +65,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteHabilitacoes(HabilitacoesDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             HabilitacoesRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteHabilitacoes");
 

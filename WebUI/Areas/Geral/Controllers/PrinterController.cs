@@ -27,6 +27,7 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public ActionResult CreatePrinter()
         {
+
             return View();
         }
         [HttpPost]
@@ -34,8 +35,10 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 PrinterRN.GetInstance().Salvar(dto);
-
                 return RedirectToAction("CreatePrinter");
             }
             return View(dto);
@@ -43,6 +46,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdatePrinter(int? id, [Bind] PrinterDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +56,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 PrinterRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdatePrinter");
             }
@@ -57,6 +66,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeletePrinter(PrinterDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             PrinterRN.GetInstance().Remover(dto);
             return RedirectToAction("DeletePrinter");
 

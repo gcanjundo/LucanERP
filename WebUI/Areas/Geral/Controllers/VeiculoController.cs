@@ -33,6 +33,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 VeiculoRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateVeiculo");
@@ -42,6 +45,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateVeiculo(int? id, [Bind] VeiculoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -49,6 +55,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 VeiculoRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateVeiculo");
             }
@@ -56,6 +65,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteVeiculo(VeiculoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             VeiculoRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteVeiculo");
 

@@ -34,8 +34,10 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ProfissaoRN.GetInstance().Salvar(dto);
-
                 return RedirectToAction("CreateProfissao");
             }
             return View(dto);
@@ -43,6 +45,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateProfissao(int? id, [Bind] ProfissaoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +55,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ProfissaoRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateProfissao");
             }
@@ -57,6 +65,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteProfissao(ProfissaoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             ProfissaoRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteProfissao");
 

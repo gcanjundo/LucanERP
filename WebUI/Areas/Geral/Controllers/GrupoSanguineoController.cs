@@ -34,7 +34,10 @@ namespace WebUI.Areas.Geral.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    GrupoSanguineoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                GrupoSanguineoRN.GetInstance().Salvar(dto);
 
                     return RedirectToAction("CreateGrupoSanguineo");
                 }
@@ -43,21 +46,30 @@ namespace WebUI.Areas.Geral.Controllers
             [HttpGet]
             public IActionResult UpdateGrupoSanguineo(int? id, [Bind] GrupoSanguineoDTO dto)
             {
-                return View(dto);
+               GetSessionDetails();
+               dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+               dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+               return View(dto);
             }
             [HttpPut]
             public IActionResult UpdateGrupoSanguineo([Bind] GrupoSanguineoDTO dto)
             {
                 if (ModelState.IsValid)
                 {
-                    GrupoSanguineoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                GrupoSanguineoRN.GetInstance().Salvar(dto);
                     return RedirectToAction("UpdateGrupoSanguineo");
                 }
                 return View(dto);
             }
             public ActionResult DeleteGrupoSanguineo(GrupoSanguineoDTO dto)
             {
-                GrupoSanguineoRN.GetInstance().Excluir(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            GrupoSanguineoRN.GetInstance().Excluir(dto);
                 return RedirectToAction("DeleteGrupoSanguineo");
 
             }

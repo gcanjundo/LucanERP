@@ -18,6 +18,12 @@ a {
     padding: 15px;
 }
 
+.cpp {
+     position: relative;
+     top: 1px;
+    cursor: pointer;
+}
+
 .btn-floating.btn-small {
     width: 32.4px;
     height: 32.4px;

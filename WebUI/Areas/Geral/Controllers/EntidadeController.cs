@@ -34,7 +34,10 @@ namespace WebUI.Areas.Geral.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    EntidadeRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                EntidadeRN.GetInstance().Salvar(dto);
 
                     return RedirectToAction("CreateEntidade");
                 }
@@ -50,14 +53,20 @@ namespace WebUI.Areas.Geral.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    EntidadeRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                EntidadeRN.GetInstance().Salvar(dto);
                     return RedirectToAction("UpdateEntidade");
                 }
                 return View(dto);
             }
             public ActionResult DeleteEntidade(EntidadeDTO dto)
             {
-                EntidadeRN.GetInstance().Eliminar(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            EntidadeRN.GetInstance().Eliminar(dto);
                 return RedirectToAction("DeleteEntidade");
 
             }

@@ -105,17 +105,17 @@
 
                                         @foreach (var item in Model)
                                         {
-                                        <tr>
-                                            <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
-                                            <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
-                                            <th>@Html.DisplayFor(modelItem => item.Tipo)</th>
-                                            <td class="txt">
-                                                <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
-                                                    <i class="material-icons">edit</i>
-                                                </a>
-                                            </td>
+                                            <tr>
+                                                <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                                <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
+                                                <th>@Html.DisplayFor(modelItem => item.Tipo)</th>
+                                                <td class="txt">
+                                                    <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
+                                                        <i class="material-icons">edit</i>
+                                                    </a>
+                                                </td>
 
-                                        </tr>
+                                            </tr>
                                         }
                                     </tbody>
                                 </table>
@@ -130,30 +130,99 @@
 </div>
 
 <!--Modal-->
-<div id="modalArmazem" class="modal" style="width: 40%;max-height: 100%;">
+<div id="modalArmazem" tabindex="-1" class="modal" style="width: 40%;max-height: 100%;">
     <div class="modal-content">
         <h5 class="mb-5">Grupos de Clientes</h5>
         <div class="container">
             <div class="row">
                 <form>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Sigla/ISO Code</label>
+                        <input id="txtarmazemId" name="id" type="text" class="validate" disabled="disabled" hidden="hidden">
+                        <label for="icon_prefix3">Id</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Designação do Pais </label>
+                        <input id="txtsigla" name="sigla" type="text" class="validate">
+                        <label for="icon_prefix3">Sigla</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Nacionalidade</label>
+                        <input id="txtdesignacao" name="designacao" type="text" class="validate">
+                        <label for="icon_prefix3">Designação</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="tablepriceId" name="tablepriceId" type="text" class="validate" disabled="disabled" hidden="hidden">
+                        <label for="icon_prefix3">Id</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbactivo" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Activo</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbWarehouseType" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Disponível para Vendas</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbAlertaStockMinimo" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Alertar p/ Stock Mínimo</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbPermiteStockNegativo" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Alertar p/ Stock Mínimo</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbAlertaStockNegativo" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Permite Stocks Negativos</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbPOS" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Alerta de Stocks Negativos</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbIN" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Disponível p/ POS</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="isForRest" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Rest</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbOUT" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Bloqueado p/ Entrada</span>
+                        </label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <label>
+                            <span><input id="cbPOS" type="checkbox" style="position: relative; top: 1px; cursor: pointer;" /></span>
+                            <span>Bloqueado p/ Saída</span>
+                        </label>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Salvar()">Salvar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Update()">Editar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Apagar()">Apagar</a>
         <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
+
     </div>
 </div>
+
+<script src="~/template/app-assets/js/armazem.js"></script>

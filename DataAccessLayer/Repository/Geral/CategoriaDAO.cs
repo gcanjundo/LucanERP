@@ -23,8 +23,8 @@ namespace DataAccessLayer.Geral
 
                 dataBase.AddParameter("@CODIGO", dto.Codigo);
                 dataBase.AddParameter("DESCRICAO", dto.Descricao);
-                dataBase.AddParameter("SIGLA", dto.Sigla);
-                dataBase.AddParameter("SITUACAO", dto.Estado);
+                dataBase.AddParameter("@SIGLA", dto.Sigla);
+                dataBase.AddParameter("@SITUACAO", dto.Estado);
                 dataBase.AddParameter("@CATEGORIA", dto.Categoria);
                 dataBase.AddParameter("@UTILIZADOR", dto.Utilizador);
                 dataBase.AddParameter("@FILIAL", dto.Filial);

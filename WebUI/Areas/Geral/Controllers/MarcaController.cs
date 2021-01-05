@@ -33,8 +33,10 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 MarcaRN.GetInstance().Salvar(dto);
-
                 return RedirectToAction("CreateMarca");
             }
             return View(dto);
@@ -42,6 +44,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateMarca(int? id, [Bind] MarcaDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -49,6 +54,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 MarcaRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateMarca");
             }
@@ -56,6 +64,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteMarca(MarcaDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             MarcaRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteMarca");
 

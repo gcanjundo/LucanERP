@@ -35,6 +35,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TamanhoRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateTamanho");
@@ -44,6 +47,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateTamanho(int? id, [Bind] TamanhoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -51,6 +57,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TamanhoRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateTamanho");
             }
@@ -58,6 +67,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteTamanho(TamanhoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             TamanhoRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteTamanho");
 

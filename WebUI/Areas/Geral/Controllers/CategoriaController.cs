@@ -35,6 +35,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 CategoriaRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateCategoria");
@@ -44,6 +47,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateCategoria(int? id, [Bind] CategoriaDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -51,6 +57,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 CategoriaRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateCategoria");
             }
@@ -58,6 +67,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteCategoria(CategoriaDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             CategoriaRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteArtigo");
 

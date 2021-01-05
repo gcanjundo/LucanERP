@@ -34,6 +34,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 FabricanteRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateFabricante");
@@ -43,6 +46,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateFabricante(int? id, [Bind] FabricanteDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +56,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 FabricanteRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateFabricante");
             }
@@ -57,6 +66,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteFabricante(FabricanteDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             FabricanteRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteFabricante");
 

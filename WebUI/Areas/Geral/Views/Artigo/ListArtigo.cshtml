@@ -110,7 +110,7 @@
                                             <th>@Html.DisplayFor(modelItem => item.PrecoVenda)</th>
                                             <td class="txt">
                                                 <a class="btn-floating mb-1 btn-flat waves-effect waves-light green darken-1 white-text btn-small">
-                                                    <i class="material-icons">edit</i>
+                                                    <i class="material-icons">Editar</i>
                                                 </a>
                                             </td>
 
@@ -131,32 +131,36 @@
 <!--Modal-->
 <div id="modalArmazem" class="modal" style="width: 40%;max-height: 100%;">
     <div class="modal-content">
-        <h5 class="mb-5">Grupos de Clientes</h5>
+        <h5 class="mb-5">Artigos</h5>
         <div class="container">
             <div class="row">
                 <form>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Sigla/ISO Code</label>
+                        <input id="txtreferencia" type="text" class="validate">
+                        <label for="icon_prefix3">Referência</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Designação do Pais </label>
+                        <input id="txtdesignacao" type="text" class="validate">
+                        <label for="icon_prefix3">Designação</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Nacionalidade</label>
+                        <input id="txtprecovenda" type="text" class="validate">
+                        <label for="icon_prefix3">Preço Venda</label>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Salvar()">Salvar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Update()">Editar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Delete()">Apagar</a>
         <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
     </div>
 </div>
 
+
+<script src="~/template/app-assets/js/artigo.js"></script>
 
                   
                

@@ -35,7 +35,10 @@ namespace WebUI.Areas.Geral.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    EntidadeDocumentacaoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                EntidadeDocumentacaoRN.GetInstance().Salvar(dto);
 
                     return RedirectToAction("CreateEntidadeDocumentacao");
                 }
@@ -44,21 +47,30 @@ namespace WebUI.Areas.Geral.Controllers
             [HttpGet]
             public IActionResult UpdateEntidadeDocumentacao(int? id, [Bind] EntidadeDocumentacaoDTO dto)
             {
-                return View(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(dto);
             }
             [HttpPut]
             public IActionResult UpdateEntidadeDocumentacao([Bind] EntidadeDocumentacaoDTO dto)
             {
                 if (ModelState.IsValid)
                 {
-                    EntidadeDocumentacaoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                EntidadeDocumentacaoRN.GetInstance().Salvar(dto);
                     return RedirectToAction("UpdateEntidadeDocumentacao");
                 }
                 return View(dto);
             }
             public ActionResult DeleteEntidadeDocumentacao(EntidadeDocumentacaoDTO dto)
             {
-                EntidadeDocumentacaoRN.GetInstance().Eliminar(dto);
+                   GetSessionDetails();
+                   dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                   dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                   EntidadeDocumentacaoRN.GetInstance().Eliminar(dto);
                 return RedirectToAction("DeleteEntidadeDocumentacao");
 
             }

@@ -35,7 +35,10 @@ namespace WebUI.Areas.Geral.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    ReligiaoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                ReligiaoRN.GetInstance().Salvar(dto);
 
                     return RedirectToAction("CreateReligiao");
                 }
@@ -44,22 +47,31 @@ namespace WebUI.Areas.Geral.Controllers
             [HttpGet]
             public IActionResult UpdateReligiao(int? id, [Bind] ReligiaoDTO dto)
             {
-                return View(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(dto);
             }
             [HttpPut]
             public IActionResult UpdateReligiao([Bind] ReligiaoDTO dto)
             {
                 if (ModelState.IsValid)
                 {
-                    ReligiaoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                ReligiaoRN.GetInstance().Salvar(dto);
                     return RedirectToAction("UpdateReligiao");
                 }
                 return View(dto);
             }
             public ActionResult DeleteReligiao(ReligiaoDTO dto)
             {
-                ReligiaoRN.GetInstance().Excluir(dto);
-                return RedirectToAction("DeleteReligiao");
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            ReligiaoRN.GetInstance().Excluir(dto);
+              return RedirectToAction("DeleteReligiao");
 
             }
             public IActionResult ListReligiao(ReligiaoDTO dto)

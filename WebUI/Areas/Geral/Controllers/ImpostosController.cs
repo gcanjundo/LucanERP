@@ -34,8 +34,10 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ImpostosRN.GetInstance().Salvar(dto);
-
                 return RedirectToAction("CreateImpostos");
             }
             return View(dto);
@@ -43,6 +45,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateImpostos(int? id, [Bind] ImpostosDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +55,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ImpostosRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateImpostos");
             }
@@ -57,6 +65,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteImpostos(ImpostosDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             ImpostosRN.GetInstance().Apagar(dto);
             return RedirectToAction("DeleteImpostos");
 

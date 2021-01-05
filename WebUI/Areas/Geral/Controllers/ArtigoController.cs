@@ -36,6 +36,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ArtigoRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateArtigo");
@@ -45,6 +48,10 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateArtigo(int? id, [Bind] ArtigoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            ArtigoRN.GetInstance().Salvar(dto);
             return View(dto);
         }
         [HttpPut]
@@ -52,6 +59,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 ArtigoRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateArtigo");
             }
@@ -59,6 +69,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteArtigo(ArtigoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             ArtigoRN.GetInstance().Apagar(dto);
             return RedirectToAction("DeleteArtigo");
 

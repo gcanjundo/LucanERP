@@ -34,6 +34,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TipoActividadeRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateTipoActividade");
@@ -43,6 +46,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateTipoActividade(int? id, [Bind] TipoActividadeDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +56,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TipoActividadeRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateTipoActividade");
             }
@@ -57,6 +66,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteTipoActividade(TipoActividadeDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             TipoActividadeRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteTipoActividade");
 

@@ -34,8 +34,10 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 MoedaRN.GetInstance().Salvar(dto);
-
                 return RedirectToAction("CreateMoeda");
             }
             return View(dto);
@@ -43,6 +45,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateMoeda(int? id, [Bind] MoedaDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +55,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 MoedaRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateMoeda");
             }
@@ -57,6 +65,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteMoeda(MoedaDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             MoedaRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteMoeda");
 

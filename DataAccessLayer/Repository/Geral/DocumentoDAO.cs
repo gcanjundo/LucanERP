@@ -20,7 +20,7 @@ namespace DataAccessLayer.Geral
                 AddParameter("DESCRICAO", dto.Descricao);
                 AddParameter("SIGLA", dto.Sigla);
                 AddParameter("SITUACAO", dto.Estado);
-                AddParameter("@UTILIZADOR", dto.Utilizador);
+                AddParameter("UTILIZADOR", dto.Utilizador);
 
                dto.Codigo = ExecuteInsert();
                dto.Sucesso = true;

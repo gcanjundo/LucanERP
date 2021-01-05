@@ -35,8 +35,10 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TipoRN.GetInstance().Salvar(dto);
-
                 return RedirectToAction("CreateTipo");
             }
             return View(dto);
@@ -44,6 +46,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateTipo(int? id, [Bind] TipoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -51,6 +56,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TipoRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateTipo");
             }
@@ -58,6 +66,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteTipo(TipoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             TipoRN.GetInstance().Apagar(dto);
             return RedirectToAction("DeleteTipo");
 

@@ -34,6 +34,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 StatusRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateStatus");
@@ -43,6 +46,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateStatus(int? id, [Bind] StatusDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -50,6 +56,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 StatusRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateStatus");
             }
@@ -57,6 +66,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteStatus(StatusDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             StatusRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeleteStatus");
 

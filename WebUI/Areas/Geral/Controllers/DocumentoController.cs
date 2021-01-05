@@ -33,7 +33,10 @@ namespace WebUI.Areas.Geral.Controllers
     {
         if (ModelState.IsValid)
         {
-            DocumentoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                DocumentoRN.GetInstance().Salvar(dto);
 
             return RedirectToAction("CreateDocumento");
         }
@@ -42,21 +45,30 @@ namespace WebUI.Areas.Geral.Controllers
     [HttpGet]
     public IActionResult UpdateDocumento(int? id, [Bind] DocumentoDTO dto)
     {
-        return View(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(dto);
     }
     [HttpPut]
     public IActionResult UpdateDocumento([Bind] DocumentoDTO dto)
     {
         if (ModelState.IsValid)
         {
-            DocumentoRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                DocumentoRN.GetInstance().Salvar(dto);
             return RedirectToAction("UpdateDocumento");
         }
         return View(dto);
     }
     public ActionResult DeleteDocumento(DocumentoDTO dto)
     {
-        DocumentoRN.GetInstance().Excluir(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            DocumentoRN.GetInstance().Excluir(dto);
         return RedirectToAction("DeleteDocumento");
 
     }

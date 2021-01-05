@@ -34,8 +34,10 @@ namespace WebUI.Areas.Geral.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    RetencaoFonteRN.GetInstance().Salvar(dto);
-
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                RetencaoFonteRN.GetInstance().Salvar(dto);
                     return RedirectToAction("CreateRetencaoFonte");
                 }
                 return View(dto);
@@ -43,21 +45,30 @@ namespace WebUI.Areas.Geral.Controllers
             [HttpGet]
             public IActionResult UpdateRetencaoFonte(int? id, [Bind] RetencaoFonteDTO dto)
             {
-                return View(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            return View(dto);
             }
             [HttpPut]
             public IActionResult UpdateRetencaoFonte([Bind] RetencaoFonteDTO dto)
             {
                 if (ModelState.IsValid)
                 {
-                    RetencaoFonteRN.GetInstance().Salvar(dto);
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+                RetencaoFonteRN.GetInstance().Salvar(dto);
                     return RedirectToAction("UpdateRetencaoFonte");
                 }
                 return View(dto);
             }
             public ActionResult DeleteRetencaoFonte(RetencaoFonteDTO dto)
             {
-                RetencaoFonteRN.GetInstance().Apagar(dto);
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
+            RetencaoFonteRN.GetInstance().Apagar(dto);
                 return RedirectToAction("DeleteRetencaoFonte");
 
             }

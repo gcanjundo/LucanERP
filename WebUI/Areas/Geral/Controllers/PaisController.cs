@@ -35,6 +35,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 PaisRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreatePais");
@@ -44,6 +47,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdatePais(int? id, [Bind] PaisDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -51,6 +57,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 PaisRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdatePais");
             }
@@ -58,6 +67,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeletePais(PaisDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             PaisRN.GetInstance().Excluir(dto);
             return RedirectToAction("DeletePais");
 

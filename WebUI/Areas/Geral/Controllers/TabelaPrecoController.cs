@@ -35,6 +35,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TabelaPrecoRN.GetInstance().Salvar(dto);
 
                 return RedirectToAction("CreateTabelaPreco");
@@ -44,6 +47,9 @@ namespace WebUI.Areas.Geral.Controllers
         [HttpGet]
         public IActionResult UpdateTabelaPreco(int? id, [Bind] TabelaPrecoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             return View(dto);
         }
         [HttpPut]
@@ -51,6 +57,9 @@ namespace WebUI.Areas.Geral.Controllers
         {
             if (ModelState.IsValid)
             {
+                GetSessionDetails();
+                dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+                dto.Filial = _kitandaConfig.pSessionInfo.Filial;
                 TabelaPrecoRN.GetInstance().Salvar(dto);
                 return RedirectToAction("UpdateTabelaPreco");
             }
@@ -58,6 +67,9 @@ namespace WebUI.Areas.Geral.Controllers
         }
         public ActionResult DeleteTabelaPreco(TabelaPrecoDTO dto)
         {
+            GetSessionDetails();
+            dto.Utilizador = _kitandaConfig.pSessionInfo.Utilizador;
+            dto.Filial = _kitandaConfig.pSessionInfo.Filial;
             TabelaPrecoRN.GetInstance().Apagar(dto);
             return RedirectToAction("DeleteTabelaPreco");
 
