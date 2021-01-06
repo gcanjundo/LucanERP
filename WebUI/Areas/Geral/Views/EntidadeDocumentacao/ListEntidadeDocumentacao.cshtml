@@ -132,33 +132,52 @@
 </div>
 
 <!--Modal-->
-<div id="modalArmazem" class="modal" style="width: 40%;max-height: 100%;">
+<div id="modalEntidadeDocumento" class="modal" style="width: 40%;max-height: 100%;">
     <div class="modal-content">
         <h5 class="mb-5">Grupos de Clientes</h5>
         <div class="container">
             <div class="row">
                 <form>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Sigla/ISO Code</label>
+                        <input id="txtnumero" type="text" class="validate">
+                        <label for="icon_prefix3">Número</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Designação do Pais </label>
+                        <input id="txtreferencia" type="text" class="validate">
+                        <label for="icon_prefix3">Referência</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Nacionalidade</label>
+                        <input id="txtdocumento" type="text" class="validate">
+                        <label for="icon_prefix3">Documento</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="txtentidade" type="text" class="validate">
+                        <label for="icon_prefix3">Entidade</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="txtemissao" type="date" class="validate">
+                        <label for="icon_prefix3">Emissão</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="txtvalidade" type="date" class="validate">
+                        <label for="icon_prefix3">Validade</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="txtlocal" type="text" class="validate">
+                        <label for="icon_prefix3">Local</label>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Salvar()">Salvar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Update()">Editar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Apagar()">Apagar</a>
         <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
     </div>
 </div>
 
 
+<script src="~/template/app-assets/js/entidadedocumentacao.js"></script>
 

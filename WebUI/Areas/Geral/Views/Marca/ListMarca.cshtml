@@ -39,7 +39,7 @@
                             <a href="#"> Tabela de consulta</a>
                         </li>
                         <li class="breadcrumb-item active">
-                            Lista de Grau Parentesco
+                            Lista de Cores
                         </li>
                     </ol>
                 </div>
@@ -55,7 +55,7 @@
                     <div class="card">
                         <div class="card-content card_sem_padd-4">
                             <div class="col s12 m6 l8">
-                                <h6 class="title">  Lista de Grau Parentesco</h6>
+                                <h6 class="title">  Lista de Cores</h6>
                             </div>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                     </div>
                                     <div class="input-field col s12 m4 s16">
                                         <input id="icon_prefix3" type="text" class="validate">
-                                        <label for="icon_prefix3">Digite Entidades Financeiras</label>
+                                        <label for="icon_prefix3"></label>
                                     </div>
 
                                     <div class="col s12 m4 l14 display-flex align-items-center show-btn">
@@ -107,6 +107,7 @@
                                         {
                                             <tr>
                                                 <td>@Html.DisplayFor(modelItem => item.Codigo)</td>
+                                                <th>@Html.DisplayFor(modelItem => item.Sigla)</th>
                                                 <th>@Html.DisplayFor(modelItem => item.Descricao)</th>
                                                 <th>@Html.DisplayFor(modelItem => item.Estado)</th>
                                                 <td class="txt">
@@ -130,32 +131,48 @@
 </div>
 
 <!--Modal-->
-<div id="modalArmazem" class="modal" style="width: 40%;max-height: 100%;">
+<div id="modalMarca" class="modal" style="width: 40%;max-height: 100%;">
     <div class="modal-content">
-        <h5 class="mb-5">Grupos de Clientes</h5>
+        <h5 class="mb-5">Cores</h5>
         <div class="container">
             <div class="row">
                 <form>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Sigla/ISO Code</label>
+                        <input id="txtreferencia" type="text" class="validate">
+                        <label for="icon_prefix3">Referência</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Designação do Pais </label>
+                        <input id="txtsigla" type="text" class="validate">
+                        <label for="icon_prefix3">Sigla</label>
                     </div>
                     <div class="input-field col s12 m12 s16">
-                        <input id="icon_prefix3" type="text" class="validate">
-                        <label for="icon_prefix3">Nacionalidade</label>
+                        <input id="txtdesignacao" type="text" class="validate">
+                        <label for="icon_prefix3">Designação</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <select>
+                            <option id="estado" value="" disabled selected>Selecione</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>Estado</label>
+                    </div>
+                    <div class="input-field col s12 m12 s16">
+                        <input id="txtlocalizacao" type="text" class="validate">
+                        <label for="icon_prefix3">Localização</label>
                     </div>
                 </form>
             </div>
         </div>
     </div>
     <div class="modal-footer">
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Salvar()">Salvar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Update()">Editar</a>
+        <a href="#" class="modal-close waves-effect waves-green btn-flat" onclick="Apagar()">Apagar</a>
         <a class="modal-close waves-effect waves-green btn-flat">Sair</a>
-        <a href="#" class="modal-close waves-effect waves-green btn-flat">Salvar</a>
     </div>
 </div>
 
 
+<script src="~/template/app-assets/js/marca.js"></script>
